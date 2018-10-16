@@ -27,7 +27,7 @@ This is a draft to determine what are the main problems for this project.
     2. Profile
 6. How endpoints orders distributions are done?
     1. Use of a specific endpoint.
-    2. Wich endpoints are the most popular?
+    2. Which endpoints are the most popular?
         1. Endpoint requests.
 7. What is the behaviour of the instances?
     1. How do we know if a certain instance is in a "normal state"?
@@ -43,5 +43,5 @@ This is a draft to determine what are the main problems for this project.
 
 6.2. The popularity of a service defines it's importance.
 
-Vizualization:
+### Vizualization:
 1. Data aggregation.
