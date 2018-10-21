@@ -36,6 +36,7 @@ This is a draft to determine what are the main problems for this project.
     2. Number of instances
         1. Relatively to the load.
         2. Relatively to the occupation.
+8. What is the length of each queue in a service?
 
 ### Notes: 
 
@@ -44,4 +45,4 @@ This is a draft to determine what are the main problems for this project.
 6.2. The popularity of a service defines it's importance.
 
 ### Vizualization:
-1. Data aggregation.
+1. How will we do the data aggregation?
