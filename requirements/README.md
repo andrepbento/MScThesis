@@ -7,12 +7,11 @@ This is a draft to determine what are the main problems for this project.
 1. What is the neighbourhood of one service? 
     1. Incoming requests (What service).
     2. Outgoing requests (What service).
-2. Is there any problem?
-    1. Wich are the associated heuristics?
-            1. Response time (Delta).
-            2. Morphology/Topology (Delta).
-            3. Ocupation/Load (Delta) (Queue length).
-            4. Number/Profile(Same/different IP's) of the client (Delta).
+2. Is there any problem (Wich are the associated heuristics)?
+    1. Response time (Delta).
+    2. Morphology/Topology (Delta).
+    3. Ocupation/Load (Delta) (Queue length).
+    4. Number/Profile(Same/different IP's) of the client (Delta).
 3. Is there any faults related to the system design/architecture?
     1. Is there cyclical dependencies?
         1. Error rate correlation.
