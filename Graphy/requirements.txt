@@ -1,5 +1,6 @@
 matplotlib>=3.0.1
 networkx>=2.2
 numpy>=1.15.3
-treelib>=1.5.3
 PyYAML>=3.13
+requests2>=2.16.0
+treelib>=1.5.3

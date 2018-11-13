@@ -34,25 +34,49 @@ from graphy.models.binary_annotation import BinaryAnnotation
 
 class Span(object):
     def __init__(self, data):
+        """ Span initialization using JSON data. """
         self.__dict__ = json.loads(data)
 
     def __str__(self):
+        """
+        Span string representation containing all the object property values.
+
+        :return: the span as a string
+        """
         return str(self.__dict__)
 
     @property
     def trace_id(self):
+        """
+        Span trace id, present in all spans.
+
+        :return: the trace id value
+        """
         attribute_key = 'traceId'
         return get_attribute(self, attribute_key)
 
     @property
     def name(self):
+        """
+        Span name in lowercase, rpc method for example.
+
+        :return: the span name value
+        """
         attribute_key = 'name'
         return get_attribute(self, attribute_key)
 
     @property
     def timestamp(self):
+        """
+        Epoch microseconds of the start of this span, possibly absent if this an incomplete span.
+
+        :return: the span timestamp value
+        """
         attribute_key = 'timestamp'
-        fix_needed, timestamp = fix_timestamp(get_attribute(self, attribute_key))
+        attribute = get_attribute(self, attribute_key)
+        if attribute is None:
+            return None
+        fix_needed, timestamp = fix_timestamp(attribute)
         if fix_needed:
             set_attribute_value(self, attribute_key, timestamp)
         return timestamp
@@ -68,6 +92,40 @@ class Span(object):
         return get_attribute(self, attribute_key)
 
     @property
+    def kind(self):
+        attribute_key = 'kind'
+        return Kind.CLIENT
+
+    @property
+    def local_service_name(self):
+        """
+        Local service name property
+
+        :return: the local service name
+        """
+        return 'lpn'
+
+    @property
+    def remote_service_name(self):
+        """
+        Remote service name property
+
+        :return: the remote service name
+        """
+        return 'rpn'
+
+    @property
+    def tags(self):
+        """
+        Spans tags are presented with all the binary annotations
+
+        :return: a dictionary containing all binary annotations
+        """
+        i = iter(self.binary_annotations)
+        tags = dict(zip(i, i))
+        return tags
+
+    @property
     def binary_annotations(self):
         attribute_key = 'binaryAnnotations'
         binary_annotations = []
@@ -76,7 +134,7 @@ class Span(object):
                 binary_annotation = BinaryAnnotation(json.dumps(binary_annotation))
                 binary_annotations.append(binary_annotation)
             return binary_annotations
-        raise AttributeError(attribute_key)
+        return None
 
     @property
     def annotations(self):
@@ -87,7 +145,7 @@ class Span(object):
                 annotation = Annotation(json.dumps(annotation_data))
                 annotations.append(annotation)
             return annotations
-        raise AttributeError(attribute_key)
+        return None
 
 
 class Kind(Enum):

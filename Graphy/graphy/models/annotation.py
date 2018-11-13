@@ -29,5 +29,7 @@ class Annotation(object):
         attribute = 'endpoint'
         endpoints = []
         endpoint_data = get_attribute(self, attribute)
+        if endpoint_data is None:
+            return None
         endpoints.append(Endpoint(json.dumps(endpoint_data)))
         return endpoints

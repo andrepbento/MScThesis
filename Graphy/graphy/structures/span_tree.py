@@ -10,7 +10,10 @@ logger = logging.getLogger(__name__)
 
 
 class SpanTree(object):
+    """ SpanTree object is a representation of spans in a tree """
+
     def __init__(self, spans_array):
+        """Initiate a new SpanTree """
         self.tree = Tree()
         self.tree.create_node()  # root node
         self.root_node = self.tree.root
@@ -18,20 +21,28 @@ class SpanTree(object):
         self.__generate_span_tree(spans_array)
 
     def print(self):
-        result = self.tree.show(idhidden=False)
-        if result:
-            print(result)
+        """ Prints the tree using the default tree.show() method """
+        self.tree.show(idhidden=False)
 
     def count_traces(self):
+        """
+        Counts the number of traces in the span tree
+
+        :return: the number of traces in the span tree
+        """
         return len(self.tree.children(self.root_node))
 
     def __count_spans(self):
+        """
+        Counts the number of spans in the span tree
+
+        :return: the number of spans in the span tree
+        """
         return len(self.tree) - 1 - self.count_traces()  # -1: Minus root node
 
     def __generate_span_tree(self, spans_array):
+        """ Generates the span tree using a @Span array """
         logger.info('generate_span_tree()')
-        # node_absent_exception = 0
-        # absent_span_array = []
         for span in spans_array:
             trace_id = None
             try:
@@ -39,22 +50,14 @@ class SpanTree(object):
                 if not self.tree.contains(trace_id):
                     self.tree.create_node(span.timestamp, trace_id, self.root_node)
                 parent_id = span.parent_id
-                self.tree.create_node(span.timestamp, span.id, parent_id, data=span)
-            except AttributeError:
-                self.tree.create_node(span.timestamp, span.id, trace_id, data=span)
+                if parent_id is not None:
+                    self.tree.create_node(span.timestamp, span.id, parent_id, data=span)
+                else:
+                    self.tree.create_node(span.timestamp, span.id, trace_id, data=span)
             except NodeIDAbsentError:
-                # node_absent_exception += 1
-                # absent_span_array.append(span)
                 self.tree.create_node(span.timestamp, span.id, trace_id, data=span)
             except Exception as ex:
                 logger.error('exception: type({}) msg({})'.format(type(ex), ex))
 
-        # absent_span_trace_id_stack = Stack()
-        # for absent_span in absent_span_array:
-        #    absent_span_trace_id_stack.push(absent_span.trace_id)
-        # logger.debug(
-        #    'absent_span_trace_id_stack[{}]: {}'.format(len(absent_span_trace_id_stack), absent_span_trace_id_stack))
-
         logger.debug('spans in tree length/spans_array_length: {}/{}'.format(self.__count_spans(),
                                                                              len(spans_array)))
-        # logger.debug('node_absent_exception: {}'.format(node_absent_exception))
