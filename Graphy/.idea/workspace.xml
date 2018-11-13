@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/apbento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/apbento.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/graph/graph_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/annotation.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/annotation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/attributes.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/attributes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/span.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/structures/span_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/structures/span_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +28,7 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="1" value="1" />
-          <entry key="gitignore" value="3" />
+          <entry key="gitignore" value="4" />
           <entry key="ini" value="1" />
           <entry key="json" value="19" />
           <entry key="jsonl" value="6" />
@@ -54,7 +46,7 @@
           <entry key="JSON" value="19" />
           <entry key="Log" value="11" />
           <entry key="Markdown" value="4" />
-          <entry key="PLAIN_TEXT" value="27" />
+          <entry key="PLAIN_TEXT" value="28" />
           <entry key="Python" value="162" />
           <entry key="YAML" value="2" />
         </counts>
@@ -62,6 +54,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="85" />
+          <entry key="gitignore" value="37" />
           <entry key="jsonl" value="24" />
           <entry key="md" value="415" />
           <entry key="py" value="17213" />
@@ -72,7 +65,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Markdown" value="415" />
-          <entry key="PLAIN_TEXT" value="249" />
+          <entry key="PLAIN_TEXT" value="286" />
           <entry key="Python" value="17213" />
           <entry key="YAML" value="62" />
         </counts>
@@ -114,67 +107,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/graphy/__main__.py">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-              <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-              <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-              <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/graph/graph_tool.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="168" selection-start-line="168" selection-end-line="168" />
-              <folding>
-                <element signature="e#36#47#0" expanded="true" />
-                <marker date="1542068507654" expanded="true" signature="1453:1955" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/models/endpoint.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/models/annotation.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="114" selection-start-line="114" selection-end-line="114" />
-              <folding>
-                <element signature="e#907#918#0" expanded="true" />
-                <marker date="1542054664789" expanded="true" signature="3387:3412" ph="..." />
-                <marker date="1542054664789" expanded="true" signature="4272:4342" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-66737">
-              <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+            <state relative-caret-position="537">
+              <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
             </state>
           </provider>
         </entry>
@@ -269,10 +205,11 @@
         <option value="$PROJECT_DIR$/graphy/models/annotation.py" />
         <option value="$PROJECT_DIR$/graphy/graph/graph_tool.py" />
         <option value="$PROJECT_DIR$/graphy/__main__.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="260" />
     <option name="y" value="52" />
     <option name="width" value="1390" />
@@ -313,30 +250,6 @@
               <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
               <item name="Graphy" type="462c0819:PsiDirectoryNode" />
               <item name="graphy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graph" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="structures" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -434,18 +347,18 @@
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49916247" visible="true" weight="0.128097" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49916247" visible="true" weight="0.128097" />
       <window_info id="Structure" order="1" sideWeight="0.5008375" side_tool="true" weight="0.18133895" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32996634" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.41750842" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41750842" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49973643" weight="0.39955106" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32996634" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32884398" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32884398" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5002636" side_tool="true" weight="0.39955106" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32996634" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -596,13 +509,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="71" column="7" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -779,11 +685,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/__main__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
-          <caret line="34" column="6" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
-          <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
+        <state relative-caret-position="325">
+          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
         </state>
       </provider>
     </entry>
