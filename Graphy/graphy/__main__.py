@@ -1,13 +1,11 @@
-import logging
 import logging.config
-import os
+import sys
 import time
-
-import yaml
 
 from graphy.graph.graph_tool import GraphTool
 from graphy.models.span import parse_to_spans_array
-from graphy.utils.files import get_data_path
+from graphy.utils.files import get_data_path, get_absolute_path
+from graphy.utils.logger import setup_logging
 from graphy.utils.profile import profile
 
 logger = logging.getLogger(__name__)
@@ -17,55 +15,62 @@ logger = logging.getLogger(__name__)
 def main():
     setup_logging()
 
-    start_time = time.time()
-
     logger.info('Graphy started')
 
-    graph_tool = GraphTool()
+    # CHANGE THIS VARIABLES IF YOU WANT [True|False] -----
+    from_zipkin = sys.argv[1]
 
-    # Open spans JSON file and reads its contents to span_json
-    # spans_file_name = '28_06.json'
-    spans_file_name = "28_06_simplified_100_spans.json"
-    spans_file_name = "28_06_simplified_1000_spans.json"
-    spans_file_name = "28_06_simplified_10000_spans.json"
-    spans_file_name = "28_06_simplified_100000_spans.json"
-    spans_file_name = "29_06.json"
-    spans_file_name = "29_06_simplified_100_spans.json"
-    spans_file_name = "29_06_simplified_1000_spans.json"
-    spans_file_name = "29_06_simplified_10000_spans.json"
-    spans_file_name = "29_06_simplified_100000_spans.json"
-    spans_json_path = get_data_path(spans_file_name)
+    print_span_tree_data = True
+    print_graph_data = True
+    print_graph_statistics = True
+    save_graph = False
+    show_graph = False
 
-    logger.debug('spans_json_path: {}'.format(spans_json_path))
+    # file_name = '28_06.json'
+    # file_name = "28_06_simplified_100_spans.json"
+    # file_name = "28_06_simplified_1000_spans.json"
+    # file_name = "28_06_simplified_10000_spans.json"
+    # file_name = "28_06_simplified_100000_spans.json"
+    file_name = "29_06.json"
+    # file_name = "29_06_simplified_100_spans.json"
+    # file_name = "29_06_simplified_1000_spans.json"
+    # file_name = "29_06_simplified_10000_spans.json"
+    # file_name = "29_06_simplified_100000_spans.json"
+    # ----------------------------------------------------
 
-    from_zipkin = False  # CHANGE THIS VARIABLE IF YOU WANT
+    file = get_data_path(file_name)
 
     if from_zipkin:
-        graph_tool.generate_graph_from_zipkin(spans_json_path)
-        # print(graph_tool.diameters()) # Found infinite path length because the digraph is not strongly connected
-        # graph_tool.draw_graph(save=True, show=False)
+        start_time = time.time()
+
+        # Print arguments data
+        logger.info('file:{}'.format(file))
+
+        # Instantiate the graph tool and runs it in zipkin mode
+        graph_tool = GraphTool()
+        graph_tool.generate_graph_from_zipkin(traces_path=get_absolute_path(file))
+        # TODO: remove because when getting from Zipkin, Span Tree doesnt exists
+        # graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
+        graph_tool.print_graph_data(print_graph_data=print_graph_data)
+        graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)
+        graph_tool.draw_graph(save=save_graph, show=show_graph)
+
+        logger.info('executed in: {} seconds'.format(time.time() - start_time))
     else:
-        spans_array = parse_to_spans_array(spans_json_path)
+        start_time = time.time()
 
-        graph_tool.generate_graph(spans_array, print_span_tree=False)
-        graph_tool.count_edge_occurrence()
-        # graph_tool.draw_graph(save=True, show=False)
+        # Print arguments data
+        logger.info('file:{}'.format(file))
 
-        logger.info('total time: {} seconds'.format(time.time() - start_time))
+        # Instantiate the graph tool and runs it in standard mode
+        graph_tool = GraphTool()
+        graph_tool.generate_graph(spans_array=parse_to_spans_array(get_absolute_path(file)))
+        graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
+        graph_tool.print_graph_data(print_graph_data=print_graph_data)
+        graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)
+        graph_tool.draw_graph(save=save_graph, show=show_graph)
 
-
-def setup_logging(default_path='logging.yaml', default_level=logging.INFO, env_key='LOG_CFG'):
-    """ Setup logging configuration """
-    path = default_path
-    value = os.getenv(env_key, None)
-    if value:
-        path = value
-    if os.path.exists(path):
-        with open(path, 'rt') as f:
-            config = yaml.safe_load(f.read())
-        logging.config.dictConfig(config)
-    else:
-        logging.basicConfig(level=default_level)
+        logger.info('executed in: {} seconds'.format(time.time() - start_time))
 
 
 if __name__ == '__main__':

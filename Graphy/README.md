@@ -18,3 +18,9 @@ Be sure to clone the project into your local machine.
 pip install -r requirements.txt
 python3 graphy/__main__.py 
 ```
+
+If you cloned this project, you can install it  on your machine by running:
+
+```
+pip install -e .[test]
+```

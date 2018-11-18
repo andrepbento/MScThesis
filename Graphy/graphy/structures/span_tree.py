@@ -32,7 +32,7 @@ class SpanTree(object):
         """
         return len(self.tree.children(self.root_node))
 
-    def __count_spans(self):
+    def count_spans(self):
         """
         Counts the number of spans in the span tree
 
@@ -40,8 +40,11 @@ class SpanTree(object):
         """
         return len(self.tree) - 1 - self.count_traces()  # -1: Minus root node
 
+    def span_max_depth(self):
+        return self.tree.depth(self.root_node) - 2  # -2: Minus root and trace
+
     def __generate_span_tree(self, spans_array):
-        """ Generates the span tree using a @Span array """
+        """ Generates the span tree using a Span array """
         logger.info('generate_span_tree()')
         for span in spans_array:
             trace_id = None
@@ -59,5 +62,5 @@ class SpanTree(object):
             except Exception as ex:
                 logger.error('exception: type({}) msg({})'.format(type(ex), ex))
 
-        logger.debug('spans in tree length/spans_array_length: {}/{}'.format(self.__count_spans(),
+        logger.debug('spans in tree length/spans_array_length: {}/{}'.format(self.count_spans(),
                                                                              len(spans_array)))

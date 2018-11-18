@@ -1,6 +1,17 @@
+import os
 from os.path import dirname, join
 
 ROOT_PROJECT_DIRECTORY = '/'.join(dirname(dirname(__file__)).split('/')[:-1])
+
+
+def file_exists(relative_path):
+    return os.path.isfile(relative_path)
+
+
+def get_absolute_path(relative_path):
+    if relative_path:
+        return os.path.abspath(relative_path)
+    return ''
 
 
 def get_root_path(*path):

@@ -1,7 +1,6 @@
 """
 TODO: add graph_tool.py doc
 """
-import json
 import logging
 
 import matplotlib.pyplot as plt
@@ -23,13 +22,16 @@ class GraphTool:
         self.G = nx.MultiDiGraph()
         self.span_tree = None
 
-    def draw_graph(self, save=False, show=True):
+    def draw_graph(self, save=False, show=False):
         """
+        Draw the graph using the data presented in the graph tool
 
-        :param save: True if
-        :param show:
-        :return:
+        :param save: save to file
+        :param show: show the image
         """
+        if save is False and show is False:
+            return
+
         logger.info('draw_graph()')
 
         nx.draw(self.G, with_labels=True, font_weight='bold')
@@ -39,48 +41,35 @@ class GraphTool:
         if show:
             plt.show()
 
-    def generate_graph(self, spans_array, print_span_tree=False, print_graph_data=True):
+    def generate_graph(self, spans_array):
+        """
+        Generates the graph using the spans array data
+
+        :param spans_array: array of span objects
+        """
         logger.info('generate_graph()')
 
-        logger.info('spans_array length: {}'.format(len(spans_array)))
-
+        # Create the span tree to generate the graph
         self.span_tree = SpanTree(spans_array)
-
-        if print_span_tree:
-            self.span_tree.print()
-
+        # Generate nodes and edges
         self.__generate_nodes_and_edges()
 
-        if print_graph_data:
-            self.print_graph_data()
+    def generate_graph_from_zipkin(self, traces_path=''):
+        """
+        Generates the graph using the Zipkin API
 
-    def generate_graph_from_zipkin(self, spans_json_path='', print_graph_data=True):
+        :param traces_path: traces file path
+        """
         logger.info('generate_graph_from_zipkin()')
 
-        if spans_json_path:
-            if not post_spans(spans_json_path):
-                return False
+        if traces_path:
+            if not post_spans(traces_path):
+                logger.error('error posting data to Zipkin')
+                return
         json_dependencies = get_dependencies()
-        dependencies = json.loads(json_dependencies)
-        for dependency in dependencies:
+        for dependency in json_dependencies:
             for count in range(dependency['callCount']):
                 self.G.add_edge(dependency['parent'], dependency['child'])
-
-        if print_graph_data:
-            self.print_graph_data()
-
-    def count_edge_occurrence(self):
-        logger.info('count_edge_occurrence()')
-        # Count each edge occurrence
-        edge_type_counter = {}
-        for edge in self.G.edges():
-            if edge in edge_type_counter:
-                edge_type_counter[edge] += 1
-            else:
-                edge_type_counter[edge] = 1
-
-        logger.info('edge_type_counter[{}]: {}'.format(len(edge_type_counter.keys()), edge_type_counter))
-        logger.info('edge_type_sum: {}'.format(sum(edge_type_counter.values())))
 
     def __generate_nodes_and_edges(self):
         """
@@ -167,7 +156,7 @@ class GraphTool:
         for edge in graph_edges:
             if len(edge) == 1:
                 for i, stack_edge in enumerate(edge):
-                    print(stack_edge)
+                    # print(stack_edge)
                     self.G.add_edge(stack_edge, stack_edge)
                 continue
             if len(edge) >= 2:
@@ -183,10 +172,10 @@ class GraphTool:
             else:
                 logger.error('invalid edge[{}]: {}'.format(len(edge), edge))
 
-        logger.info('attribute_exception_counter: {}'.format(attribute_exception_counter))
-        logger.info('endpoint_counter: {}'.format(endpoint_counter))
-        logger.info('trace_counter: {}'.format(self.span_tree.count_traces()))
-        print('binary_annotation_endpoint_counter:', binary_annotation_endpoint_counter)
+        logger.debug('attribute_exception_counter: {}'.format(attribute_exception_counter))
+        logger.debug('endpoint_counter: {}'.format(endpoint_counter))
+        logger.debug('trace_counter: {}'.format(self.span_tree.count_traces()))
+        logger.debug('binary_annotation_endpoint_counter: {}'.format(binary_annotation_endpoint_counter))
 
         """
         for node in self.span_tree.tree.all_nodes():
@@ -250,6 +239,7 @@ class GraphTool:
             self.__addLink(parent, child, is_error)
         """
 
+    """
     def __addLink(self, parent, child, isError):
         if isError is True:
             print('Error')
@@ -260,21 +250,180 @@ class GraphTool:
 
     def __findRpcAncestor(self, node):
         return node
+    """
 
-    def diameters(self):
-        """
-        TODO: convert the GraphTool to use more than one graph
+    def print_span_tree_data(self, print_span_tree_data=True):
+        """ Print span tree metadata to logger """
+        if not print_span_tree_data:
+            logger.info('skipping print_span_tree_data()')
+            return
 
-        :return: a list with the diameters of every graph
-        """
-        return nx_algorithms.diameter(self.G)
+        logger.info('print_span_tree_data()')
 
-    def print_graph_data(self):
-        if self.G.number_of_nodes() > 20:
+        self.span_tree.print()
+        logger.info('traces: {}'.format(self.span_tree.count_traces()))
+        logger.info('spans: {}'.format(self.span_tree.count_spans()))
+        logger.info('spans_max_depth: {}'.format(self.span_tree.span_max_depth()))
+
+    def print_graph_data(self, print_graph_data=True):
+        """ Print graph metadata to logger """
+        if not print_graph_data:
+            logger.info('skipping print_graph_data()')
+            return
+
+        logger.info('print_graph_data()')
+
+        self.__print_nodes_edges()
+        self.__count_edge_occurrence()
+
+    def __print_nodes_edges(self, max_nodes=20, max_edges=100):
+        """ Prints the number of edges and nodes """
+
+        # Print nodes and edge numbers
+        if self.G.number_of_nodes() > max_nodes:
             logger.info('graph_nodes[{}]'.format(self.G.number_of_nodes()))
         else:
             logger.info('graph_nodes[{}]: {}'.format(self.G.number_of_nodes(), self.G.nodes()))
-        if self.G.number_of_edges() > 100:
+        if self.G.number_of_edges() > max_edges:
             logger.info('graph_edges[{}]'.format(self.G.number_of_edges()))
         else:
             logger.info('graph_edges[{}]: {}'.format(self.G.number_of_edges(), self.G.edges()))
+
+    def __count_edge_occurrence(self):
+        """ Prints the number of edges types and their sum """
+        logger.info('count_edge_occurrence()')
+        # Count each edge occurrence
+        edge_type_counter = {}
+        for edge in self.G.edges():
+            if edge in edge_type_counter:
+                edge_type_counter[edge] += 1
+            else:
+                edge_type_counter[edge] = 1
+
+        logger.info('edge_type_counter[{}]: {}'.format(len(edge_type_counter.keys()), edge_type_counter))
+        logger.info('edge_type_sum: {}'.format(sum(edge_type_counter.values())))
+
+    def generate_graph_statistics(self, print_graph_statistics=True):
+        """ Print graph statistics to logger """
+        if not print_graph_statistics:
+            logger.info('skipping generate_graph_statistics()')
+            return
+
+        logger.info('generate_graph_statistics()')
+
+        logger.info('Assortativity Algorithms')
+        logger.info('assortativity: {}'.format(self.__assortativity()))
+        logger.info('average neighbor degree: {}'.format(self.__average_neighbor_degree()))
+        logger.info('average degree connectivity: {}'.format(self.__average_degree_connectivity()))
+        logger.info('k nearest neighbors: {}'.format(self.__mixing()))
+
+        logger.info('Directed Acyclic Graph Algorithms')
+        logger.info('is directed acyclic graph: {}'.format(self.__is_directed_acyclic_graph()))
+
+        logger.info('Distance Measures Algorithms')
+        logger.info('center: {}'.format(self.__center()))
+        logger.info('diameter: {}'.format(self.__diameter()))
+
+        logger.info('Shortest Path Algorithms')
+        logger.info('shortest path: {}'.format(self.__shortest_path()))
+        for path in self.__all_pairs_shortest_path():
+            print(path)
+        # logger.info('all pairs shortest path: {}'.format()
+        logger.info('floyd warshall: {}'.format(self.__floyd_warshal()))
+
+        # TODO: maybe convert the GraphTool to use more than one graph
+        # TODO: problem -> # Found infinite path length because the digraph is not strongly connected
+
+        # Assortativity Algorithms -----------------------------------------------------------------------------------------
+
+    def __assortativity(self):
+        """
+        Calculates the degree assortativity of graph
+
+        :return: the degree assortativity of graph
+        """
+        try:
+            return nx_algorithms.degree_pearson_correlation_coefficient(self.G)
+        except Exception as ex:
+            logger.error('cannot calculate degree assortativity')
+        return -1
+
+    def __average_neighbor_degree(self):
+        """
+        Calculates the average neighbor degree of the current graph
+
+        :return: a dict with the average neighbor degree of each node
+        """
+        try:
+            return nx_algorithms.average_neighbor_degree(self.G)
+        except Exception as ex:
+            logger.error('cannot calculate average neighbor degree')
+        return -1
+
+    def __average_degree_connectivity(self):
+        """
+        Calculates the average degree connectivity of the current graph
+
+        :return: a dict with the average neighbor degree of each node
+        """
+        try:
+            return nx_algorithms.average_degree_connectivity(self.G)
+        except Exception as ex:
+            logger.error('cannot calculate average degree connectivity')
+        return -1
+
+    def __mixing(self):
+        """
+        Calculates the mixing matrix for degree
+
+        :return: a dict representation of mixing matrix for degree
+        """
+        try:
+            return nx_algorithms.degree_mixing_dict(self.G)
+        except Exception as ex:
+            logger.error('cannot calculate mixing matrix')
+        return -1
+
+    # Directed Acyclic Graphs Algorithms -------------------------------------------------------------------------------
+    def __is_directed_acyclic_graph(self):
+        """
+        Checks if the graph is acyclic
+
+        :return: the list of nodes in center or a empty list
+        """
+        return nx_algorithms.is_directed_acyclic_graph(self.G)
+
+    # Distance Measures Algorithms -------------------------------------------------------------------------------------
+    def __center(self):
+        """
+        Calculates the center of the current graph
+
+        :return: the list of nodes in center or a empty list
+        """
+        try:
+            return nx_algorithms.diameter(self.G)
+        except Exception as ex:
+            logger.error('cannot obtain the list of nodes in the center')
+        return []
+
+    def __diameter(self):
+        """
+        Calculates the diameter of the current graph
+
+        :return: the diameter of the graph or -1
+        """
+        try:
+            return nx_algorithms.diameter(self.G)
+        except Exception as ex:
+            logger.error('cannot calculate graph diameter')
+        return -1
+
+    # Shortest Paths Algorithms
+    def __shortest_path(self):
+        return nx_algorithms.shortest_path(self.G)
+
+    def __all_pairs_shortest_path(self):
+        return nx_algorithms.all_pairs_shortest_path(self.G)
+
+    def __floyd_warshal(self):
+        return nx_algorithms.floyd_warshall(self.G)
