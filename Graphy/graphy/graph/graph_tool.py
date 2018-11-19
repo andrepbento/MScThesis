@@ -18,8 +18,8 @@ class GraphTool:
 
     def __init__(self):
         """Initiate a new GraphTool """
-        # Create a MultiGraph instance
-        self.G = nx.MultiDiGraph()
+        # Create a MultiDiGraph instance
+        self.G = nx.MultiDiDiGraph()
         self.span_tree = None
 
     def draw_graph(self, save=False, show=False):
@@ -326,7 +326,10 @@ class GraphTool:
         logger.info('number of attracting components: {}'.format(self.__number_attracting_components()))
 
         logger.info('Cycles Algorithms')
-        logger.info('number of cycles: {}'.format(self.__count_simple_cycles()))
+        logger.info('number of simple cycles: {}'.format(self.__count_simple_cycles()))
+        logger.info('number of recursive simple cycles: {}'.format(self.__count_recursive_simple_cycles()))
+        logger.info('find cycle: {}'.format(self.__find_cycle()))
+        logger.info('minimum cycle basis: {}'.format(self.__minimum_cycle_basis()))
 
         logger.info('Directed Acyclic Graph Algorithms')
         logger.info('is directed acyclic graph: {}'.format(self.__is_directed_acyclic_graph()))
@@ -350,7 +353,7 @@ class GraphTool:
         # TODO: maybe convert the GraphTool to use more than one graph
         # TODO: problem -> # Found infinite path length because the digraph is not strongly connected
 
-        # Assortativity Algorithms -----------------------------------------------------------------------------------------
+    # Assortativity Algorithms -----------------------------------------------------------------------------------------
 
     def __assortativity(self):
         """
@@ -360,7 +363,7 @@ class GraphTool:
         """
         try:
             return nx_algorithms.degree_pearson_correlation_coefficient(self.G)
-        except Exception as ex:
+        except Exception:
             logger.error('cannot calculate degree assortativity')
         return -1
 
@@ -372,7 +375,7 @@ class GraphTool:
         """
         try:
             return nx_algorithms.average_neighbor_degree(self.G)
-        except Exception as ex:
+        except Exception:
             logger.error('cannot calculate average neighbor degree')
         return -1
 
@@ -384,7 +387,7 @@ class GraphTool:
         """
         try:
             return nx_algorithms.average_degree_connectivity(self.G)
-        except Exception as ex:
+        except Exception:
             logger.error('cannot calculate average degree connectivity')
         return -1
 
@@ -396,7 +399,7 @@ class GraphTool:
         """
         try:
             return nx_algorithms.degree_mixing_dict(self.G)
-        except Exception as ex:
+        except Exception:
             logger.error('cannot calculate mixing matrix')
         return -1
 
@@ -419,8 +422,22 @@ class GraphTool:
         return nx_algorithms.number_attracting_components(self.G)
 
     # Cycles Algorithms ------------------------------------------------------------------------------------------------
+
     def __count_simple_cycles(self):
         return len(list(nx_algorithms.simple_cycles(self.G)))
+
+    def __count_recursive_simple_cycles(self):
+        return len(list(nx_algorithms.recursive_simple_cycles(self.G)))
+
+    def __find_cycle(self):
+        try:
+            return nx_algorithms.find_cycle(self.G)
+        except Exception:
+            logger.error('cannot find cycle in the current graph')
+        return -1
+
+    def __minimum_cycle_basis(self):
+        return nx_algorithms.minimum_cycle_basis(self.G.to_undirected())
 
     # Directed Acyclic Graphs Algorithms -------------------------------------------------------------------------------
 
@@ -442,7 +459,7 @@ class GraphTool:
         """
         try:
             return nx_algorithms.center(self.G.to_undirected())  # Only works with undirected graphs
-        except Exception as ex:
+        except Exception:
             logger.error('cannot obtain the list of nodes in the center')
         return []
 
@@ -454,7 +471,7 @@ class GraphTool:
         """
         try:
             return nx_algorithms.diameter(self.G.to_undirected())  # Only works with undirected graphs
-        except Exception as ex:
+        except Exception:
             logger.error('cannot calculate graph diameter')
         return -1
 
