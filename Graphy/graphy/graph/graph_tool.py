@@ -317,19 +317,35 @@ class GraphTool:
         logger.info('average degree connectivity: {}'.format(self.__average_degree_connectivity()))
         logger.info('k nearest neighbors: {}'.format(self.__mixing()))
 
+        logger.info('Boundaries Algorithms')
+        logger.info('node boundaries: {}'.format(self.__node_boundaries()))
+
+        logger.info('Components Algorithms')
+        logger.info('number of connected components: {}'.format(self.__number_connected_components()))
+        logger.info('connected components: {}'.format((str(list(self.__connected_components())))))
+        logger.info('number of attracting components: {}'.format(self.__number_attracting_components()))
+
+        logger.info('Cycles Algorithms')
+        logger.info('number of cycles: {}'.format(self.__count_simple_cycles()))
+
         logger.info('Directed Acyclic Graph Algorithms')
         logger.info('is directed acyclic graph: {}'.format(self.__is_directed_acyclic_graph()))
 
         logger.info('Distance Measures Algorithms')
         logger.info('center: {}'.format(self.__center()))
         logger.info('diameter: {}'.format(self.__diameter()))
+        logger.info('periphery: {}'.format(self.__periphery()))
+        logger.info('radius: {}'.format(self.__radius()))
 
         logger.info('Shortest Path Algorithms')
         logger.info('shortest path: {}'.format(self.__shortest_path()))
-        for path in self.__all_pairs_shortest_path():
-            print(path)
+        # for path in self.__all_pairs_shortest_path():
+        #    print(path)
         # logger.info('all pairs shortest path: {}'.format()
         logger.info('floyd warshall: {}'.format(self.__floyd_warshal()))
+
+        logger.info('Other Algorithms')
+        logger.info('neighbors: {}'.format(self.__neighbors()))
 
         # TODO: maybe convert the GraphTool to use more than one graph
         # TODO: problem -> # Found infinite path length because the digraph is not strongly connected
@@ -384,7 +400,30 @@ class GraphTool:
             logger.error('cannot calculate mixing matrix')
         return -1
 
+    # Boundary Algorithms ----------------------------------------------------------------------------------------------
+    def __node_boundaries(self):
+        # TODO: not finished
+        node_boundaries = dict()
+        for node in self.G.nodes:
+            node_boundaries[node] = nx_algorithms.node_boundary(self.G, node)
+
+    # Components Algorithms --------------------------------------------------------------------------------------------
+
+    def __number_connected_components(self):
+        return nx_algorithms.number_connected_components(self.G.to_undirected())
+
+    def __connected_components(self):
+        return nx_algorithms.connected_components(self.G.to_undirected())
+
+    def __number_attracting_components(self):
+        return nx_algorithms.number_attracting_components(self.G)
+
+    # Cycles Algorithms ------------------------------------------------------------------------------------------------
+    def __count_simple_cycles(self):
+        return len(list(nx_algorithms.simple_cycles(self.G)))
+
     # Directed Acyclic Graphs Algorithms -------------------------------------------------------------------------------
+
     def __is_directed_acyclic_graph(self):
         """
         Checks if the graph is acyclic
@@ -394,6 +433,7 @@ class GraphTool:
         return nx_algorithms.is_directed_acyclic_graph(self.G)
 
     # Distance Measures Algorithms -------------------------------------------------------------------------------------
+
     def __center(self):
         """
         Calculates the center of the current graph
@@ -401,7 +441,7 @@ class GraphTool:
         :return: the list of nodes in center or a empty list
         """
         try:
-            return nx_algorithms.diameter(self.G)
+            return nx_algorithms.center(self.G.to_undirected())  # Only works with undirected graphs
         except Exception as ex:
             logger.error('cannot obtain the list of nodes in the center')
         return []
@@ -413,12 +453,25 @@ class GraphTool:
         :return: the diameter of the graph or -1
         """
         try:
-            return nx_algorithms.diameter(self.G)
+            return nx_algorithms.diameter(self.G.to_undirected())  # Only works with undirected graphs
         except Exception as ex:
             logger.error('cannot calculate graph diameter')
         return -1
 
-    # Shortest Paths Algorithms
+    def __periphery(self):
+        if nx_algorithms.is_strongly_connected(self.G) is False:
+            logger.error('cannot calculate graph periphery')
+            return []
+        return nx_algorithms.periphery(self.G)
+
+    def __radius(self):
+        if nx_algorithms.is_strongly_connected(self.G) is False:
+            logger.error('cannot calculate graph radius')
+            return []
+        return nx_algorithms.radius(self.G)
+
+    # Shortest Paths Algorithms ----------------------------------------------------------------------------------------
+
     def __shortest_path(self):
         return nx_algorithms.shortest_path(self.G)
 
@@ -427,3 +480,14 @@ class GraphTool:
 
     def __floyd_warshal(self):
         return nx_algorithms.floyd_warshall(self.G)
+
+    # Other Algorithms
+    def __neighbors(self):
+        neighbors = dict
+        print('Neighbors')
+        for node in self.G.nodes:
+            print('#####')
+            print('Node: {}'.format(node))
+            for i, neighbor in enumerate(self.G.neighbors(node)):
+                print('{}: {}'.format(i, neighbor))
+        return neighbors

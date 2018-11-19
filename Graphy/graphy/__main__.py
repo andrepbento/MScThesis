@@ -26,12 +26,12 @@ def main():
     save_graph = False
     show_graph = False
 
-    # file_name = '28_06.json'
+    file_name = '28_06.json'
     # file_name = "28_06_simplified_100_spans.json"
     # file_name = "28_06_simplified_1000_spans.json"
     # file_name = "28_06_simplified_10000_spans.json"
     # file_name = "28_06_simplified_100000_spans.json"
-    file_name = "29_06.json"
+    # file_name = "29_06.json"
     # file_name = "29_06_simplified_100_spans.json"
     # file_name = "29_06_simplified_1000_spans.json"
     # file_name = "29_06_simplified_10000_spans.json"
