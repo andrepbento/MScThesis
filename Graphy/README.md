@@ -4,7 +4,7 @@ This is the main project for the thesis.
 
 ## Architecture
 
-The project architecture can be found in the [Architecture](/docs/architecture) directory.
+The project architecture can be found in the [Architecture](docs/architecture) directory.
 
 ## Requirements
 
