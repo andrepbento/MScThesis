@@ -55,7 +55,8 @@ def run(file, print_span_tree_data, print_graph_data, print_graph_statistics, sa
 
 
 @cli.command('zipkin')
-@click.option('--file', default='')
+# TODO: consider using a JSONL file too
+@click.option('--file', default='', help='JSON file')
 @click.option('--print-span-tree-data', default=False, is_flag=True, help='Print span tree data to console')
 @click.option('--print-graph-data', default=False, is_flag=True, help='Print graph data to console')
 @click.option('--print-graph-statistics', default=False, is_flag=True, help='Print graph statistics data to console')

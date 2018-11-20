@@ -12,15 +12,23 @@ Python 3.6
 
 ## Setup
 
-Be sure to clone the project into your local machine.
+After cloned this project, you have two ways to run Graphy. You can either install it on your local machine, or open it 
+with the [Pycharm IDE](https://www.jetbrains.com/pycharm/) and run it in the IDE.
+
+If the selected option is install it, you need to run the following commands:
 
 ```
-pip install -r requirements.txt
-python3 graphy/__main__.py 
+sudo ./install.sh       # Install the Graphy tool
+graphy --help           # Get the commands documentation
 ```
 
-If you cloned this project, you can install it  on your machine by running:
+## Run
+
+Graphy can run in multiple modes - `graphy [MODE]`. They are the following:
 
 ```
-pip install -e .[test]
+graphy run              # Runs using the default graph implemented algorithm to perform the analysis
+graphy zipkin           # Runs using the Zipkin API to perform the analysis
 ```
+
+For more information about each mode, please run - `graphy [MODE] --help`

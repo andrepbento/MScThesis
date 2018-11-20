@@ -19,7 +19,7 @@ class GraphTool:
     def __init__(self):
         """Initiate a new GraphTool """
         # Create a MultiDiGraph instance
-        self.G = nx.MultiDiDiGraph()
+        self.G = nx.MultiDiGraph()
         self.span_tree = None
 
     def draw_graph(self, save=False, show=False):

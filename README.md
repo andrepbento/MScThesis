@@ -4,5 +4,6 @@ This repository contains some contents related to the project of my Master Thesi
 
 ## Contents
 
-- [Report](report)
-- [Requirements?](requirements)
+* [Graphy](Graphy) - Developed tool for the whole project.
+* [Report](report) - Project report in `LaTeX` and `pdf` formats.
+* [Requirements?](requirements)
