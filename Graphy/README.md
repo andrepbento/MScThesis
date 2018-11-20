@@ -27,7 +27,7 @@ graphy --help           # Get the commands documentation
 Graphy can run in multiple modes - `graphy [MODE]`. They are the following:
 
 ```
-graphy run              # Runs using the default graph implemented algorithm to perform the analysis
+graphy run              # Runs using the default implemented graph algorithm to perform the analysis
 graphy zipkin           # Runs using the Zipkin API to perform the analysis
 ```
 

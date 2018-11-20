@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/graph/graph_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_tool.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +62,7 @@
           <entry key="dummy" value="100" />
           <entry key="gitignore" value="37" />
           <entry key="jsonl" value="24" />
-          <entry key="md" value="1283" />
+          <entry key="md" value="1285" />
           <entry key="py" value="27248" />
           <entry key="sh" value="14" />
           <entry key="txt" value="163" />
@@ -75,7 +72,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Markdown" value="1283" />
+          <entry key="Markdown" value="1285" />
           <entry key="PLAIN_TEXT" value="337" />
           <entry key="Python" value="27248" />
           <entry key="YAML" value="62" />
@@ -121,8 +118,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="578">
-                <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+              <first_editor relative-caret-position="493">
+                <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
               </first_editor>
               <second_editor />
             </state>
@@ -851,8 +848,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="578">
-            <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+          <first_editor relative-caret-position="493">
+            <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
           </first_editor>
           <second_editor />
         </state>
