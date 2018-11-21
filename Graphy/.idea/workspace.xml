@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/architecture/Graphy_Architecture.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +38,7 @@
           <entry key="json" value="20" />
           <entry key="jsonl" value="6" />
           <entry key="log" value="13" />
-          <entry key="md" value="8" />
+          <entry key="md" value="9" />
           <entry key="png" value="12" />
           <entry key="py" value="246" />
           <entry key="sh" value="5" />
@@ -51,7 +53,7 @@
           <entry key="Ini" value="3" />
           <entry key="JSON" value="20" />
           <entry key="Log" value="11" />
-          <entry key="Markdown" value="8" />
+          <entry key="Markdown" value="9" />
           <entry key="PLAIN_TEXT" value="38" />
           <entry key="Python" value="249" />
           <entry key="YAML" value="2" />
@@ -62,7 +64,7 @@
           <entry key="dummy" value="100" />
           <entry key="gitignore" value="37" />
           <entry key="jsonl" value="24" />
-          <entry key="md" value="1285" />
+          <entry key="md" value="1338" />
           <entry key="py" value="27248" />
           <entry key="sh" value="14" />
           <entry key="txt" value="163" />
@@ -72,7 +74,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Bash" value="1" />
-          <entry key="Markdown" value="1285" />
+          <entry key="Markdown" value="1338" />
           <entry key="PLAIN_TEXT" value="337" />
           <entry key="Python" value="27248" />
           <entry key="YAML" value="62" />
@@ -118,8 +120,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="102">
-                <caret line="6" column="60" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
+              <first_editor relative-caret-position="493">
+                <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
               </first_editor>
               <second_editor />
             </state>
@@ -539,13 +541,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/graphy/models/annotation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/models/endpoint.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -845,11 +840,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/docs/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="15" lean-forward="true" selection-start-line="4" selection-start-column="15" selection-end-line="4" selection-end-column="15" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="102">
-            <caret line="6" column="60" selection-start-line="6" selection-start-column="60" selection-end-line="6" selection-end-column="60" />
+          <first_editor relative-caret-position="493">
+            <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
           </first_editor>
           <second_editor />
         </state>

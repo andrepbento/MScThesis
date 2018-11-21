@@ -1,10 +1,6 @@
 # Graphy
 
-This is the main project for the thesis.
-
-## Architecture
-
-The project architecture can be found in the [Architecture](Graphy/docs/architecture) directory.
+Graphy is the main project for the thesis.
 
 ## Requirements
 
@@ -31,4 +27,4 @@ graphy run              # Runs using the default implemented graph algorithm to 
 graphy zipkin           # Runs using the Zipkin API to perform the analysis
 ```
 
-For more information about each mode, please run - `graphy [MODE] --help`
+For more information about each mode and the possible options, please run - `graphy [MODE] --help`
