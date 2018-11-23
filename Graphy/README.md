@@ -18,6 +18,14 @@ sudo ./install.sh       # Install the Graphy tool
 graphy --help           # Get the commands documentation
 ```
 
+If you want to run `graphy` with `zipkin` integration, you can find some scripts to run Zipkin in a `docker` container.
+Be sure to have [Docker](https://www.docker.com/) installed in your system.
+
+```
+scripts/docker-zipkin-start.sh          # Starts Zipkin in a docker container
+scripts/docker-zipkin-stop-rm-all.sh    # Stops and removes all docker containers [BE CAREFULL IF YOU HAVE IMPORTANT CONTAINERS RUNNING]
+```
+
 ## Run
 
 Graphy can run in multiple modes - `graphy [MODE]`. They are the following:

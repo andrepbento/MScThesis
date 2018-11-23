@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/apbento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/apbento.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/__main__.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/__main__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/cli.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/graph/graph_tool.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_tool.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/logging.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/logging.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/convert_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/convert_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/zipkin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,11 +34,26 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/cli.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
               <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="340">
+                <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -189,7 +198,6 @@
         <option value="$PROJECT_DIR$/graphy/utils/files.py" />
         <option value="$PROJECT_DIR$/graphy/structures/span_tree.py" />
         <option value="$PROJECT_DIR$/graphy/statistics/timestamp.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/graphy/graph/graph_tool.py" />
         <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
         <option value="$PROJECT_DIR$/graphy/utils/convert_json.py" />
@@ -197,6 +205,7 @@
         <option value="$PROJECT_DIR$/graphy/utils/logger.py" />
         <option value="$PROJECT_DIR$/graphy/logging.yaml" />
         <option value="$PROJECT_DIR$/graphy/cli.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -690,16 +699,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/README.md" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="493">
-            <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/utils/profile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -797,6 +796,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="340">
+            <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
