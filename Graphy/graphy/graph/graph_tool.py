@@ -328,7 +328,7 @@ class GraphTool:
         logger.info('Cycles Algorithms')
         logger.info('number of simple cycles: {}'.format(self.__count_simple_cycles()))
         logger.info('number of recursive simple cycles: {}'.format(self.__count_recursive_simple_cycles()))
-        logger.info('find cycle: {}'.format(self.__find_cycle()))
+        logger.info('graph cycle found: {}'.format(self.__find_cycle()))
         logger.info('minimum cycle basis: {}'.format(self.__minimum_cycle_basis()))
 
         logger.info('Directed Acyclic Graph Algorithms')
@@ -345,7 +345,7 @@ class GraphTool:
         # for path in self.__all_pairs_shortest_path():
         #    print(path)
         # logger.info('all pairs shortest path: {}'.format()
-        logger.info('floyd warshall: {}'.format(self.__floyd_warshal()))
+        logger.info('floyd warshall: {}'.format(self.__floyd_warshall()))
 
         logger.info('Other Algorithms')
         logger.info('neighbors: {}'.format(self.__neighbors()))
@@ -363,8 +363,8 @@ class GraphTool:
         """
         try:
             return nx_algorithms.degree_pearson_correlation_coefficient(self.G)
-        except Exception:
-            logger.error('cannot calculate degree assortativity')
+        except Exception as ex:
+            logger.error('cannot calculate degree assortativity: {}'.format(ex))
         return -1
 
     def __average_neighbor_degree(self):
@@ -375,8 +375,8 @@ class GraphTool:
         """
         try:
             return nx_algorithms.average_neighbor_degree(self.G)
-        except Exception:
-            logger.error('cannot calculate average neighbor degree')
+        except Exception as ex:
+            logger.error('cannot calculate average neighbor degree: {}'.format(ex))
         return -1
 
     def __average_degree_connectivity(self):
@@ -387,8 +387,8 @@ class GraphTool:
         """
         try:
             return nx_algorithms.average_degree_connectivity(self.G)
-        except Exception:
-            logger.error('cannot calculate average degree connectivity')
+        except Exception as ex:
+            logger.error('cannot calculate average degree connectivity : {}'.format(ex))
         return -1
 
     def __mixing(self):
@@ -399,8 +399,8 @@ class GraphTool:
         """
         try:
             return nx_algorithms.degree_mixing_dict(self.G)
-        except Exception:
-            logger.error('cannot calculate mixing matrix')
+        except Exception as ex:
+            logger.error('cannot calculate mixing matrix: {}'.format(ex))
         return -1
 
     # Boundary Algorithms ----------------------------------------------------------------------------------------------
@@ -432,12 +432,16 @@ class GraphTool:
     def __find_cycle(self):
         try:
             return nx_algorithms.find_cycle(self.G)
-        except Exception:
-            logger.error('cannot find cycle in the current graph')
+        except Exception as ex:
+            logger.error('cannot find cycle in the current graph: {}'.format(ex))
         return -1
 
     def __minimum_cycle_basis(self):
-        return nx_algorithms.minimum_cycle_basis(self.G.to_undirected())
+        try:
+            return nx_algorithms.minimum_cycle_basis(self.G.to_undirected())
+        except Exception as ex:
+            logger.error('cannot calculate minimum cycle basis for this kind of graph: {}'.format(ex))
+        return -1
 
     # Directed Acyclic Graphs Algorithms -------------------------------------------------------------------------------
 
@@ -459,8 +463,8 @@ class GraphTool:
         """
         try:
             return nx_algorithms.center(self.G.to_undirected())  # Only works with undirected graphs
-        except Exception:
-            logger.error('cannot obtain the list of nodes in the center')
+        except Exception as ex:
+            logger.error('cannot obtain the list of nodes in the center: {}'.format(ex))
         return []
 
     def __diameter(self):
@@ -471,19 +475,19 @@ class GraphTool:
         """
         try:
             return nx_algorithms.diameter(self.G.to_undirected())  # Only works with undirected graphs
-        except Exception:
-            logger.error('cannot calculate graph diameter')
+        except Exception as ex:
+            logger.error('cannot calculate graph diameter: {}'.format(ex))
         return -1
 
     def __periphery(self):
         if nx_algorithms.is_strongly_connected(self.G) is False:
-            logger.error('cannot calculate graph periphery')
+            logger.error('cannot calculate graph periphery: Graph is not strongly connected')
             return []
         return nx_algorithms.periphery(self.G)
 
     def __radius(self):
         if nx_algorithms.is_strongly_connected(self.G) is False:
-            logger.error('cannot calculate graph radius')
+            logger.error('cannot calculate graph radius: Graph is not strongly connected')
             return []
         return nx_algorithms.radius(self.G)
 
@@ -495,16 +499,16 @@ class GraphTool:
     def __all_pairs_shortest_path(self):
         return nx_algorithms.all_pairs_shortest_path(self.G)
 
-    def __floyd_warshal(self):
+    def __floyd_warshall(self):
         return nx_algorithms.floyd_warshall(self.G)
 
     # Other Algorithms
     def __neighbors(self):
+        debug_message = 'node neighbors'
         neighbors = dict
-        print('Neighbors')
         for node in self.G.nodes:
-            print('#####')
-            print('Node: {}'.format(node))
+            debug_message += '\nNode: {}'.format(node)
             for i, neighbor in enumerate(self.G.neighbors(node)):
-                print('{}: {}'.format(i, neighbor))
+                debug_message += '\n\t{}: {}'.format(i, neighbor)
+        logger.debug(debug_message)
         return neighbors

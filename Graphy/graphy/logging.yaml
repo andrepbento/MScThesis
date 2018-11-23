@@ -38,5 +38,5 @@ loggers:
     propagate: no
 
 root:
-  level: DEBUG
+  level: NOTSET
   handlers: [console, info_file_handler, error_file_handler]

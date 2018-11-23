@@ -4,6 +4,7 @@ import time
 
 from graphy.graph.graph_tool import GraphTool
 from graphy.models.span import parse_to_spans_array
+from graphy.utils.convert_json import convert_json
 from graphy.utils.files import get_data_path, get_absolute_path
 from graphy.utils.logger import setup_logging
 from graphy.utils.profile import profile
@@ -25,6 +26,9 @@ def main():
     print_graph_statistics = True
     save_graph = False
     show_graph = False
+
+    # file_name = "traces-2018-06-28.jsonl"
+    # file_name = "traces-2018-06-29.jsonl"
 
     file_name = '28_06.json'
     # file_name = "28_06_simplified_100_spans.json"
@@ -48,9 +52,7 @@ def main():
 
         # Instantiate the graph tool and runs it in zipkin mode
         graph_tool = GraphTool()
-        graph_tool.generate_graph_from_zipkin(traces_path=get_absolute_path(file))
-        # TODO: remove because when getting from Zipkin, Span Tree doesnt exists
-        # graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
+        graph_tool.generate_graph_from_zipkin(traces_path=convert_json(get_absolute_path(file)))
         graph_tool.print_graph_data(print_graph_data=print_graph_data)
         graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)
         graph_tool.draw_graph(save=save_graph, show=show_graph)
@@ -64,7 +66,7 @@ def main():
 
         # Instantiate the graph tool and runs it in standard mode
         graph_tool = GraphTool()
-        graph_tool.generate_graph(spans_array=parse_to_spans_array(get_absolute_path(file)))
+        graph_tool.generate_graph(spans_array=parse_to_spans_array(convert_json(get_absolute_path(file))))
         graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
         graph_tool.print_graph_data(print_graph_data=print_graph_data)
         graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)

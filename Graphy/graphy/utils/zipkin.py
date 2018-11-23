@@ -148,7 +148,7 @@ def get_dependencies(lookback=None):
         sys.exit(status=1)
 
 
-# TODO: only for testing purposes
+# TODO: the following lines are only for testing purposes [REMOVE]
 if __name__ == '__main__':
     # print(get_services())
     # print(get_spans('api_com'))
