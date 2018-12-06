@@ -1,7 +1,9 @@
 click>=7.0
 click-log>=0.3.2
 matplotlib>=3.0.1
+neo4j-driver>=1.7.0b2
 networkx>=2.2
+networkx-neo4j>=0.0.1
 numpy>=1.15.3
 PyYAML>=3.13
 requests2>=2.16.0

@@ -6,6 +6,7 @@ import logging
 import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms as nx_algorithms
+from neo4j import GraphDatabase
 
 from graphy.structures.span_tree import SpanTree
 from graphy.utils.zipkin import post_spans, get_dependencies
@@ -18,6 +19,16 @@ class GraphTool:
 
     def __init__(self):
         """Initiate a new GraphTool """
+        # Neo4J init
+        # Neo4J
+        driver = GraphDatabase.driver("bolt://localhost", auth=('neo4j', 'neo'))
+
+        config = {
+            "node_label": "ServiceName",
+            "relationship_type": None,
+            "identifier_property": "name"
+        }
+
         # Create a MultiDiGraph instance
         self.G = nx.MultiDiGraph()
         self.span_tree = None
