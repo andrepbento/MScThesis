@@ -1,0 +1,17 @@
+1 - Implement the monitoring tool
+	1.1 - Setup Graphy project
+	1.2 - Implement Graphy Controller
+	1.3 - Implement comunication with target systems
+	1.4 - Implement the File IO
+	1.5 - Setup databases
+	1.6 - Implement database repositories
+	1.7 - Implement the Graph Processor
+	1.8 - Implement the Logging Component
+	1.9 - Research apropriate analysis algorithms
+	1.10 - Implement the Data Analyser
+	1.11 - Define tests to be performed
+	1.12 - Implement the Testing Component
+2 - Test and evaluate the results
+	2.1 - Run tests
+	2.2 - Write down system analysis results
+3 - Write final report
