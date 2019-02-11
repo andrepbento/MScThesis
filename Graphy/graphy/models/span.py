@@ -30,6 +30,7 @@ from enum import Enum
 from graphy.models.annotation import Annotation
 from graphy.models.attributes import get_attribute, set_attribute_value
 from graphy.models.binary_annotation import BinaryAnnotation
+from graphy.utils.dictionary import Dictionary
 
 
 class Span(object):
@@ -76,9 +77,8 @@ class Span(object):
         attribute = get_attribute(self, attribute_key)
         if attribute is None:
             return None
-        fix_needed, timestamp = fix_timestamp(attribute)
-        if fix_needed:
-            set_attribute_value(self, attribute_key, timestamp)
+        timestamp = fix_timestamp(attribute)
+        set_attribute_value(self, attribute_key, timestamp)
         return timestamp
 
     @property
@@ -155,15 +155,28 @@ class Kind(Enum):
     CONSUMER = 4
 
 
+def fix_timestamps(spans):
+    if type(spans) is not list:
+        return
+
+    timestamp = 'timestamp'
+
+    for span in spans:
+        Dictionary.update_dict(span, timestamp, fix_timestamp)
+
+
 def fix_timestamp(timestamp):
     """
     Fix timestamp values.
 
     This function fixes the timestamp len issue.
     """
-    if len(str(timestamp)) < 16:
-        return True, int(str(timestamp) + '000')
-    return False, timestamp
+    default_timestamp_len = 16
+    if len(str(timestamp)) < default_timestamp_len:
+        miss_len = default_timestamp_len - len(str(timestamp))
+        timestamp = str(timestamp) + ''.join(['0' for _ in range(miss_len)])
+        return int(timestamp)
+    return timestamp
 
 
 def parse_to_spans_array(spans_json_path):

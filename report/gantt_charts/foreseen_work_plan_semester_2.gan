@@ -46,7 +46,6 @@
             </task>
             <task id="44" name="1.4 - Implement the File IO" color="#8cb6ce" meeting="false" start="2019-02-25" duration="3" complete="0" thirdDate="2018-10-01" thirdDate-constraint="0" expand="true">
                 <depend id="14" type="2" difference="0" hardness="Strong"/>
-                <depend id="26" type="2" difference="0" hardness="Strong"/>
             </task>
             <task id="14" name="1.5 - Setup databases" color="#8cb6ce" meeting="false" start="2019-02-28" duration="3" complete="0" thirdDate="2019-02-01" thirdDate-constraint="0" expand="true">
                 <depend id="16" type="2" difference="0" hardness="Strong"/>

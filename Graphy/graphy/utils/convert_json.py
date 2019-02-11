@@ -1,8 +1,14 @@
-import json
 import logging
 import os
 import sys
 from os.path import join
+
+from graphy.models.span import fix_timestamps
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +37,8 @@ def convert_json(json_file_path, limit=None):
     if limit:
         lines = lines[:limit]
 
+    fix_timestamps(lines)
+
     json_array = json.dumps(lines)
 
     dir_path = os.path.dirname(os.path.realpath(json_file_path))
@@ -48,7 +56,7 @@ def main():
     if len(sys.argv) != 2:
         print('convert_json.py JSONL_FILE')
         sys.exit(1)
-    convert_json(sys.argv[1], 100)
+    print('File created in:', convert_json(sys.argv[1], None))
 
 
 if __name__ == '__main__':

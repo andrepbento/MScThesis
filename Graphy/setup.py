@@ -1,11 +1,12 @@
+import subprocess
 from os.path import dirname, abspath, join
-from subprocess import call
 
-from setuptools import setup, find_packages, Command
-
-from graphy import __version__
+from setuptools import find_packages, Command, setup
 
 this_dir = abspath(dirname(__file__))
+
+NAME = 'graphy'
+VERSION = '0.0.1'
 
 # Readme
 with open(join(this_dir, 'README.md'), encoding='utf-8') as file:
@@ -13,15 +14,44 @@ with open(join(this_dir, 'README.md'), encoding='utf-8') as file:
 
 # License
 with open(join(this_dir, 'LICENSE'), encoding='utf-8') as file:
-    license = file.read()
+    license_file = file.read()
 
 # Requirements
 with open(join(this_dir, 'requirements.txt')) as file:
     requirements = file.read().splitlines()
 
 
-class RunTests(Command):
-    """Run all tests."""
+class InstallCommand(Command):
+    description = "Install command"
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        subprocess.run(['pip3', 'install', '-r', 'requirements.txt'])
+
+
+class RunCommand(Command):
+    description = "Description of the command"
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        from graphy.app import Graphy
+        run = Graphy.run
+        run()
+
+
+class TestCommand(Command):
     description = 'run tests'
     user_options = []
 
@@ -32,33 +62,27 @@ class RunTests(Command):
         pass
 
     def run(self):
+        print('Hello')
         """Run all tests!"""
-        error = call(['py.test', '--cov=graphy', '--cov-report=term-missing'])
-        raise SystemExit(error)
+        # error = call(['py.test', '--cov=graphy', '--cov-report=term-missing'])
+        # raise SystemExit(error)
+        pass
 
 
 setup(
-    name='graphy',
-    version=__version__,
-    description='A system monitor command line program in Python.',
+    name=NAME,
+    version=VERSION,
+    description='A micro-services system monitor command line program in Python.',
     long_description=readme,
+    long_description_content_type='text/markdown',
+    url='https://github.com/andrepbento/MScThesis/tree/master/Graphy',
     author='André Bento',
     author_email='apbento@student.dei.uc.pt',
-    url='https://github.com/...',
-    license=license,
+    license=license_file,
     classifiers=[
         'Intended Audience :: Developers',
-        'Topic :: Utilities',
-        'License :: Public Domain',
-        'Natural Language :: English',
-        'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Topic :: Observing and Controlling Performance in  Micro-services',
+        'License :: MIT License',
         'Programming Language :: Python :: 3.6',
     ],
     keywords='cli',
@@ -72,5 +96,9 @@ setup(
             'graphy=graphy.cli:cli',
         ],
     },
-    cmdclass={'test': RunTests},
+    cmdclass={
+        'install': InstallCommand,
+        'run': RunCommand,
+        'test': TestCommand
+    },
 )

@@ -92,5 +92,5 @@ ENV/
 # Traces and Spans data
 data/
 
-# Tmp graph image
-graphy/graph.png
+# Temporary files
+tmp/

@@ -4,8 +4,8 @@ import time
 import click
 import click_log
 
-from graphy.__main__ import setup_logging
-from graphy.graph.graph_tool import GraphTool
+from graphy.app import setup_logging
+from graphy.graph.graph_processor import GraphProcessor
 from graphy.models.span import parse_to_spans_array
 from graphy.utils.convert_json import convert_json
 from graphy.utils.files import get_absolute_path
@@ -50,7 +50,7 @@ def run(file, print_span_tree_data, print_graph_data, print_graph_statistics, sa
     logger.info('file:{}'.format(file))
 
     # Instantiate the graph tool and runs it in standard mode
-    graph_tool = GraphTool()
+    graph_tool = GraphProcessor()
     graph_tool.generate_graph(spans_array=parse_to_spans_array(convert_json(get_absolute_path(file))))
     graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
     graph_tool.print_graph_data(print_graph_data=print_graph_data)
@@ -75,7 +75,7 @@ def zipkin(file, print_span_tree_data, print_graph_data, print_graph_statistics,
     logger.info('file:{}'.format(file))
 
     # Instantiate the graph tool and runs it in zipkin mode
-    graph_tool = GraphTool()
+    graph_tool = GraphProcessor()
     graph_tool.generate_graph_from_zipkin(traces_path=convert_json(get_absolute_path(file)))
     graph_tool.print_graph_data(print_graph_data=print_graph_data)
     graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)

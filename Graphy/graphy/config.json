@@ -1,0 +1,25 @@
+{
+  "GRAPHY": {
+    "ACTIVATE_ZIPKIN": true,
+    "TRACE_FILE": "data/28_06.json",
+    "TRACE_FILE_FROM_PROJECT": true,
+    "PRINT_GRAPH": false,
+    "PRINT_GRAPH_STATISTICS": false,
+    "PRINT_SPAN_TREE": false,
+    "SAVE_GRAPH": false,
+    "SHOW_GRAPH": false
+  },
+  "ARANGO_DB": {
+    "IP": ""
+  },
+  "OPENTSDB": {
+    "IP": "127.0.0.1",
+    "PORT": 4242
+  },
+  "ZIPKIN": {
+    "API_V2": "/api/v2/",
+    "API_V1": "/api/v1/",
+    "IP": "127.0.0.1",
+    "PORT": "9411"
+  }
+}

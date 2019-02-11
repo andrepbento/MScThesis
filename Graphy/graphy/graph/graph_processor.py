@@ -1,34 +1,23 @@
 """
-TODO: add graph_tool.py doc
+TODO: add graph_processor.py doc
 """
 import logging
+from collections import defaultdict
 
 import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms as nx_algorithms
-from neo4j import GraphDatabase
 
-from graphy.structures.span_tree import SpanTree
-from graphy.utils.zipkin import post_spans, get_dependencies
+from graphy.models.span_tree import SpanTree
 
 logger = logging.getLogger(__name__)
 
 
-class GraphTool:
+class GraphProcessor:
     """ GraphTool contains a collection of methods to handle SpanTree's and Graphs """
 
     def __init__(self):
         """Initiate a new GraphTool """
-        # Neo4J init
-        # Neo4J
-        driver = GraphDatabase.driver("bolt://localhost", auth=('neo4j', 'neo'))
-
-        config = {
-            "node_label": "ServiceName",
-            "relationship_type": None,
-            "identifier_property": "name"
-        }
-
         # Create a MultiDiGraph instance
         self.G = nx.MultiDiGraph()
         self.span_tree = None
@@ -65,22 +54,16 @@ class GraphTool:
         # Generate nodes and edges
         self.__generate_nodes_and_edges()
 
-    def generate_graph_from_zipkin(self, traces_path=''):
+    def generate_graph_from_zipkin(self, dependencies):
         """
-        Generates the graph using the Zipkin API
+        Generates the graph using the Dependencies from Zipkin.
 
-        :param traces_path: traces file path
+        :param dependencies: graph dependencies data in Zipkin format.
         """
-        logger.info('generate_graph_from_zipkin()')
-
-        if traces_path:
-            if not post_spans(traces_path):
-                logger.error('error posting data to Zipkin')
-                return
-        json_dependencies = get_dependencies()
-        for dependency in json_dependencies:
-            for count in range(dependency['callCount']):
-                self.G.add_edge(dependency['parent'], dependency['child'])
+        logger.debug('generate_graph_from_zipkin()')
+        for dependency in dependencies:
+            for count in range(dependency['callCount']):  # TODO: Check if weight acts as adding it one by one
+                self.G.add_edge(dependency['parent'], dependency['child'])  # , weight=range(dependency['callCount']
 
     def __generate_nodes_and_edges(self):
         """
@@ -359,7 +342,7 @@ class GraphTool:
         logger.info('floyd warshall: {}'.format(self.__floyd_warshall()))
 
         logger.info('Other Algorithms')
-        logger.info('neighbors: {}'.format(self.__neighbors()))
+        logger.info('neighbors: {}'.format(self.all_neighbors()))
 
         # TODO: maybe convert the GraphTool to use more than one graph
         # TODO: problem -> # Found infinite path length because the digraph is not strongly connected
@@ -513,13 +496,68 @@ class GraphTool:
     def __floyd_warshall(self):
         return nx_algorithms.floyd_warshall(self.G)
 
-    # Other Algorithms
-    def __neighbors(self):
-        debug_message = 'node neighbors'
-        neighbors = dict
-        for node in self.G.nodes:
+    def degree(self, service_name):
+        """
+        Calculates the degree for a specific node.
+
+        :param service_name: the service node name.
+        :return: the degree of the service node.
+        """
+        # TODO: Finish this method
+        degree = self.G.degree[service_name]
+
+    def degrees(self, sort=True):
+        """
+        Calculates the degree for all nodes.
+        Node degree is the sum of all input and output edges.
+
+        :param sort: sort the list by degree in reverse order.
+        :return: a tuple list containing all the nodes and their corresponding degree.
+        """
+        # TODO: The following lines of code can be used to get the input or output degree from all nodes
+        # in_degree = self.G.in_degree
+        # out_degree = self.G.out_degree
+        degrees = self.G.degree
+        return sorted(degrees, key=lambda tup: tup[1], reverse=sort)
+
+    def neighbors(self, service_name=None):
+        """
+        Calculates the out neighbors for all nodes or for a specific node.
+
+        :param service_name: the service node name.
+        :return: a dictionary containing all the nodes and their corresponding list of neighbors.
+        """
+        debug_message = ''
+        neighbors = defaultdict(list)
+
+        service_nodes = self.G.nodes
+        if service_name:
+            service_nodes = [service_name]
+
+        # TODO: The following lines of code can be used to get the input and output from all nodes
+        # in_edges = self.G.in_edges
+        # out_edges = self.G.out_edges
+
+        for node in service_nodes:
             debug_message += '\nNode: {}'.format(node)
             for i, neighbor in enumerate(self.G.neighbors(node)):
                 debug_message += '\n\t{}: {}'.format(i, neighbor)
+                neighbors[node].append(neighbor)
         logger.debug(debug_message)
         return neighbors
+
+    def number_of_edges(self, service_name=None):
+        """
+        Calculates the number of edges for all nodes or for a specific node.
+
+        :param service_name: the service node name.
+        :return:
+        """
+        services = self.G.nodes
+        if service_name:
+            services = [service_name]
+
+        for service in services:
+            for service_neighbor in (self.G.neighbors(service)):
+                n_edges = self.G.number_of_edges(service, service_neighbor)
+                print(service, ':', service_neighbor, ':', n_edges)

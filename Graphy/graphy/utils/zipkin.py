@@ -5,20 +5,23 @@ import time
 
 import requests
 
+from graphy.utils import config
 from graphy.utils.files import read_file
 
-zipkin_ip = '127.0.0.1'
-zipkin_port = '9411'
+logger = logging.getLogger(__name__)
+
+zipkin_config = config.get('ZIPKIN')
+
+zipkin_ip = zipkin_config['IP']
+zipkin_port = zipkin_config['PORT']
 base_address = 'http://{}:{}'.format(zipkin_ip, zipkin_port)
-api_v1_endpoint = '/api/v1/'
-api_v2_endpoint = '/api/v2/'
+api_v1_endpoint = zipkin_config['API_V1']
+api_v2_endpoint = zipkin_config['API_V2']
 
 address_v1 = base_address + api_v1_endpoint
 address_v2 = base_address + api_v2_endpoint
 
 headers = {'content-type': 'application/json'}
-
-logger = logging.getLogger(__name__)
 
 
 def get_services():
@@ -27,7 +30,7 @@ def get_services():
 
     :return: a list with all services presented in Zipkin
     """
-    logger.info('get_services()')
+    logger.debug('get_services()')
 
     try:
         response = requests.get(address_v2 + 'services')
@@ -45,7 +48,7 @@ def get_spans(service_name):
     enumerates possible input values.
     :return: the spans data
     """
-    logger.info('get_spans()')
+    logger.debug('get_spans()')
 
     try:
         params = {'serviceName': service_name}
@@ -63,7 +66,7 @@ def post_spans(spans_file):
     :param spans_file: spans file path
     :return: if the operation was successful (equal to HTTP code 202) or not
     """
-    logger.info('post_spans()')
+    logger.debug('post_spans()')
 
     try:
         spans_data = read_file(spans_file)
@@ -74,11 +77,13 @@ def post_spans(spans_file):
         sys.exit(status=1)
 
 
-def get_traces(service_name=None, span_name=None, annotation_query=None, min_duration=None, max_duration=None,
-               end_ts=None, lookback=None, limit=None):
+def get_traces(lookback=365 * 24 * 60 * 60 * 1000, service_name=None, span_name=None, annotation_query=None,
+               min_duration=None, max_duration=None, end_ts=None, limit=10):
     """
     Get all the traces from the Zipkin API.
 
+    :param lookback: Only return traces where all Span.timestamp are at or after (endTs lookback) in milliseconds.
+    Defaults to endTs, limited to a system parameter QUERY_LOOKBACK. Default 1 year in milliseconds.
     :param service_name: Ex api_com (required) - Lower-case label of a node in the service graph. The /services endpoint
     enumerates possible input values.
     :param span_name: Ex get - name of a span in a trace. Only return traces that contains spans with this name.
@@ -91,12 +96,10 @@ def get_traces(service_name=None, span_name=None, annotation_query=None, min_dur
     valid with minDuration.
     :param end_ts: Only return traces where all Span.timestamp are at or before this time in epoch milliseconds.
     Defaults to current time.
-    :param lookback: Only return traces where all Span.timestamp are at or after (endTs lookback) in milliseconds.
-    Defaults to endTs, limited to a system parameter QUERY_LOOKBACK
     :param limit: Maximum number of traces to return. Defaults to 10
     :return: list of traces with respect to the provided parameters.
     """
-    logger.info('get_trace()')
+    logger.debug('get_trace()')
 
     try:
         params = {
@@ -123,23 +126,23 @@ def get_trace(trace_id):
     :param trace_id: Trace identifier, set on all spans within it
     :return: the trace data
     """
-    logger.info('get_trace()')
+    logger.debug('get_trace()')
 
     response = requests.get(address_v2 + 'trace/{}'.format(trace_id))
 
     return json.loads(response.text)
 
 
-def get_dependencies(lookback=None):
+def get_dependencies(end_ts, lookback=60 * 60 * 1000):
     """
     Get all the dependencies from the Zipkin API.
-
+    :param end_ts: End timestamp in milliseconds.
+    :param lookback: Timestamp in milliseconds of lookback, 1 hour default.
     :return: the dependencies data or None
     """
-    logger.info('get_dependencies()')
+    logger.debug('get_dependencies()')
 
     try:
-        end_ts = str(int(time.time()))
         params = {'endTs': end_ts, 'lookback': lookback}
         response = requests.get(address_v2 + 'dependencies', params)
         return None if response.status_code != 200 else json.loads(response.text)
@@ -148,10 +151,43 @@ def get_dependencies(lookback=None):
         sys.exit(status=1)
 
 
-# TODO: the following lines are only for testing purposes [REMOVE]
 if __name__ == '__main__':
-    # print(get_services())
-    # print(get_spans('api_com'))
-    # print(get_dependencies())
+    start_date_time_str = "01/01/2018 00:00:00"
+    end_date_time_str = "30/12/2018 00:00:00"
+
+    from graphy.utils import time as my_time
+
+    start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
+    end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+
+    # TODO: the following lines are only for testing purposes [REMOVE]
+    # print('\nServices:\n{}'.format(get_services()))
+
+    # print('\nSpans:\n{}'.format(get_spans('api_com')))
+
+    # print('\nDependencies:\n'.format(get_dependencies(1530227280000)))
+
     # print(get_trace('236a2805784a45d10a891d8327fc58f1'))
-    print(len(get_traces()))
+
+    traces = get_traces(end_ts=end_timestamp, lookback=start_timestamp, limit=100000)
+    min_timestamp = None
+    max_timestamp = None
+    trace_count = 0
+    span_count = 0
+    for trace in traces:
+        trace_count += 1
+        for span in trace:
+            span_count += 1
+            if min_timestamp is None:
+                min_timestamp = span['timestamp']
+            if max_timestamp is None:
+                max_timestamp = span['timestamp']
+            if min_timestamp > span['timestamp']:
+                min_timestamp = span['timestamp']
+            if max_timestamp < span['timestamp']:
+                max_timestamp = span['timestamp']
+
+    print('trace_count: {}'.format(trace_count))
+    print('span_count: {}'.format(span_count))
+    print('min_timestamp: {}'.format(min_timestamp))
+    print('max_timestamp: {}'.format(max_timestamp))
