@@ -61,6 +61,7 @@ class GraphProcessor:
         :param dependencies: graph dependencies data in Zipkin format.
         """
         logger.debug('generate_graph_from_zipkin()')
+        self.G.clear()
         for dependency in dependencies:
             for count in range(dependency['callCount']):  # TODO: Check if weight acts as adding it one by one
                 self.G.add_edge(dependency['parent'], dependency['child'])  # , weight=range(dependency['callCount']

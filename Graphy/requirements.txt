@@ -1,11 +1,13 @@
 click>=7.0
 click-log>=0.3.2
+coloredlogs>=10.0
 matplotlib>=3.0.1
 networkx>=2.2
 numpy>=1.15.3
 opentsdb-py>=0.5.3
 pandas>=0.24.1
 potsdb>=1.0.3
+pytest>=4.2.0
 PyYAML>=3.13
 requests2>=2.16.0
 simplejson>=3.15.0

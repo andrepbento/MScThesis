@@ -1,4 +1,4 @@
-import json
+import json as json
 import logging
 import sys
 import time
@@ -61,7 +61,7 @@ def get_spans(service_name):
 
 def post_spans(spans_file):
     """
-    Post the spans json file to the Zipkin API
+    Post the spans utils file to the Zipkin API
 
     :param spans_file: spans file path
     :return: if the operation was successful (equal to HTTP code 202) or not

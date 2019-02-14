@@ -1,7 +1,7 @@
 {
   "GRAPHY": {
     "ACTIVATE_ZIPKIN": true,
-    "TRACE_FILE": "data/28_06.json",
+    "TRACE_FILE": "data/traces-2018-06-28.json",
     "TRACE_FILE_FROM_PROJECT": true,
     "PRINT_GRAPH": false,
     "PRINT_GRAPH_STATISTICS": false,
@@ -10,11 +10,14 @@
     "SHOW_GRAPH": false
   },
   "ARANGO_DB": {
-    "IP": ""
+    "IP": "127.0.0.1",
+    "PORT": 8529,
+    "STORE_IN_DB": true
   },
   "OPENTSDB": {
     "IP": "127.0.0.1",
-    "PORT": 4242
+    "PORT": 4242,
+    "STORE_IN_DB": true
   },
   "ZIPKIN": {
     "API_V2": "/api/v2/",

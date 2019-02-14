@@ -17,14 +17,20 @@ def is_json(file_path):
     return file_path.endswith('.json')
 
 
-def convert_json(json_file_path, limit=None):
-    """ Converts a JSONL file to JSON """
-    logger.info('convert_json()')
+def to_json(file_path, limit=None):
+    """
+    Converts a file to JSON
 
-    if is_json(json_file_path):
-        return json_file_path
+    :param file_path: The file path.
+    :param limit: Limit the number of entries to convert to the new file.
+    :return: The file path of the created file.
+    """
+    logger.debug('convert_json()')
 
-    with open(json_file_path) as fp:
+    if is_json(file_path):
+        return file_path
+
+    with open(file_path) as fp:
         lines = fp.readlines()
 
     lines = list(
@@ -41,8 +47,8 @@ def convert_json(json_file_path, limit=None):
 
     json_array = json.dumps(lines)
 
-    dir_path = os.path.dirname(os.path.realpath(json_file_path))
-    file_name = os.path.splitext(json_file_path)[0]
+    dir_path = os.path.dirname(os.path.realpath(file_path))
+    file_name = os.path.splitext(file_path)[0]
     new_abs_file_path = join(dir_path, file_name + '.json')
 
     with open(new_abs_file_path, 'w') as f:
@@ -52,12 +58,8 @@ def convert_json(json_file_path, limit=None):
 
 
 # TODO: the following lines are only for testing purposes [REMOVE]
-def main():
-    if len(sys.argv) != 2:
-        print('convert_json.py JSONL_FILE')
-        sys.exit(1)
-    print('File created in:', convert_json(sys.argv[1], None))
-
-
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) != 2:
+        print('utils.py JSONL_FILE')
+        sys.exit(1)
+    print('File created in:', to_json(sys.argv[1], None))

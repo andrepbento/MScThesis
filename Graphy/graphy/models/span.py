@@ -25,12 +25,15 @@ Notes:
 2. Trace spans may contain more fields, except those mentioned here
 """
 import json
+import logging
 from enum import Enum
 
 from graphy.models.annotation import Annotation
 from graphy.models.attributes import get_attribute, set_attribute_value
 from graphy.models.binary_annotation import BinaryAnnotation
-from graphy.utils.dictionary import Dictionary
+from graphy.utils import dict as my_dict
+
+logger = logging.getLogger(__name__)
 
 
 class Span(object):
@@ -162,7 +165,7 @@ def fix_timestamps(spans):
     timestamp = 'timestamp'
 
     for span in spans:
-        Dictionary.update_dict(span, timestamp, fix_timestamp)
+        my_dict.update(span, timestamp, fix_timestamp)
 
 
 def fix_timestamp(timestamp):
@@ -177,6 +180,18 @@ def fix_timestamp(timestamp):
         timestamp = str(timestamp) + ''.join(['0' for _ in range(miss_len)])
         return int(timestamp)
     return timestamp
+
+
+def get_status_code(span):
+    try:
+        tags = span.get('tags', False)
+        if tags:
+            http_status_code = tags.get('http.status_code', False)
+            return http_status_code
+        return span['tags']['http.status_code']
+    except Exception as e:
+        logger.error(e)
+        return False
 
 
 def parse_to_spans_array(spans_json_path):

@@ -11,7 +11,7 @@ services:
     # links:
     #  - zipkin
     volumes:
-      - ./data:/Graphy/data
+      - tmp/graphy/data:/Graphy/data
 
   arangodb:
     image: arangodb
@@ -22,8 +22,8 @@ services:
       - name=arangodb-instance
     volumes:
       # Data persistency
-      # sudo mkdir -p /tmp/arangodb; chown 472:472 /tmp/arangodb
-      - /tmp/arangodb:/var/lib/arangodb3
+      # sudo mkdir -p /tmp/graphy/arangodb; chown 472:472 /tmp/graphy/arangodb
+      - /tmp/graphy/arangodb:/var/lib/arangodb3
     ports:
       - 8529:8529
 
@@ -37,15 +37,22 @@ services:
       - 'env.grafana'
     volumes:
       # Data persistency
-      # sudo mkdir -p /tmp/grafana/data; chown 472:472 /tmp/grafana/data
-      - /tmp/grafana/data:/var/lib/grafana
+      # sudo mkdir -p /tmp/graphy/grafana/data; chown 472:472 /tmp/graphy/grafana/data
+      - /tmp/graphy/grafana/data:/var/lib/grafana
 
   opentsdb:
     image: petergrace/opentsdb-docker
     container_name: graphy_opentsdb
-    restart: on-failure
+    environment:
+      - WAITSECS=30
     ports:
       - 4242:4242
+    volumes:
+      # Data persistency
+      # sudo mkdir -p /tmp/graphy/opentsdb/data; chown 472:472 /tmp/graphy/opentsdb/data
+      - /tmp/graphy/opentsdb/data:/data/hbase
+      # Config file
+      - ./opentsdb.conf:/etc/opentsdb/opentsdb.conf
 
   zipkin:
     image: openzipkin/zipkin

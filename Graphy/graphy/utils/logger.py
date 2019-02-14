@@ -2,18 +2,30 @@ import logging
 import logging.config
 import os
 
+import coloredlogs
 import yaml
 
+from graphy.utils import files
 
-def setup_logging(default_path='logging.yaml', logging_level=logging.INFO, env_key='LOG_CFG'):
+
+def setup_logging(default_path='graphy/logging.yaml', default_level=logging.INFO, env_key='LOG_CFG'):
     """ Setup logging configuration """
-    path = default_path
+    path = files.get_absolute_path(default_path, from_project=True)
     value = os.getenv(env_key, None)
     if value:
         path = value
     if os.path.exists(path):
         with open(path, 'rt') as f:
-            config = yaml.safe_load(f.read())
-        logging.config.dictConfig(config)
+            try:
+                config = yaml.safe_load(f.read())
+                logging.config.dictConfig(config)
+                coloredlogs.install()
+            except Exception as e:
+                print(e)
+                print('Error in Logging Configuration. Using default configs')
+                logging.basicConfig(level=default_level)
+                coloredlogs.install(level=default_level)
     else:
-        logging.basicConfig(level=logging_level)
+        logging.basicConfig(level=default_level)
+        coloredlogs.install(level=default_level)
+        print('Failed to load configuration file. Using default configs')

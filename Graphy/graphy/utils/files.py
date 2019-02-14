@@ -4,6 +4,12 @@ from os.path import dirname
 ROOT_PROJECT_DIRECTORY = os.path.join(dirname(dirname(dirname(__file__))))
 
 
+class FileException(Exception):
+    def __init__(self, message, errors):
+        super().__init__(message)
+        self.errors = errors
+
+
 def get_absolute_path(relative_path, from_project=False):
     if from_project:
         relative_path = os.path.join(ROOT_PROJECT_DIRECTORY, relative_path)
