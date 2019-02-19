@@ -32,6 +32,7 @@ class InstallCommand(Command):
         pass
 
     def run(self):
+        subprocess.run(['scripts/create-directories.sh'])
         subprocess.run(['pip3', 'install', '-r', 'requirements.txt'])
 
 
@@ -80,6 +81,13 @@ setup(
     author_email='apbento@student.dei.uc.pt',
     license=license_file,
     classifiers=[
+        # How mature is this project? Common values are
+        #   1 - Project setup
+        #   2 - Prototype
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Development Status :: 2 - Prototype',
         'Intended Audience :: Developers',
         'Topic :: Observing and Controlling Performance in  Micro-services',
         'License :: MIT License',

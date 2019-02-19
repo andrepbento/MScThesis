@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Graphy data directory
+sudo mkdir ./data
+
 # Graphy root directory
 sudo mkdir /tmp/graphy
 

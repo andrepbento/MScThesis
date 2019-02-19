@@ -7,6 +7,7 @@ numpy>=1.15.3
 opentsdb-py>=0.5.3
 pandas>=0.24.1
 potsdb>=1.0.3
+pyArango>=1.3.2
 pytest>=4.2.0
 PyYAML>=3.13
 requests2>=2.16.0

@@ -4,35 +4,40 @@ Graphy is the main project for the thesis.
 
 ## Requirements
 
-Python 3.6
+- [Docker](https://docs.docker.com/install/)
+
+- [Docker-Compose](https://docs.docker.com/compose/install/)
+
+- Python 3.6
 
 ## Setup
 
 After cloned this project, you have two ways to run Graphy. You can either install it on your local machine, or open it 
 with the [Pycharm IDE](https://www.jetbrains.com/pycharm/) and run it in the IDE.
 
-If the selected option is install it, you need to run the following commands:
+Just please make sure that you run the following commands in the Graphy directory:
 
 ```
-sudo ./install.sh       # Install the Graphy tool
-graphy --help           # Get the commands documentation
-```
-
-If you want to run `graphy` with `zipkin` integration, you can find some scripts to run Zipkin in a `docker` container.
-Be sure to have [Docker](https://www.docker.com/) installed in your system.
-
-```
-scripts/docker-zipkin-start.sh          # Starts Zipkin in a docker container
-scripts/docker-zipkin-stop-rm-all.sh    # Stops and removes all docker containers [BE CAREFULL IF YOU HAVE IMPORTANT CONTAINERS RUNNING]
+sudo python3 setup.py install   # Installs the requirements and cretes some folders needed for this project
+sudo docker-compose up          # Run the containers needed by Graphy
 ```
 
 ## Run
-
-Graphy can run in multiple modes - `graphy [MODE]`. They are the following:
+Copy your trace file to the Graphy/data folder and change the corresponding configuration in the 
+[config.json](graphy/config.json) file:
 
 ```
-graphy run              # Runs using the default implemented graph algorithm to perform the analysis
-graphy zipkin           # Runs using the Zipkin API to perform the analysis
+TRACE_FILE: 'data/file_name.jsonl'
 ```
 
-For more information about each mode and the possible options, please run - `graphy [MODE] --help`
+
+Graphy can run in PyCharm or in the command line using the following command:
+
+```
+sudo python3 setup.py run
+```
+
+## Configuration
+
+You can modify some configurations regarding the application communication and interaction with other components, for 
+this use the [config.json](graphy/config.json) file. 

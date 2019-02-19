@@ -14,13 +14,16 @@ logger = logging.getLogger(__name__)
 
 
 class GraphProcessor:
-    """ GraphTool contains a collection of methods to handle SpanTree's and Graphs """
+    """ GraphProcessor contains a collection of methods to handle SpanTree's and Graphs """
 
     def __init__(self):
-        """Initiate a new GraphTool """
-        # Create a MultiDiGraph instance
-        self.G = nx.MultiDiGraph()
+        """Initiate a new GraphProcessor """
+        self._graph = nx.MultiDiGraph()
         self.span_tree = None
+
+    @property
+    def graph(self):
+        return self._graph
 
     def draw_graph(self, save=False, show=False):
         """
@@ -34,14 +37,17 @@ class GraphProcessor:
 
         logger.info('draw_graph()')
 
-        nx.draw(self.G, with_labels=True, font_weight='bold')
+        nx.draw(self._graph, with_labels=True, font_weight='bold')
         plt.axis('off')
         if save:
             plt.savefig("graph.png")
         if show:
             plt.show()
 
-    def generate_graph(self, spans_array):
+    def generate_graph(self, tuple_list):
+        self._graph.add_edges_from(tuple_list)
+
+    def generate_graph_from_spans(self, spans_array):
         """
         Generates the graph using the spans array data
 
@@ -61,10 +67,11 @@ class GraphProcessor:
         :param dependencies: graph dependencies data in Zipkin format.
         """
         logger.debug('generate_graph_from_zipkin()')
-        self.G.clear()
+        self._graph.clear()
         for dependency in dependencies:
-            for count in range(dependency['callCount']):  # TODO: Check if weight acts as adding it one by one
-                self.G.add_edge(dependency['parent'], dependency['child'])  # , weight=range(dependency['callCount']
+            self._graph.add_edge(dependency['parent'],
+                                 dependency['child'],
+                                 weight=dependency['callCount'])
 
     def __generate_nodes_and_edges(self):
         """
@@ -127,7 +134,7 @@ class GraphProcessor:
             except Exception as ex:
                 print(ex)
 
-        self.G.add_nodes_from(graph_nodes)
+        self._graph.add_nodes_from(graph_nodes)
 
         print('Smax', max(span_annotations_len_array))
         print('Smin', min(span_annotations_len_array))
@@ -152,7 +159,7 @@ class GraphProcessor:
             if len(edge) == 1:
                 for i, stack_edge in enumerate(edge):
                     # print(stack_edge)
-                    self.G.add_edge(stack_edge, stack_edge)
+                    self._graph.add_edge(stack_edge, stack_edge)
                 continue
             if len(edge) >= 2:
                 if len(edge) > 2:
@@ -163,7 +170,7 @@ class GraphProcessor:
                     if i == 0:
                         edge_aux = stack_edge
                         continue
-                    self.G.add_edge(edge_aux, stack_edge)
+                    self._graph.add_edge(edge_aux, stack_edge)
             else:
                 logger.error('invalid edge[{}]: {}'.format(len(edge), edge))
 
@@ -275,21 +282,21 @@ class GraphProcessor:
         """ Prints the number of edges and nodes """
 
         # Print nodes and edge numbers
-        if self.G.number_of_nodes() > max_nodes:
-            logger.info('graph_nodes[{}]'.format(self.G.number_of_nodes()))
+        if self._graph.number_of_nodes() > max_nodes:
+            logger.info('graph_nodes[{}]'.format(self._graph.number_of_nodes()))
         else:
-            logger.info('graph_nodes[{}]: {}'.format(self.G.number_of_nodes(), self.G.nodes()))
-        if self.G.number_of_edges() > max_edges:
-            logger.info('graph_edges[{}]'.format(self.G.number_of_edges()))
+            logger.info('graph_nodes[{}]: {}'.format(self._graph.number_of_nodes(), self._graph.nodes()))
+        if self._graph.number_of_edges() > max_edges:
+            logger.info('graph_edges[{}]'.format(self._graph.number_of_edges()))
         else:
-            logger.info('graph_edges[{}]: {}'.format(self.G.number_of_edges(), self.G.edges()))
+            logger.info('graph_edges[{}]: {}'.format(self._graph.number_of_edges(), self._graph.edges()))
 
     def __count_edge_occurrence(self):
         """ Prints the number of edges types and their sum """
         logger.info('count_edge_occurrence()')
         # Count each edge occurrence
         edge_type_counter = {}
-        for edge in self.G.edges():
+        for edge in self._graph.edges():
             if edge in edge_type_counter:
                 edge_type_counter[edge] += 1
             else:
@@ -357,7 +364,7 @@ class GraphProcessor:
         :return: the degree assortativity of graph
         """
         try:
-            return nx_algorithms.degree_pearson_correlation_coefficient(self.G)
+            return nx_algorithms.degree_pearson_correlation_coefficient(self._graph)
         except Exception as ex:
             logger.error('cannot calculate degree assortativity: {}'.format(ex))
         return -1
@@ -369,7 +376,7 @@ class GraphProcessor:
         :return: a dict with the average neighbor degree of each node
         """
         try:
-            return nx_algorithms.average_neighbor_degree(self.G)
+            return nx_algorithms.average_neighbor_degree(self._graph)
         except Exception as ex:
             logger.error('cannot calculate average neighbor degree: {}'.format(ex))
         return -1
@@ -381,7 +388,7 @@ class GraphProcessor:
         :return: a dict with the average neighbor degree of each node
         """
         try:
-            return nx_algorithms.average_degree_connectivity(self.G)
+            return nx_algorithms.average_degree_connectivity(self._graph)
         except Exception as ex:
             logger.error('cannot calculate average degree connectivity : {}'.format(ex))
         return -1
@@ -393,7 +400,7 @@ class GraphProcessor:
         :return: a dict representation of mixing matrix for degree
         """
         try:
-            return nx_algorithms.degree_mixing_dict(self.G)
+            return nx_algorithms.degree_mixing_dict(self._graph)
         except Exception as ex:
             logger.error('cannot calculate mixing matrix: {}'.format(ex))
         return -1
@@ -402,38 +409,38 @@ class GraphProcessor:
     def __node_boundaries(self):
         # TODO: not finished
         node_boundaries = dict()
-        for node in self.G.nodes:
-            node_boundaries[node] = nx_algorithms.node_boundary(self.G, node)
+        for node in self._graph.nodes:
+            node_boundaries[node] = nx_algorithms.node_boundary(self._graph, node)
 
     # Components Algorithms --------------------------------------------------------------------------------------------
 
     def __number_connected_components(self):
-        return nx_algorithms.number_connected_components(self.G.to_undirected())
+        return nx_algorithms.number_connected_components(self._graph.to_undirected())
 
     def __connected_components(self):
-        return nx_algorithms.connected_components(self.G.to_undirected())
+        return nx_algorithms.connected_components(self._graph.to_undirected())
 
     def __number_attracting_components(self):
-        return nx_algorithms.number_attracting_components(self.G)
+        return nx_algorithms.number_attracting_components(self._graph)
 
     # Cycles Algorithms ------------------------------------------------------------------------------------------------
 
     def __count_simple_cycles(self):
-        return len(list(nx_algorithms.simple_cycles(self.G)))
+        return len(list(nx_algorithms.simple_cycles(self._graph)))
 
     def __count_recursive_simple_cycles(self):
-        return len(list(nx_algorithms.recursive_simple_cycles(self.G)))
+        return len(list(nx_algorithms.recursive_simple_cycles(self._graph)))
 
     def __find_cycle(self):
         try:
-            return nx_algorithms.find_cycle(self.G)
+            return nx_algorithms.find_cycle(self._graph)
         except Exception as ex:
             logger.error('cannot find cycle in the current graph: {}'.format(ex))
         return -1
 
     def __minimum_cycle_basis(self):
         try:
-            return nx_algorithms.minimum_cycle_basis(self.G.to_undirected())
+            return nx_algorithms.minimum_cycle_basis(self._graph.to_undirected())
         except Exception as ex:
             logger.error('cannot calculate minimum cycle basis for this kind of graph: {}'.format(ex))
         return -1
@@ -446,7 +453,7 @@ class GraphProcessor:
 
         :return: the list of nodes in center or a empty list
         """
-        return nx_algorithms.is_directed_acyclic_graph(self.G)
+        return nx_algorithms.is_directed_acyclic_graph(self._graph)
 
     # Distance Measures Algorithms -------------------------------------------------------------------------------------
 
@@ -457,7 +464,7 @@ class GraphProcessor:
         :return: the list of nodes in center or a empty list
         """
         try:
-            return nx_algorithms.center(self.G.to_undirected())  # Only works with undirected graphs
+            return nx_algorithms.center(self._graph.to_undirected())  # Only works with undirected graphs
         except Exception as ex:
             logger.error('cannot obtain the list of nodes in the center: {}'.format(ex))
         return []
@@ -469,43 +476,33 @@ class GraphProcessor:
         :return: the diameter of the graph or -1
         """
         try:
-            return nx_algorithms.diameter(self.G.to_undirected())  # Only works with undirected graphs
+            return nx_algorithms.diameter(self._graph.to_undirected())  # Only works with undirected graphs
         except Exception as ex:
             logger.error('cannot calculate graph diameter: {}'.format(ex))
         return -1
 
     def __periphery(self):
-        if nx_algorithms.is_strongly_connected(self.G) is False:
+        if nx_algorithms.is_strongly_connected(self._graph) is False:
             logger.error('cannot calculate graph periphery: Graph is not strongly connected')
             return []
-        return nx_algorithms.periphery(self.G)
+        return nx_algorithms.periphery(self._graph)
 
     def __radius(self):
-        if nx_algorithms.is_strongly_connected(self.G) is False:
+        if nx_algorithms.is_strongly_connected(self._graph) is False:
             logger.error('cannot calculate graph radius: Graph is not strongly connected')
             return []
-        return nx_algorithms.radius(self.G)
+        return nx_algorithms.radius(self._graph)
 
     # Shortest Paths Algorithms ----------------------------------------------------------------------------------------
 
     def __shortest_path(self):
-        return nx_algorithms.shortest_path(self.G)
+        return nx_algorithms.shortest_path(self._graph)
 
     def __all_pairs_shortest_path(self):
-        return nx_algorithms.all_pairs_shortest_path(self.G)
+        return nx_algorithms.all_pairs_shortest_path(self._graph)
 
     def __floyd_warshall(self):
-        return nx_algorithms.floyd_warshall(self.G)
-
-    def degree(self, service_name):
-        """
-        Calculates the degree for a specific node.
-
-        :param service_name: the service node name.
-        :return: the degree of the service node.
-        """
-        # TODO: Finish this method
-        degree = self.G.degree[service_name]
+        return nx_algorithms.floyd_warshall(self._graph)
 
     def degrees(self, sort=True):
         """
@@ -518,7 +515,7 @@ class GraphProcessor:
         # TODO: The following lines of code can be used to get the input or output degree from all nodes
         # in_degree = self.G.in_degree
         # out_degree = self.G.out_degree
-        degrees = self.G.degree
+        degrees = self._graph.degree
         return sorted(degrees, key=lambda tup: tup[1], reverse=sort)
 
     def neighbors(self, service_name=None):
@@ -531,7 +528,7 @@ class GraphProcessor:
         debug_message = ''
         neighbors = defaultdict(list)
 
-        service_nodes = self.G.nodes
+        service_nodes = self._graph.nodes
         if service_name:
             service_nodes = [service_name]
 
@@ -541,7 +538,7 @@ class GraphProcessor:
 
         for node in service_nodes:
             debug_message += '\nNode: {}'.format(node)
-            for i, neighbor in enumerate(self.G.neighbors(node)):
+            for i, neighbor in enumerate(self._graph.neighbors(node)):
                 debug_message += '\n\t{}: {}'.format(i, neighbor)
                 neighbors[node].append(neighbor)
         logger.debug(debug_message)
@@ -554,11 +551,11 @@ class GraphProcessor:
         :param service_name: the service node name.
         :return:
         """
-        services = self.G.nodes
+        services = self._graph.nodes
         if service_name:
             services = [service_name]
 
         for service in services:
-            for service_neighbor in (self.G.neighbors(service)):
-                n_edges = self.G.number_of_edges(service, service_neighbor)
+            for service_neighbor in (self._graph.neighbors(service)):
+                n_edges = self._graph.number_of_edges(service, service_neighbor)
                 print(service, ':', service_neighbor, ':', n_edges)

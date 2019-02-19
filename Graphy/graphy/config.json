@@ -9,10 +9,13 @@
     "SAVE_GRAPH": false,
     "SHOW_GRAPH": false
   },
-  "ARANGO_DB": {
-    "IP": "127.0.0.1",
-    "PORT": 8529,
-    "STORE_IN_DB": true
+  "ARANGODB": {
+    "ARANGO_URL": "http://127.0.0.1:8529",
+    "CACHE_VALUE": 15000,
+    "DB_NAME": "test_graph",
+    "PASSWORD": "password",
+    "STORE_IN_DB": true,
+    "USERNAME": "root"
   },
   "OPENTSDB": {
     "IP": "127.0.0.1",
