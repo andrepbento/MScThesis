@@ -62,7 +62,7 @@ class Controller(object):
                 'Show most popular service',
                 'Show most popular service in time (EXPERIMENTAL)',
                 'Show service status code analysis',
-                'Show service status code analysis (EXPERIMENTAL)',
+                'Show service status code analysis in time (EXPERIMENTAL)',
                 'Show response time analysis (NOT IMPLEMENTED)',
                 'Show morphology analysis (NOT IMPLEMENTED)',
                 'Show request work-flow analysis (NOT IMPLEMENTED)',

@@ -92,5 +92,8 @@ ENV/
 # Traces and Spans data
 data/
 
+# Exception for one sample trace file
+!data/28_06_simplified_100_spans.json
+
 # Temporary files
 tmp/

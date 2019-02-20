@@ -44,39 +44,73 @@ class ArangoDB(object):
             self._service_link = self._db.createCollection('ServiceLink')
 
     def delete_all(self):
+        """ Deletes all collections. """
         self._db.dropAllCollections()
+        self.__init__()  # TODO: Starts the database structure
 
-    def get_graphs(self, name=None):
-        if name and self._db.hasGraph(name):
-            self._db.graph(name)
-        else:
-            self._db_conn.graphs()
+    def delete_graph(self, name):
+        """
+        Deletes a certain graph.
 
-    def delete_graphs(self, names=None):
-        if not names:
-            names = self._db_conn.graphs()
+        :param name: The graph name.
+        :return: True if graph was deleted or false if not.
+        """
+        if self._db.hasGraph(name):
+            self._db.graphs[name].delete()
+            return True
+        return False
 
-        for name in names:
-            self._db_conn.delete_graph(name)
+    def get_graph(self, name):
+        """
+        Gets a certain graph.
+
+        :param name: The name of the graph.
+        :return: The graph.
+        """
+        if self._db.hasGraph(name):
+            return self._db.graphs[name]
+        return None
 
     def insert_graph(self, name, node_links):
+        """
+        Inserts a new graph.
+
+        :param name: The name of the graph.
+        :param node_links: The links in dict data format.
+        :return: The created graph.
+        """
         if self._db.hasGraph(name):
             graph = self._db.graphs[name]
         else:
             graph = self._db.createGraph('ServiceGraph', name)
 
         for node_link in node_links:
-            node_from = node_link[0]
-            node_to = node_link[1]
+            node_from_name = node_link[0]
+            node_to_name = node_link[1]
             links = node_link[2].get('weight')
-            collections = self._db.collections['Services']
-            example = collections.fetchFirstExample({'name': node_from})
-            v1 = graph.createVertex('Services', {'name': node_from})
-            v2 = graph.createVertex('Services', {'name': node_to})
-            graph.link('ServiceLink', v1, v2, {'links': links})
 
-    def update_node(self, vertex_collection):
-        vertex_collection.update({'_key': 'service_name_1', 'data': '0.8'})
+            vertex_1 = self._vertex(graph, node_from_name)
+            vertex_2 = self._vertex(graph, node_to_name)
+
+            graph.link('ServiceLink', vertex_1, vertex_2, {'links': links})
+
+        return graph
+
+    def _vertex(self, graph, name):
+        """
+        Creates or gets a node.
+
+        :param graph: The graph where the node might be.
+        :param name: The name of the node.
+        :return: The fetched node or the new node.
+        """
+        collections = self._db.collections['Services']
+        node_from = collections.fetchFirstExample({'name': name})
+        if node_from:
+            key = node_from.response.get('result')[0].get('_key')  # TODO: Remove hard coded gets.
+            return collections.fetchDocument(key=str(key))
+        else:
+            return graph.createVertex('Services', {'name': name})
 
 
 if __name__ == '__main__':
@@ -106,7 +140,7 @@ if __name__ == '__main__':
 
     timestamp1 = time.time()
     timestamp2 = time.time()
-    # arango_db.delete_all()
-    arango_db.insert_graph(name='graph', node_links=edges)  # name='graph_{}_{}'.format(timestamp1, timestamp2))
-
-    # var = arango_db.get_graphs().
+    arango_db.delete_all()
+    # arango_db.delete_graph('graph')
+    graph = arango_db.insert_graph(name='graph', node_links=edges)  # name='graph_{}_{}'.format(timestamp1, timestamp2))
+    print(graph)

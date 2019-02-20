@@ -19,7 +19,7 @@ Just please make sure that you run the following commands in the Graphy director
 
 ```
 sudo python3 setup.py install   # Installs the requirements and cretes some folders needed for this project
-sudo docker-compose up          # Run the containers needed by Graphy
+sudo docker-compose up -d       # Run the containers needed by Graphy
 ```
 
 ## Run
@@ -27,11 +27,11 @@ Copy your trace file to the Graphy/data folder and change the corresponding conf
 [config.json](graphy/config.json) file:
 
 ```
-TRACE_FILE: 'data/file_name.jsonl'
+"TRACE_FILE": "data/file_name.jsonl"
 ```
 
 
-Graphy can run in PyCharm or in the command line using the following command:
+Graphy can run in PyCharm running the [app.py](graphy/app.py) file or with the following command:
 
 ```
 sudo python3 setup.py run

@@ -1,3 +1,5 @@
+# TODO: Check if we will maintain the CLI functionality. [Think only in starting Graphy like in app.py]
+
 import logging
 import time
 
@@ -7,8 +9,8 @@ import click_log
 from graphy.app import setup_logging
 from graphy.graph.graph_processor import GraphProcessor
 from graphy.models.span import parse_to_spans_array
-from graphy.utils.json import to_json
 from graphy.utils.files import get_absolute_path
+from graphy.utils.json import to_json
 
 logger = logging.getLogger(__name__)
 
