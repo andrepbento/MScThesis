@@ -1,7 +1,7 @@
 {
   "GRAPHY": {
     "ACTIVATE_ZIPKIN": true,
-    "TRACE_FILE": "data/traces-2018-06-28.jsonl",
+    "TRACE_FILE": "data/traces-2018-06-28.json",
     "TRACE_FILE_FROM_PROJECT": true,
     "PRINT_GRAPH": false,
     "PRINT_GRAPH_STATISTICS": false,

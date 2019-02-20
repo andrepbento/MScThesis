@@ -9,7 +9,9 @@ def get_status_codes(trace_list):
     for trace in trace_list:
         for span in trace:
             status_code = my_span.get_status_code(span)
-            if status_code:
+            if status_code and len(status_code) > 1:
+                status_code_group = status_code[0]
+                status_code = status_code_group + 'XX'
                 if status_code in status_codes_dict:
                     status_codes_dict[status_code] += 1
                 else:

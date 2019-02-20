@@ -24,8 +24,6 @@ services:
     ports:
       - 8529:8529
     volumes:
-      # Data persistency
-      # sudo mkdir -p /tmp/graphy/arangodb; chown 472:472 /tmp/graphy/arangodb
       - arangodb-storage:/var/lib/arangodb3
 
 
@@ -39,8 +37,6 @@ services:
     # env_file:
     #   - 'env.grafana'#
     volumes:
-      # Data persistency
-      # sudo mkdir -p /tmp/graphy/grafana/data; chown 472:472 /tmp/graphy/grafana/data
       - grafana-storage:/var/lib/grafana
 
   opentsdb:
@@ -56,7 +52,8 @@ services:
     volumes:
       # Data persistency
       # sudo mkdir -p /tmp/graphy/opentsdb/data; chown 472:472 /tmp/graphy/opentsdb/data
-      - /tmp/graphy/opentsdb/data:/data/hbase
+      - opentsdb-storage:/data/hbase
+      # - /tmp/graphy/opentsdb/data:/data/hbase
       # Config file
       - ./opentsdb.conf:/etc/opentsdb/opentsdb.conf
 
