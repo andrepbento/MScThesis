@@ -1,3 +1,7 @@
+"""
+    Author: André Bento
+    Date last modified: 11-02-2019
+"""
 from datetime import datetime, timezone
 
 import pandas

@@ -1,3 +1,7 @@
+"""
+    Author: André Bento
+    Date last modified: 20-02-2019
+"""
 import subprocess
 from os.path import dirname, abspath, join
 
@@ -22,7 +26,6 @@ with open(join(this_dir, 'requirements.txt')) as file:
 
 
 class InstallCommand(Command):
-    description = "Install command"
     user_options = []
 
     def initialize_options(self):
@@ -32,12 +35,15 @@ class InstallCommand(Command):
         pass
 
     def run(self):
-        subprocess.run(['scripts/create-directories.sh'])
-        subprocess.run(['pip3', 'install', '-r', 'requirements.txt'])
+        commands = [
+            ['./scripts/create-directories.sh'],
+            ['pip3', 'install', '-r', 'requirements.txt']
+        ]
+        for command in commands:
+            subprocess.run(command)
 
 
 class RunCommand(Command):
-    description = "Description of the command"
     user_options = []
 
     def initialize_options(self):
@@ -48,8 +54,7 @@ class RunCommand(Command):
 
     def run(self):
         from graphy.app import Graphy
-        run = Graphy.run
-        run()
+        Graphy.run()
 
 
 class TestCommand(Command):

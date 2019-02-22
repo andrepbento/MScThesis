@@ -1,3 +1,4 @@
+# Author: André Bento
 FROM alpine:3.9
 MAINTAINER apbento "apbento@student.dei.uc.pt"
 

@@ -1,3 +1,7 @@
+"""
+    Author: André Bento
+    Date last modified: 16-11-2018
+"""
 import logging
 
 import matplotlib.pyplot as plt

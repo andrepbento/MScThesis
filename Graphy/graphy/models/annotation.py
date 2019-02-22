@@ -1,5 +1,6 @@
 """
-TODO: add annotation.py doc
+    Author: André Bento
+    Date last modified: 12-11-2018
 """
 import json
 

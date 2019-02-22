@@ -1,9 +1,12 @@
+"""
+    Author: André Bento
+    Date last modified: 20-02-2019
+"""
 import sys
 
 from graphy.controller.controller import Controller
 from graphy.utils import config
 from graphy.utils import files
-from graphy.utils import logger as my_logger
 from graphy.view.console_view import ConsoleView
 
 
@@ -11,8 +14,6 @@ class Graphy(object):
 
     @staticmethod
     def run():
-        my_logger.setup_logging()
-
         graphy_config = config.get('GRAPHY')
 
         file = files.get_absolute_path(graphy_config['TRACE_FILE'], graphy_config['TRACE_FILE_FROM_PROJECT'])

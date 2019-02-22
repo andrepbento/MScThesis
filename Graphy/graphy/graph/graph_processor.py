@@ -1,5 +1,6 @@
 """
-TODO: add graph_processor.py doc
+    Author: André Bento
+    Date last modified: 21-02-2019
 """
 import logging
 from collections import defaultdict
@@ -14,10 +15,10 @@ logger = logging.getLogger(__name__)
 
 
 class GraphProcessor:
-    """ GraphProcessor contains a collection of methods to handle SpanTree's and Graphs """
+    """ GraphProcessor contains a collection of methods to handle Graphs. """
 
     def __init__(self):
-        """Initiate a new GraphProcessor """
+        """ Initiate a new GraphProcessor. """
         self._graph = nx.MultiDiGraph()
         self.span_tree = None
 
@@ -25,26 +26,13 @@ class GraphProcessor:
     def graph(self):
         return self._graph
 
-    def draw_graph(self, save=False, show=False):
-        """
-        Draw the graph using the data presented in the graph tool
-
-        :param save: save to file
-        :param show: show the image
-        """
-        if save is False and show is False:
-            return
-
-        logger.info('draw_graph()')
-
-        nx.draw(self._graph, with_labels=True, font_weight='bold')
-        plt.axis('off')
-        if save:
-            plt.savefig("graph.png")
-        if show:
-            plt.show()
-
     def generate_graph(self, tuple_list):
+        """
+        TODO: Add doc.
+
+        :param tuple_list:
+        :return:
+        """
         self._graph.add_edges_from(tuple_list)
 
     def generate_graph_from_spans(self, spans_array):
@@ -64,7 +52,8 @@ class GraphProcessor:
         """
         Generates the graph using the Dependencies from Zipkin.
 
-        :param dependencies: graph dependencies data in Zipkin format.
+        :param dependencies: Graph dependencies data in Zipkin format.
+        :return: Generated graph.
         """
         logger.debug('generate_graph_from_zipkin()')
         self._graph.clear()
@@ -72,6 +61,93 @@ class GraphProcessor:
             self._graph.add_edge(dependency['parent'],
                                  dependency['child'],
                                  weight=dependency['callCount'])
+        return self._graph
+
+    def generate_graph_from_edge_list(self, edge_list):
+        """
+        Generates the graph using a list of edges.
+
+        :param edge_list: A list edges in ArangoDB format.
+        :return: Generated graph.
+        """
+        logger.debug('generate_graph_from_edge_list()')
+        self._graph.clear()
+        for edge in edge_list:
+            node_from = edge.get('_from').split('/')[-1]
+            node_to = edge.get('_to').split('/')[-1]
+            call_count = edge.get('links')
+            if node_from and node_to and call_count:
+                self._graph.add_edge(node_from, node_to, weight=call_count)
+        return self._graph
+
+    @staticmethod
+    def graphs_difference(graph_1, graph_2):
+        """
+        TODO: Add doc.
+
+        :param graph_1:
+        :param graph_2:
+        :return:
+        """
+        graph_diff = nx.difference(graph_1, graph_2)
+        return graph_diff
+
+    @staticmethod
+    def graphs_symmetric_difference(graph1, graph2):
+        """
+        TODO: Add doc.
+
+        :param graph1:
+        :param graph2:
+        :return:
+        """
+        graph_symetric_diff = nx.symmetric_difference(graph1, graph2)
+        return graph_symetric_diff
+
+    @staticmethod
+    def graphs_edges_difference(graph_1, graph_2):
+        """
+        TODO: Add doc.
+
+        :param graph_1:
+        :param graph_2:
+        :return:
+        """
+        edges_diff = dict()
+
+        graph_1_edges = graph_1.edges(data=True)
+        graph_2_edges = graph_2.edges(data=True)
+
+        # if graph_1_edges and graph_2_edges:
+        #    edges_diff = {k: graph_2_edges.get('_adjdic')[k]
+        #                  for k in set(graph_2_edges.get('_adjdic')) - set(graph_1_edges.get('_adjdic'))}
+
+        return edges_diff
+        # TODO: Perform difference.
+
+    @staticmethod
+    def graphs_nodes_difference(graph_1, graph_2):
+        """
+        TODO: Add doc.
+
+        :param graph_1:
+        :param graph_2:
+        :return:
+        """
+        nodes_diff = dict()
+
+        graph_1_nodes = list(graph_1.nodes)
+        graph_2_nodes = list(graph_2.nodes)
+
+        from graphy.utils import list as my_list
+        nodes_diff_1 = my_list.diff(graph_1_nodes, graph_2_nodes)
+        nodes_diff_2 = my_list.diff(graph_2_nodes, graph_1_nodes)
+        print('List1.len:', len(graph_1_nodes))
+        print('List2.len:', len(graph_2_nodes))
+        print('List.diff(1-2):', nodes_diff_1)
+        print('List.diff(2-1):', nodes_diff_2)
+
+        return nodes_diff_1
 
     def __generate_nodes_and_edges(self):
         """
@@ -241,20 +317,26 @@ class GraphProcessor:
             self.__addLink(parent, child, is_error)
         """
 
-    """
-    def __addLink(self, parent, child, isError):
-        if isError is True:
-            print('Error')
-        else:
-            print('!Error')
-        self.G.add_edge(parent, child)
-        pass
+    def draw_graph(self, save=False, show=False):
+        """
+        Draw the graph using the data presented in the graph tool.
 
-    def __findRpcAncestor(self, node):
-        return node
-    """
+        :param save: Save graph to a file.
+        :param show: Show the image after saving.
+        """
+        if save is False and show is False:
+            return
 
-    def print_span_tree_data(self, print_span_tree_data=True):
+        logger.info('draw_graph()')
+
+        nx.draw(self._graph, with_labels=True, font_weight='bold')
+        plt.axis('off')
+        if save:
+            plt.savefig("graph.png")
+        if show:
+            plt.show()
+
+    def log_span_tree_data(self, print_span_tree_data=True):
         """ Print span tree metadata to logger """
         if not print_span_tree_data:
             logger.info('skipping print_span_tree_data()')

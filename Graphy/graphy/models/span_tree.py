@@ -1,4 +1,8 @@
 """
+    Author: André Bento
+    Date last modified: 16-11-2018
+"""
+"""
 SpanTree represents the entity for handling spans in a tree data structure.
 """
 import logging

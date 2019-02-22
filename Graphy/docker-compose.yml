@@ -1,3 +1,4 @@
+# Author: André Bento
 version: '3.1'
 
 services:
@@ -50,10 +51,7 @@ services:
     ports:
       - 4242:4242
     volumes:
-      # Data persistency
-      # sudo mkdir -p /tmp/graphy/opentsdb/data; chown 472:472 /tmp/graphy/opentsdb/data
       - opentsdb-storage:/data/hbase
-      # - /tmp/graphy/opentsdb/data:/data/hbase
       # Config file
       - ./opentsdb.conf:/etc/opentsdb/opentsdb.conf
 

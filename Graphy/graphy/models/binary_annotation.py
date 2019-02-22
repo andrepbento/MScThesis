@@ -1,10 +1,10 @@
+"""
+    Author: André Bento
+    Date last modified: 08-11-2018
+"""
 import json
 
 from graphy.models.attributes import get_attribute
-
-"""
-TODO: Add doc
-"""
 
 
 class BinaryAnnotation(object):

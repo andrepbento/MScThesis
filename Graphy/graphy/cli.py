@@ -1,5 +1,8 @@
+"""
+    Author: André Bento
+    Date last modified: 20-02-2019
+"""
 # TODO: Check if we will maintain the CLI functionality. [Think only in starting Graphy like in app.py]
-
 import logging
 import time
 
@@ -54,7 +57,7 @@ def run(file, print_span_tree_data, print_graph_data, print_graph_statistics, sa
     # Instantiate the graph tool and runs it in standard mode
     graph_tool = GraphProcessor()
     graph_tool.generate_graph_from_spans(spans_array=parse_to_spans_array(to_json(get_absolute_path(file))))
-    graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
+    graph_tool.log_span_tree_data(print_span_tree_data=print_span_tree_data)
     graph_tool.print_graph_data(print_graph_data=print_graph_data)
     graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)
     graph_tool.draw_graph(save=save_graph, show=show_graph)

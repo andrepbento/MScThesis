@@ -1,4 +1,8 @@
 """
+    Author: André Bento
+    Date last modified: 13-02-2019
+"""
+"""
 Fields:
 -------
 * traceId - unique id of a trace, 128-bit string

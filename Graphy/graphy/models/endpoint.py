@@ -1,5 +1,6 @@
 """
-TODO: add endpoint.py doc
+    Author: André Bento
+    Date last modified: 08-11-2018
 """
 import json
 

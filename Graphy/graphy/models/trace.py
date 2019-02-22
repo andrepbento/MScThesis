@@ -1,5 +1,6 @@
 """
-TODO: add trace.py doc
+    Author: André Bento
+    Date last modified: 20-02-2019
 """
 from graphy.models import span as my_span
 

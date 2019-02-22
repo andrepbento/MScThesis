@@ -1,0 +1,36 @@
+# Author: André Bento
+version: 1
+
+GRAPHY:
+  ACTIVATE_ZIPKIN: true
+  # The trace file absolute or relative path.
+  TRACE_FILE: "data/traces-2018-06-29.json"
+  # If changed to false, make sure the TRACE_FILE is an absolute file path.
+  TRACE_FILE_FROM_PROJECT: true
+  PRINT_GRAPH: false
+  PRINT_GRAPH_STATISTICS: false
+  PRINT_SPAN_TREE: false
+  SAVE_GRAPH: false
+  SHOW_GRAPH: false
+  # Timestamp resolution stands for the time interval between analysis, expressed in milliseconds.
+  TIMESTAMP_RESOLUTION: 3600000
+
+ARANGODB:
+  ARANGO_URL: "http://127.0.0.1:8529"
+  IP: "127.0.0.1"
+  PORT: "8529"
+  DB_NAME: "test_graph_db"
+  PASSWORD: "password"
+  STORE_IN_DB: true
+  USERNAME: "root"
+
+OPENTSDB:
+  IP: "127.0.0.1"
+  PORT: 4242
+  STORE_IN_DB: true
+
+ZIPKIN:
+  API_V1: "/api/v1/"
+  API_V2: "/api/v2/"
+  IP: "127.0.0.1"
+  PORT: "9411"

@@ -1,3 +1,7 @@
+"""
+    Author: André Bento
+    Date last modified: 21-02-2019
+"""
 import logging
 import time
 
@@ -29,7 +33,7 @@ class Controller(object):
         self.is_zipkin_running = False
         self.zipkin_limit = 1000000  # TODO: Check if is enough
 
-        self.graph_tool = GraphProcessor()
+        self.graph_processor = GraphProcessor()
 
         self.graph_db = None
 
@@ -116,14 +120,14 @@ class Controller(object):
             self.view.display_time('end_time', my_time.from_str_to_datetime(end_date_time_str), end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.graph_tool.generate_graph_from_zipkin(dependencies)
+            self.graph_processor.generate_graph_from_zipkin(dependencies)
             self.view.display_dictionary('All service neighbors from {} to {}'
                                          .format(my_time.from_str_to_datetime(start_date_time_str),
                                                  my_time.from_str_to_datetime(end_date_time_str)),
-                                         self.graph_tool.neighbors())
+                                         self.graph_processor.neighbors())
             service_name = 'api_com'
             self.view.display_dictionary('{} service neighbors'.format(service_name),
-                                         self.graph_tool.neighbors(service_name))
+                                         self.graph_processor.neighbors(service_name))
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
         # else:
@@ -153,11 +157,11 @@ class Controller(object):
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2)
                 if dependencies:
-                    self.graph_tool.generate_graph_from_zipkin(dependencies)
+                    self.graph_processor.generate_graph_from_zipkin(dependencies)
                     self.view.display_dictionary('All neighbors from {} to {}'
                                                  .format(my_time.from_timestamp_to_datetime(timestamp_1),
                                                          my_time.from_timestamp_to_datetime(timestamp_2)),
-                                                 self.graph_tool.neighbors())
+                                                 self.graph_processor.neighbors())
                 else:
                     self.view.display_message('No services from {} to {}'
                                               .format(my_time.from_timestamp_to_datetime(timestamp_1),
@@ -177,8 +181,8 @@ class Controller(object):
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.graph_tool.generate_graph_from_zipkin(dependencies)
-            self.view.display_tuple_list('Most popular services (Degrees)', self.graph_tool.degrees())
+            self.graph_processor.generate_graph_from_zipkin(dependencies)
+            self.view.display_tuple_list('Most popular services (Degrees)', self.graph_processor.degrees())
             # self.graph_tool.number_of_edges()
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
@@ -202,8 +206,8 @@ class Controller(object):
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
                 if dependencies:
-                    self.graph_tool.generate_graph_from_zipkin(dependencies)
-                    service_degrees = self.graph_tool.degrees()
+                    self.graph_processor.generate_graph_from_zipkin(dependencies)
+                    service_degrees = self.graph_processor.degrees()
 
                     self.time_series_db.send_numeric_metrics('degree', service_degrees,
                                                              int((timestamp_1 + timestamp_2) / 2))
@@ -307,7 +311,59 @@ class Controller(object):
         return NotImplemented
 
     def show_morphology_analysis(self):
-        return NotImplemented
+        if self.is_zipkin_running:
+            start_time = time.time()
+
+            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
+            self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
+
+            timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
+
+            previous_graph = None
+            for i, timestamp in enumerate(timestamps):
+                if i + 1 >= len(timestamps):
+                    break
+                timestamp_1 = timestamp
+                timestamp_2 = timestamps[i + 1]
+
+                dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
+                if dependencies:
+                    generated_graph = self.graph_processor.generate_graph_from_zipkin(dependencies)
+                    generated_graph.name = '{}_{}'.format(timestamp_1, timestamp_2)
+
+                    print('len(nodes):', len(generated_graph.nodes))
+                    print('len(edges):', len(generated_graph.edges))
+
+                    # Persist graph
+
+                    if previous_graph:
+                        # graph_diff = self.graph_processor.graphs_difference(previous_graph, generated_graph)
+                        # graph_diff_inverted = self.graph_processor.graphs_difference(generated_graph,
+                        #                                                             previous_graph)
+                        # print('graph_diff:', graph_diff.edges(data=True))
+                        # print('graph_diff_inverted:', graph_diff_inverted.edges(data=True))
+                        #
+                        # graph_simm = self.graph_processor.graphs_symmetric_difference(previous_graph,
+                        #                                                              generated_graph)
+                        # graph_simm_inverted = self.graph_processor.graphs_symmetric_difference(generated_graph,
+                        #                                                                       previous_graph)
+                        # print('graph_simm:', graph_simm.edges(data=True))
+                        # print('graph_simm_inverted:', graph_simm_inverted.edges(data=True))
+                        #
+                        # edges_diff = self.graph_processor.graphs_edges_difference(previous_graph, generated_graph)
+                        # edges_diff_inverted = self.graph_processor.graphs_edges_difference(generated_graph,
+                        #                                                                   previous_graph)
+                        #
+                        nodes_diff = self.graph_processor.graphs_nodes_difference(previous_graph, generated_graph)
+                        nodes_diff = self.graph_processor.graphs_nodes_difference(generated_graph, previous_graph)
+
+                    previous_graph = generated_graph.copy()
+
+            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
     def show_request_work_flow_analysis(self):
         return NotImplemented
