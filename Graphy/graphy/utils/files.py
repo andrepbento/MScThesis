@@ -1,17 +1,11 @@
 """
     Author: André Bento
-    Date last modified: 12-02-2019
+    Date last modified: 26-02-2019
 """
 import os
 from os.path import dirname
 
 ROOT_PROJECT_DIRECTORY = os.path.join(dirname(dirname(dirname(__file__))))
-
-
-class FileException(Exception):
-    def __init__(self, message, errors):
-        super().__init__(message)
-        self.errors = errors
 
 
 def get_absolute_path(relative_path, from_project=False):

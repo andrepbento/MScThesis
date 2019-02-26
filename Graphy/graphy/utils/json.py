@@ -1,23 +1,25 @@
 """
     Author: André Bento
-    Date last modified: 12-02-2019
+    Date last modified: 26-02-2019
 """
-import logging
 import os
-import sys
 from os.path import join
 
-from graphy.models.span import fix_timestamps
+from graphy.models import span
 
 try:
     import simplejson as json
 except ImportError:
     import json
 
-logger = logging.getLogger(__name__)
-
 
 def is_json(file_path):
+    """
+    Checks if a certain file path is JSON.
+
+    :param file_path: The file path.
+    :return: True if it is JSON, False otherwise.
+    """
     return file_path.endswith('.json')
 
 
@@ -29,8 +31,6 @@ def to_json(file_path, limit=None):
     :param limit: Limit the number of entries to convert to the new file.
     :return: The file path of the created file.
     """
-    logger.debug('convert_json()')
-
     if is_json(file_path):
         return file_path
 
@@ -47,7 +47,7 @@ def to_json(file_path, limit=None):
     if limit:
         lines = lines[:limit]
 
-    fix_timestamps(lines)
+    span.fix_timestamps(lines)
 
     json_array = json.dumps(lines)
 
@@ -59,11 +59,3 @@ def to_json(file_path, limit=None):
         f.write(json_array)
 
     return new_abs_file_path
-
-
-# TODO: the following lines are only for testing purposes [REMOVE]
-if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('utils.py JSONL_FILE')
-        sys.exit(1)
-    print('File created in:', to_json(sys.argv[1], None))

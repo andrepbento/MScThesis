@@ -1,16 +1,14 @@
 """
     Author: André Bento
-    Date last modified: 16-11-2018
+    Date last modified: 25-02-2019
 """
-"""
-SpanTree represents the entity for handling spans in a tree data structure.
-"""
-import logging
 
 from treelib import Tree
 from treelib.exceptions import NodeIDAbsentError
 
-logger = logging.getLogger(__name__)
+from graphy.utils import logger as my_logger
+
+logger = my_logger.setup_logging(__name__)
 
 
 class SpanTree(object):

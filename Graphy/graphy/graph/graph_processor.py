@@ -1,8 +1,7 @@
 """
     Author: André Bento
-    Date last modified: 21-02-2019
+    Date last modified: 26-02-2019
 """
-import logging
 from collections import defaultdict
 
 import matplotlib.pyplot as plt
@@ -10,8 +9,9 @@ import networkx as nx
 import networkx.algorithms as nx_algorithms
 
 from graphy.models.span_tree import SpanTree
+from graphy.utils import logger as my_logger
 
-logger = logging.getLogger(__name__)
+logger = my_logger.setup_logging(__name__)
 
 
 class GraphProcessor:
@@ -19,29 +19,30 @@ class GraphProcessor:
 
     def __init__(self):
         """ Initiate a new GraphProcessor. """
-        self._graph = nx.MultiDiGraph()
+        self.__graph = nx.MultiDiGraph()
         self.span_tree = None
 
     @property
     def graph(self):
-        return self._graph
+        return self.__graph
 
     def generate_graph(self, tuple_list):
         """
-        TODO: Add doc.
+        Generates the graph using the tuple list.
 
-        :param tuple_list:
-        :return:
+        :param tuple_list: The tuple list with the from and to nodes.
         """
-        self._graph.add_edges_from(tuple_list)
+        logger.info('generate_graph()')
+
+        self.__graph.add_edges_from(tuple_list)
 
     def generate_graph_from_spans(self, spans_array):
         """
-        Generates the graph using the spans array data
+        Generates the graph using the spans array data.
 
-        :param spans_array: array of span objects
+        :param spans_array: Array of span objects.
         """
-        logger.info('generate_graph()')
+        logger.info('generate_graph_from_spans()')
 
         # Create the span tree to generate the graph
         self.span_tree = SpanTree(spans_array)
@@ -56,12 +57,12 @@ class GraphProcessor:
         :return: Generated graph.
         """
         logger.debug('generate_graph_from_zipkin()')
-        self._graph.clear()
+        self.__graph.clear()
         for dependency in dependencies:
-            self._graph.add_edge(dependency['parent'],
-                                 dependency['child'],
-                                 weight=dependency['callCount'])
-        return self._graph
+            self.__graph.add_edge(dependency['parent'],
+                                  dependency['child'],
+                                  weight=dependency['callCount'])
+        return self.__graph
 
     def generate_graph_from_edge_list(self, edge_list):
         """
@@ -71,251 +72,55 @@ class GraphProcessor:
         :return: Generated graph.
         """
         logger.debug('generate_graph_from_edge_list()')
-        self._graph.clear()
+        self.__graph.clear()
         for edge in edge_list:
             node_from = edge.get('_from').split('/')[-1]
             node_to = edge.get('_to').split('/')[-1]
             call_count = edge.get('links')
             if node_from and node_to and call_count:
-                self._graph.add_edge(node_from, node_to, weight=call_count)
-        return self._graph
+                self.__graph.add_edge(node_from, node_to, weight=call_count)
+        return self.__graph
 
     @staticmethod
-    def graphs_difference(graph_1, graph_2):
+    def graphs_difference(first_graph, second_graph, graph_name=None):
         """
-        TODO: Add doc.
+        Performs the difference between two graphs.
 
-        :param graph_1:
-        :param graph_2:
-        :return:
+        :param first_graph: The first named Graph in NetworkX MultiDiGraph format.
+        :param second_graph: The second named Graph in NetworkX MultiDiGraph format.
+        :param graph_name: The name of the resulting graph.
+        :return: The resulting difference between the graphs.
         """
-        graph_diff = nx.difference(graph_1, graph_2)
-        return graph_diff
+        g_diff = nx.MultiDiGraph()
+        graph_1 = first_graph.copy()  # Copy to preserve values.
+        graph_2 = second_graph.copy()
 
-    @staticmethod
-    def graphs_symmetric_difference(graph1, graph2):
-        """
-        TODO: Add doc.
-
-        :param graph1:
-        :param graph2:
-        :return:
-        """
-        graph_symetric_diff = nx.symmetric_difference(graph1, graph2)
-        return graph_symetric_diff
-
-    @staticmethod
-    def graphs_edges_difference(graph_1, graph_2):
-        """
-        TODO: Add doc.
-
-        :param graph_1:
-        :param graph_2:
-        :return:
-        """
-        edges_diff = dict()
-
-        graph_1_edges = graph_1.edges(data=True)
-        graph_2_edges = graph_2.edges(data=True)
-
-        # if graph_1_edges and graph_2_edges:
-        #    edges_diff = {k: graph_2_edges.get('_adjdic')[k]
-        #                  for k in set(graph_2_edges.get('_adjdic')) - set(graph_1_edges.get('_adjdic'))}
-
-        return edges_diff
-        # TODO: Perform difference.
-
-    @staticmethod
-    def graphs_nodes_difference(graph_1, graph_2):
-        """
-        TODO: Add doc.
-
-        :param graph_1:
-        :param graph_2:
-        :return:
-        """
-        nodes_diff = dict()
-
-        graph_1_nodes = list(graph_1.nodes)
-        graph_2_nodes = list(graph_2.nodes)
-
-        from graphy.utils import list as my_list
-        nodes_diff_1 = my_list.diff(graph_1_nodes, graph_2_nodes)
-        nodes_diff_2 = my_list.diff(graph_2_nodes, graph_1_nodes)
-        print('List1.len:', len(graph_1_nodes))
-        print('List2.len:', len(graph_2_nodes))
-        print('List.diff(1-2):', nodes_diff_1)
-        print('List.diff(2-1):', nodes_diff_2)
-
-        return nodes_diff_1
-
-    def __generate_nodes_and_edges(self):
-        """
-        Generates the nodes and edges using the span tree.
-
-        :return: tuple with nodes and edges
-        """
-        logger.info('generate_nodes_and_edges()')
-
-        attribute_exception_counter = 0
-
-        graph_nodes = set()  # graph_nodes
-        graph_edges = []
-        graph_arc = set()
-        # graph_arc = []
-
-        endpoint_counter = 0
-        binary_annotation_endpoint_counter = 0
-
-        value_stack_array = []
-
-        annotation_values = [['sr', 'ss'], ['cs', 'cr']]
-
-        span_annotations_len_array = []
-        endpoints_len_array = []
-
-        for node in self.span_tree.tree.all_nodes():
-            span = node.data
-            # root or trace node
-            if span is None:
-                continue
-            try:
-                value_stack = set()
-                endpoint_service_name = None
-                span_annotations_len_array.append(len(span.annotations))
-                for i, annotation in enumerate(span.annotations):
-                    timestamp = annotation.timestamp
-                    value = annotation.value
-                    value_stack.add(value)
-                    endpoints = annotation.endpoints
-                    if endpoints is None:
-                        raise AttributeError('endpoints not found')
-                    endpoints_len_array.append(len(endpoints))
-                    for _, endpoint in enumerate(endpoints):
-                        endpoint_counter += 1
-                        endpoint_service_name = endpoint.service_name
-                        # graph_arc.append(endpoint.get_service_name())
-                        graph_arc.add(endpoint.service_name)
-                    if i == len(span.annotations) - 1 and list(value_stack) in [annotation_value for annotation_value
-                                                                                in annotation_values]:
-                        graph_nodes.add(endpoint_service_name)
-                # for _, binary_annotation in enumerate(span.binary_annotations):
-                value_stack_array.append(value_stack)
-            except AttributeError:
-                # logger.error('annotation: {}'.format(annotation_aux))
-                attribute_exception_counter += 1
-                graph_edges.append(graph_arc)
-                graph_arc = set()
-                continue
-            except Exception as ex:
-                print(ex)
-
-        self._graph.add_nodes_from(graph_nodes)
-
-        print('Smax', max(span_annotations_len_array))
-        print('Smin', min(span_annotations_len_array))
-        print('Savg', sum(span_annotations_len_array) / len(span_annotations_len_array))
-
-        print('Tmax', max(endpoints_len_array))
-        print('Tmin', min(endpoints_len_array))
-        print('Tavg', sum(endpoints_len_array) / len(endpoints_len_array))
-
-        try:
-            lens = [len(i) for i in graph_edges]
-            print('max', max(lens))
-            print('min', min(lens))
-            print('avg', sum(lens) / len(lens))
-            print('len', len(graph_edges))
-        except Exception as ex:
-            logging.error('Exception[{}]: {}'.format(type(ex), ex))
-
-        # self.G.add_edges_from(graph_edges)
-
-        for edge in graph_edges:
-            if len(edge) == 1:
-                for i, stack_edge in enumerate(edge):
-                    # print(stack_edge)
-                    self._graph.add_edge(stack_edge, stack_edge)
-                continue
-            if len(edge) >= 2:
-                if len(edge) > 2:
-                    # print('>2: ', edge)
-                    continue
-                edge_aux = None
-                for i, stack_edge in enumerate(edge):
-                    if i == 0:
-                        edge_aux = stack_edge
-                        continue
-                    self._graph.add_edge(edge_aux, stack_edge)
+        # Cycle through all edges in G.
+        for n in graph_1.edges:
+            if n not in graph_2.edges:
+                edge_weight = graph_1.get_edge_data(n[0], n[1])[0].get('weight')
+                edge_weight = str(int(edge_weight) * -1)  # Lost node.
+                g_diff.add_edge(n[0], n[1], weight=edge_weight)
             else:
-                logger.error('invalid edge[{}]: {}'.format(len(edge), edge))
+                first_edge_weight = graph_1.get_edge_data(n[0], n[1])[0].get('weight')
+                second_edge_weight = graph_2.get_edge_data(n[0], n[1])[0].get('weight')
+                if first_edge_weight != second_edge_weight:
+                    g_diff.add_edge(n[0], n[1], weight=second_edge_weight - first_edge_weight)
+                graph_2.remove_edge(n[0], n[1])  # Remove edge to reduce size.
 
-        logger.debug('attribute_exception_counter: {}'.format(attribute_exception_counter))
-        logger.debug('endpoint_counter: {}'.format(endpoint_counter))
-        logger.debug('trace_counter: {}'.format(self.span_tree.count_traces()))
-        logger.debug('binary_annotation_endpoint_counter: {}'.format(binary_annotation_endpoint_counter))
+        # Cycle through all remaining edges in second_graph.
+        for n in graph_2.edges:
+            if n not in graph_1.edges:
+                edge_weight = graph_2.get_edge_data(n[0], n[1])[0].get('weight')
+                g_diff.add_edge(n[0], n[1], weight=edge_weight)
 
-        """
-        for node in self.span_tree.tree.all_nodes():
-            span = node.data
-            # root or trace node
-            if span is None:
-                continue
-            kind = span.kind
-            if kind == Kind.CLIENT and node.is_leaf():
-                print('deferring link to rpc child span')
-                continue
-            service_name = span.local_service_name
-            remote_service_name = span.remote_service_name
-            if kind is None:
-                if service_name is not None and remote_service_name is not None:
-                    kind = Kind.CLIENT
-                else:
-                    print('non-rpc span; skipping')
-                    continue
+        if graph_name is None:
+            start_timestamp = graph_1.name.split('_')[1]
+            end_timestamp = graph_2.name.split('_')[-1]
+            graph_name = 'graph_{}_{}'.format(start_timestamp, end_timestamp)
+        g_diff.name = graph_name
 
-            if kind is Kind.SERVER or kind is Kind.CONSUMER:
-                child = service_name
-                parent = remote_service_name
-                # if (current == tree)
-                if parent is None:
-                    print('root\'s peer is unknown; skippin')
-                    continue
-            elif kind is Kind.CLIENT or kind is Kind.PRODUCER:
-                parent = service_name
-                child = remote_service_name
-            else:
-                print('unknown kind; skipping')
-                continue
-
-            is_error = True if 'error' in span.tags else False
-            if kind == Kind.PRODUCER or kind == Kind.CONSUMER:
-                if parent is None or child is None:
-                    print("cannot link messaging span to its broker; skipping")
-                else:
-                    self.__addLink(parent, child, is_error)
-                continue
-
-            rpc_ancestor = self.__findRpcAncestor(node)
-            rpc_service_name = ''
-            if rpc_ancestor is not None:
-                rpc_ancestor_name = rpc_ancestor.local_service_name
-                if rpc_ancestor_name is not None:
-                    if kind == Kind.CLIENT and service_name is not None and rpc_ancestor_name == rpc_service_name:
-                        print("detected missing link to client span")
-                        self.__addLink(rpc_ancestor_name, service_name, False)  # we don't know if there's an error here
-                    if parent is None:
-                        parent = rpc_ancestor_name
-                    if not is_error and Kind.CLIENT == rpc_ancestor.kind and span.parent_id is not None \
-                            and span.parent_id == rpc_ancestor.id:
-                        is_error = rpc_ancestor.tags().containsKey("error")
-
-            if parent is None and child is None:
-                print("cannot find server ancestor; skipping")
-                continue
-
-            self.__addLink(parent, child, is_error)
-        """
+        return g_diff
 
     def draw_graph(self, save=False, show=False):
         """
@@ -329,7 +134,7 @@ class GraphProcessor:
 
         logger.info('draw_graph()')
 
-        nx.draw(self._graph, with_labels=True, font_weight='bold')
+        nx.draw(self.__graph, with_labels=True, font_weight='bold')
         plt.axis('off')
         if save:
             plt.savefig("graph.png")
@@ -350,7 +155,7 @@ class GraphProcessor:
         logger.info('spans_max_depth: {}'.format(self.span_tree.span_max_depth()))
 
     def print_graph_data(self, print_graph_data=True):
-        """ Print graph metadata to logger """
+        """ Print graph data. """
         if not print_graph_data:
             logger.info('skipping print_graph_data()')
             return
@@ -364,21 +169,21 @@ class GraphProcessor:
         """ Prints the number of edges and nodes """
 
         # Print nodes and edge numbers
-        if self._graph.number_of_nodes() > max_nodes:
-            logger.info('graph_nodes[{}]'.format(self._graph.number_of_nodes()))
+        if self.__graph.number_of_nodes() > max_nodes:
+            logger.info('graph_nodes[{}]'.format(self.__graph.number_of_nodes()))
         else:
-            logger.info('graph_nodes[{}]: {}'.format(self._graph.number_of_nodes(), self._graph.nodes()))
-        if self._graph.number_of_edges() > max_edges:
-            logger.info('graph_edges[{}]'.format(self._graph.number_of_edges()))
+            logger.info('graph_nodes[{}]: {}'.format(self.__graph.number_of_nodes(), self.__graph.nodes()))
+        if self.__graph.number_of_edges() > max_edges:
+            logger.info('graph_edges[{}]'.format(self.__graph.number_of_edges()))
         else:
-            logger.info('graph_edges[{}]: {}'.format(self._graph.number_of_edges(), self._graph.edges()))
+            logger.info('graph_edges[{}]: {}'.format(self.__graph.number_of_edges(), self.__graph.edges()))
 
     def __count_edge_occurrence(self):
         """ Prints the number of edges types and their sum """
         logger.info('count_edge_occurrence()')
         # Count each edge occurrence
         edge_type_counter = {}
-        for edge in self._graph.edges():
+        for edge in self.__graph.edges():
             if edge in edge_type_counter:
                 edge_type_counter[edge] += 1
             else:
@@ -446,7 +251,7 @@ class GraphProcessor:
         :return: the degree assortativity of graph
         """
         try:
-            return nx_algorithms.degree_pearson_correlation_coefficient(self._graph)
+            return nx_algorithms.degree_pearson_correlation_coefficient(self.__graph)
         except Exception as ex:
             logger.error('cannot calculate degree assortativity: {}'.format(ex))
         return -1
@@ -458,7 +263,7 @@ class GraphProcessor:
         :return: a dict with the average neighbor degree of each node
         """
         try:
-            return nx_algorithms.average_neighbor_degree(self._graph)
+            return nx_algorithms.average_neighbor_degree(self.__graph)
         except Exception as ex:
             logger.error('cannot calculate average neighbor degree: {}'.format(ex))
         return -1
@@ -470,7 +275,7 @@ class GraphProcessor:
         :return: a dict with the average neighbor degree of each node
         """
         try:
-            return nx_algorithms.average_degree_connectivity(self._graph)
+            return nx_algorithms.average_degree_connectivity(self.__graph)
         except Exception as ex:
             logger.error('cannot calculate average degree connectivity : {}'.format(ex))
         return -1
@@ -482,7 +287,7 @@ class GraphProcessor:
         :return: a dict representation of mixing matrix for degree
         """
         try:
-            return nx_algorithms.degree_mixing_dict(self._graph)
+            return nx_algorithms.degree_mixing_dict(self.__graph)
         except Exception as ex:
             logger.error('cannot calculate mixing matrix: {}'.format(ex))
         return -1
@@ -491,38 +296,38 @@ class GraphProcessor:
     def __node_boundaries(self):
         # TODO: not finished
         node_boundaries = dict()
-        for node in self._graph.nodes:
-            node_boundaries[node] = nx_algorithms.node_boundary(self._graph, node)
+        for node in self.__graph.nodes:
+            node_boundaries[node] = nx_algorithms.node_boundary(self.__graph, node)
 
     # Components Algorithms --------------------------------------------------------------------------------------------
 
     def __number_connected_components(self):
-        return nx_algorithms.number_connected_components(self._graph.to_undirected())
+        return nx_algorithms.number_connected_components(self.__graph.to_undirected())
 
     def __connected_components(self):
-        return nx_algorithms.connected_components(self._graph.to_undirected())
+        return nx_algorithms.connected_components(self.__graph.to_undirected())
 
     def __number_attracting_components(self):
-        return nx_algorithms.number_attracting_components(self._graph)
+        return nx_algorithms.number_attracting_components(self.__graph)
 
     # Cycles Algorithms ------------------------------------------------------------------------------------------------
 
     def __count_simple_cycles(self):
-        return len(list(nx_algorithms.simple_cycles(self._graph)))
+        return len(list(nx_algorithms.simple_cycles(self.__graph)))
 
     def __count_recursive_simple_cycles(self):
-        return len(list(nx_algorithms.recursive_simple_cycles(self._graph)))
+        return len(list(nx_algorithms.recursive_simple_cycles(self.__graph)))
 
     def __find_cycle(self):
         try:
-            return nx_algorithms.find_cycle(self._graph)
+            return nx_algorithms.find_cycle(self.__graph)
         except Exception as ex:
             logger.error('cannot find cycle in the current graph: {}'.format(ex))
         return -1
 
     def __minimum_cycle_basis(self):
         try:
-            return nx_algorithms.minimum_cycle_basis(self._graph.to_undirected())
+            return nx_algorithms.minimum_cycle_basis(self.__graph.to_undirected())
         except Exception as ex:
             logger.error('cannot calculate minimum cycle basis for this kind of graph: {}'.format(ex))
         return -1
@@ -535,7 +340,7 @@ class GraphProcessor:
 
         :return: the list of nodes in center or a empty list
         """
-        return nx_algorithms.is_directed_acyclic_graph(self._graph)
+        return nx_algorithms.is_directed_acyclic_graph(self.__graph)
 
     # Distance Measures Algorithms -------------------------------------------------------------------------------------
 
@@ -546,7 +351,7 @@ class GraphProcessor:
         :return: the list of nodes in center or a empty list
         """
         try:
-            return nx_algorithms.center(self._graph.to_undirected())  # Only works with undirected graphs
+            return nx_algorithms.center(self.__graph.to_undirected())  # Only works with undirected graphs
         except Exception as ex:
             logger.error('cannot obtain the list of nodes in the center: {}'.format(ex))
         return []
@@ -558,35 +363,35 @@ class GraphProcessor:
         :return: the diameter of the graph or -1
         """
         try:
-            return nx_algorithms.diameter(self._graph.to_undirected())  # Only works with undirected graphs
+            return nx_algorithms.diameter(self.__graph.to_undirected())  # Only works with undirected graphs
         except Exception as ex:
             logger.error('cannot calculate graph diameter: {}'.format(ex))
         return -1
 
     def __periphery(self):
-        if nx_algorithms.is_strongly_connected(self._graph) is False:
+        if nx_algorithms.is_strongly_connected(self.__graph) is False:
             logger.error('cannot calculate graph periphery: Graph is not strongly connected')
             return []
-        return nx_algorithms.periphery(self._graph)
+        return nx_algorithms.periphery(self.__graph)
 
     def __radius(self):
-        if nx_algorithms.is_strongly_connected(self._graph) is False:
+        if nx_algorithms.is_strongly_connected(self.__graph) is False:
             logger.error('cannot calculate graph radius: Graph is not strongly connected')
             return []
-        return nx_algorithms.radius(self._graph)
+        return nx_algorithms.radius(self.__graph)
 
     # Shortest Paths Algorithms ----------------------------------------------------------------------------------------
 
     def __shortest_path(self):
-        return nx_algorithms.shortest_path(self._graph)
+        return nx_algorithms.shortest_path(self.__graph)
 
     def __all_pairs_shortest_path(self):
-        return nx_algorithms.all_pairs_shortest_path(self._graph)
+        return nx_algorithms.all_pairs_shortest_path(self.__graph)
 
     def __floyd_warshall(self):
-        return nx_algorithms.floyd_warshall(self._graph)
+        return nx_algorithms.floyd_warshall(self.__graph)
 
-    def degrees(self, sort=True):
+    def degrees(self, sort: bool = True) -> list:
         """
         Calculates the degree for all nodes.
         Node degree is the sum of all input and output edges.
@@ -597,10 +402,38 @@ class GraphProcessor:
         # TODO: The following lines of code can be used to get the input or output degree from all nodes
         # in_degree = self.G.in_degree
         # out_degree = self.G.out_degree
-        degrees = self._graph.degree
-        return sorted(degrees, key=lambda tup: tup[1], reverse=sort)
+        return sorted(self.__graph.degree, key=lambda tup: tup[1], reverse=sort)
 
-    def neighbors(self, service_name=None):
+    def edges_call_count(self, service_name: str = None, sort: bool = True) -> list:
+        """
+        Calculates the number of calls for all nodes or for a specific node.
+
+        :param service_name: the service node name.
+        :param sort:
+        :return:
+        """
+        # TODO: The following lines of code can be used to get the input and output from all edges
+        # in_edges = list(self.__graph.in_edges(data=True))
+        # out_edges = list(self.__graph.out_edges(data=True))
+
+        edges_call_count = dict()
+
+        if service_name:
+            edges = list(self.__graph.edges(service_name, data=True))
+        else:
+            edges = list(self.__graph.edges(data=True))
+
+        for edge in edges:
+            service_from = edge[0]
+            call_count = edge[2].get('weight')
+            if service_from in edges_call_count:
+                edges_call_count[service_from] += call_count
+            else:
+                edges_call_count[service_from] = call_count
+
+        return sorted(edges_call_count.items(), key=lambda x: x[1], reverse=sort)
+
+    def neighbors(self, service_name: str = None) -> dict:
         """
         Calculates the out neighbors for all nodes or for a specific node.
 
@@ -610,34 +443,14 @@ class GraphProcessor:
         debug_message = ''
         neighbors = defaultdict(list)
 
-        service_nodes = self._graph.nodes
+        service_nodes = self.__graph.nodes
         if service_name:
             service_nodes = [service_name]
 
-        # TODO: The following lines of code can be used to get the input and output from all nodes
-        # in_edges = self.G.in_edges
-        # out_edges = self.G.out_edges
-
         for node in service_nodes:
             debug_message += '\nNode: {}'.format(node)
-            for i, neighbor in enumerate(self._graph.neighbors(node)):
+            for i, neighbor in enumerate(self.__graph.neighbors(node)):
                 debug_message += '\n\t{}: {}'.format(i, neighbor)
                 neighbors[node].append(neighbor)
         logger.debug(debug_message)
         return neighbors
-
-    def number_of_edges(self, service_name=None):
-        """
-        Calculates the number of edges for all nodes or for a specific node.
-
-        :param service_name: the service node name.
-        :return:
-        """
-        services = self._graph.nodes
-        if service_name:
-            services = [service_name]
-
-        for service in services:
-            for service_neighbor in (self._graph.neighbors(service)):
-                n_edges = self._graph.number_of_edges(service, service_neighbor)
-                print(service, ':', service_neighbor, ':', n_edges)

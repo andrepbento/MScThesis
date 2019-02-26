@@ -1,0 +1,19 @@
+"""
+    Author: André Bento
+    Date last modified: 26-02-2019
+"""
+import os
+from logging import Logger
+from unittest import TestCase
+
+from graphy.utils import logger as my_logger
+
+
+class TestLogger(TestCase):
+
+    def test_setup_logging(self):
+        """ Test setup_logging function. """
+        self.assertIsInstance(my_logger.setup_logging('test_logger'), Logger)
+
+        logging_error_file = os.path.abspath('logging_error.yaml')
+        my_logger.setup_logging('test_logger', logging_error_file)

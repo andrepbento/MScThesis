@@ -1,11 +1,18 @@
 """
     Author: André Bento
-    Date last modified: 20-02-2019
+    Date last modified: 25-02-2019
 """
 from graphy.models import span as my_span
 
 
 def get_status_codes(trace_list):
+    """
+    Gets the status codes presented in a trace list.
+
+    :param trace_list: The trace list in Zipkin format.
+    :return: A dictionary containing the grouped status codes counting.
+    """
+
     status_codes_dict = dict()
     for trace in trace_list:
         for span in trace:

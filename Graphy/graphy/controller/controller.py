@@ -1,26 +1,25 @@
 """
     Author: André Bento
-    Date last modified: 21-02-2019
+    Date last modified: 26-02-2019
 """
-import logging
+import os
+import sys
 import time
 
-from pip._vendor.distlib.compat import raw_input
-
 from graphy.db import opentsdb
+from graphy.db.arangodb import ArangoDB
 from graphy.graph.graph_processor import GraphProcessor
 from graphy.models import trace as my_trace
-from graphy.utils import dict as my_dict
+from graphy.utils import dict as my_dict, config
 from graphy.utils import files
 from graphy.utils import json as my_json
+from graphy.utils import logger as my_logger
 from graphy.utils import time as my_time
 from graphy.utils import zipkin
 
-logger = logging.getLogger(__name__)
+logger = my_logger.setup_logging(__name__)
 
-# TODO: This values are the default times, change them if you need.
-start_date_time_str = "25/06/2018 00:00:00"
-end_date_time_str = "30/06/2018 00:00:00"
+graphy_config = config.get('GRAPHY')
 
 
 class Controller(object):
@@ -28,125 +27,139 @@ class Controller(object):
         self.model = model
         self.view = view
 
-        self.trace_file = ''
+        self.__graph_processor = GraphProcessor()
 
-        self.is_zipkin_running = False
-        self.zipkin_limit = 1000000  # TODO: Check if is enough
+        self.__graph_db = ArangoDB()
 
-        self.graph_processor = GraphProcessor()
+        self.__time_series_db = opentsdb
 
-        self.graph_db = None
+        self.__start_date_time_str = graphy_config.get('DEFAULT_START_TIME')
+        self.__end_date_time_str = graphy_config.get('DEFAULT_END_TIME')
 
-        self.time_series_db = opentsdb
+        self.__zipkin_limit = graphy_config.get('ZIPKIN_TRACE_LIMIT')
+        self.__is_zipkin = graphy_config.get('ACTIVATE_ZIPKIN')
 
     def start(self):
+        """ Starts the controller. """
         self.view.start_view()
 
-        user_input = ''
-        while user_input != '0':
+        while True:
             switcher = {
-                '1': self.show_service_neighbours,
-                '2': self.show_service_neighbours_in_time,
-                '3': self.show_most_popular_service,
-                '4': self.show_most_popular_service_in_time,
-                '5': self.show_service_status_code_analysis,
-                '6': self.show_service_status_code_analysis_in_time,
-                '7': self.show_response_time_analysis,
-                '8': self.show_morphology_analysis,
-                '9': self.show_request_work_flow_analysis,
-                '10': self.show_service_order_distribution_analysis,
-                '11': self.show_load_analysis,
-                '12': self.show_clients_request_analysis,
-                '13': self.end
+                'Show service neighbours':
+                    self.show_service_neighbours,
+                'Show service neighbours in time (EXPERIMENTAL)':
+                    self.show_service_neighbours_in_time,
+                'Show most popular service [degree]':
+                    self.show_most_popular_service,
+                'Show most popular service [degree] in time (EXPERIMENTAL)':
+                    self.show_most_popular_service_degree_in_time,
+                'Show most popular service [call count]':
+                    self.show_most_popular_service_call_count,
+                'Show most popular service [call count] in time (EXPERIMENTAL)':
+                    self.show_most_popular_service_call_count_in_time,
+                'Show service status code analysis':
+                    self.show_service_status_code_analysis,
+                'Show service status code analysis in time (EXPERIMENTAL)':
+                    self.show_service_status_code_analysis_in_time,
+                'Show response time analysis (NOT IMPLEMENTED)':
+                    self.show_response_time_analysis,
+                'Show morphology analysis (EXPERIMENTAL)':
+                    self.show_morphology_analysis,
+                'Show request work-flow analysis (NOT IMPLEMENTED)':
+                    self.show_request_work_flow_analysis,
+                'Show service order distribution analysis (NOT IMPLEMENTED)':
+                    self.show_service_order_distribution_analysis,
+                'Show load analysis (NOT IMPLEMENTED)':
+                    self.show_load_analysis,
+                'Show clients request analysis (NOT IMPLEMENTED)':
+                    self.show_clients_request_analysis,
+                'Exit':
+                    self.__end
             }
 
-            switcher_descriptions = [
-                'Show service neighbours',
-                'Show service neighbours in time (EXPERIMENTAL)',
-                'Show most popular service',
-                'Show most popular service in time (EXPERIMENTAL)',
-                'Show service status code analysis',
-                'Show service status code analysis in time (EXPERIMENTAL)',
-                'Show response time analysis (NOT IMPLEMENTED)',
-                'Show morphology analysis (NOT IMPLEMENTED)',
-                'Show request work-flow analysis (NOT IMPLEMENTED)',
-                'Show service order distribution analysis (NOT IMPLEMENTED)',
-                'Show load analysis (NOT IMPLEMENTED)',
-                'Show clients request analysis (NOT IMPLEMENTED)',
-                'Exit'
-            ]
+            self.__show_options('Graphy options', switcher)
+            user_input = input('>>> ')
 
-            self.show_options('Graphy options', switcher_descriptions)
-            user_input = raw_input('>>> ')
-            execute_selected = switcher.get(user_input, lambda: 'Invalid option!' if user_input is not '0' else '')
-            try:
-                execute_selected()
-            except Exception as ex:
-                self.view.display_exception(ex)
+            if user_input in range(1, len(switcher)):
+                self.view.display_message('Invalid option!', 'Option not valid, please try again.')
+                continue
+            else:
+                try:
+                    execute_selected = list(switcher.items())[int(user_input) - 1]
+                    execute_selected[1]()
+                except Exception as e:
+                    exc_type, exc_obj, exc_tb = sys.exc_info()
+                    file_name = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+                    logger.error(e)
+                    self.view.display_exception('{} {} {}'.format(exc_type, file_name, exc_tb.tb_lineno))
 
-        self.end()
-
-    def end(self):
+    def __end(self):
+        """ Terminates the controller. """
         self.view.end_view()
         exit(1)
 
-    def set_trace_file(self, file):
-        absolute_path = files.get_absolute_path(file)
-        if not my_json.is_json(absolute_path):
-            self.view.display_message('Converting file to JSON', 'file: {}'.format(absolute_path))
-            absolute_path = my_json.to_json(absolute_path)
-            self.view.display_message('File converted to JSON', 'file: {}'.format(absolute_path))
-        self.trace_file = absolute_path
-        logger.debug('using file: {}'.format(self.trace_file))
+    def __show_options(self, title: str, options: dict) -> None:
+        """
+        Shows options using the view.
 
-    def set_zipkin(self, is_zipkin_running, is_data_in_zipkin=False):
-        self.is_zipkin_running = is_zipkin_running
-        if not is_data_in_zipkin and self.is_zipkin_running and self.trace_file:
-            if not zipkin.post_spans(self.trace_file):
+        :param title: The title of the options menu.
+        :param options: The list of options.
+        """
+        self.view.show_number_point_list(title, options)
+
+    def setup_zipkin(self, trace_file_path: str):
+        """
+        Setup Zipkin with a certain trace file, if data is not already in it.
+
+        :param trace_file_path: The trace file absolute path.
+        """
+        if not my_json.is_json(trace_file_path):
+            self.view.display_message('Converting file to JSON', 'file: {}'.format(trace_file_path))
+            trace_file_path = my_json.to_json(trace_file_path)
+            self.view.display_message('File converted to JSON', 'file: {}'.format(trace_file_path))
+
+        if trace_file_path:
+            logger.debug('Using file: {}'.format(trace_file_path))
+
+            if not zipkin.post_spans(trace_file_path):
                 logger.error('error posting data to zipkin')
                 exit(1)
 
-    def show_options(self, item_type, options):
-        self.view.show_number_point_list(item_type, options)
-
     def show_service_neighbours(self):
-        if self.is_zipkin_running:
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
-            self.view.display_time('start_time', my_time.from_str_to_datetime(start_date_time_str), start_timestamp)
-            self.view.display_time('end_time', my_time.from_str_to_datetime(end_date_time_str), end_timestamp)
+            self.view.display_time('start_time', my_time.from_str_to_datetime(self.__start_date_time_str),
+                                   start_timestamp)
+            self.view.display_time('end_time', my_time.from_str_to_datetime(self.__end_date_time_str),
+                                   end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.graph_processor.generate_graph_from_zipkin(dependencies)
+            self.__graph_processor.generate_graph_from_zipkin(dependencies)
             self.view.display_dictionary('All service neighbors from {} to {}'
-                                         .format(my_time.from_str_to_datetime(start_date_time_str),
-                                                 my_time.from_str_to_datetime(end_date_time_str)),
-                                         self.graph_processor.neighbors())
+                                         .format(my_time.from_str_to_datetime(self.__start_date_time_str),
+                                                 my_time.from_str_to_datetime(self.__end_date_time_str)),
+                                         self.__graph_processor.neighbors())
             service_name = 'api_com'
             self.view.display_dictionary('{} service neighbors'.format(service_name),
-                                         self.graph_processor.neighbors(service_name))
+                                         self.__graph_processor.neighbors(service_name))
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
-        # else:
-        # Runs GraphProcessor in standard mode
-        # self.graph_tool.generate_graph(spans_array=span.parse_to_spans_array(my_json.to_json(self.trace_file)))
-        # graph_tool.print_span_tree_data(print_span_tree_data=print_span_tree_data)
-        # graph_tool.print_graph_data(print_graph_data=print_graph_data)
-        # graph_tool.generate_graph_statistics(print_graph_statistics=print_graph_statistics)
-        # graph_tool.draw_graph(save=save_graph, show=show_graph)
 
     def show_service_neighbours_in_time(self):
-        if self.is_zipkin_running:
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
-            self.view.display_time('start_time', my_time.from_str_to_datetime(start_date_time_str), start_timestamp)
-            self.view.display_time('end_time', my_time.from_str_to_datetime(end_date_time_str), end_timestamp)
+            self.view.display_time('start_time', my_time.from_str_to_datetime(self.__start_date_time_str),
+                                   start_timestamp)
+            self.view.display_time('end_time', my_time.from_str_to_datetime(self.__end_date_time_str),
+                                   end_timestamp)
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
 
@@ -157,11 +170,11 @@ class Controller(object):
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2)
                 if dependencies:
-                    self.graph_processor.generate_graph_from_zipkin(dependencies)
+                    self.__graph_processor.generate_graph_from_zipkin(dependencies)
                     self.view.display_dictionary('All neighbors from {} to {}'
                                                  .format(my_time.from_timestamp_to_datetime(timestamp_1),
                                                          my_time.from_timestamp_to_datetime(timestamp_2)),
-                                                 self.graph_processor.neighbors())
+                                                 self.__graph_processor.neighbors())
                 else:
                     self.view.display_message('No services from {} to {}'
                                               .format(my_time.from_timestamp_to_datetime(timestamp_1),
@@ -171,30 +184,31 @@ class Controller(object):
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
     def show_most_popular_service(self):
-        if self.is_zipkin_running:
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
-            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp), start_timestamp)
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.graph_processor.generate_graph_from_zipkin(dependencies)
-            self.view.display_tuple_list('Most popular services (Degrees)', self.graph_processor.degrees())
-            # self.graph_tool.number_of_edges()
+            self.__graph_processor.generate_graph_from_zipkin(dependencies)
+            self.view.display_tuple_list('Most popular services (Degrees)', self.__graph_processor.degrees())
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
-    def show_most_popular_service_in_time(self):
-        if self.is_zipkin_running:
+    def show_most_popular_service_degree_in_time(self):
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
-            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp), start_timestamp)
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
@@ -206,11 +220,11 @@ class Controller(object):
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
                 if dependencies:
-                    self.graph_processor.generate_graph_from_zipkin(dependencies)
-                    service_degrees = self.graph_processor.degrees()
+                    self.__graph_processor.generate_graph_from_zipkin(dependencies)
+                    service_degrees = self.__graph_processor.degrees()
 
-                    self.time_series_db.send_numeric_metrics('degree', service_degrees,
-                                                             int((timestamp_1 + timestamp_2) / 2))
+                    self.__time_series_db.send_numeric_metrics('degree', service_degrees,
+                                                               int((timestamp_1 + timestamp_2) / 2))
 
                     most_popular_service = service_degrees[0]
                     self.view.display_tuple('Most popular service from {} to {} (Degrees)'
@@ -225,23 +239,83 @@ class Controller(object):
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
-    def show_service_status_code_analysis(self):
-        if self.is_zipkin_running:
+    def show_most_popular_service_call_count(self):
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
-            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp), start_timestamp)
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
+            self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
+
+            dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
+            self.__graph_processor.generate_graph_from_zipkin(dependencies)
+            self.view.display_tuple_list('Most popular services (Call Count)',
+                                         self.__graph_processor.edges_call_count())
+
+            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+
+    def show_most_popular_service_call_count_in_time(self):
+        if self.__is_zipkin:
+            start_time = time.time()
+
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
+
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
+            self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
+
+            timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
+
+            for i, timestamp in enumerate(timestamps):
+                if i + 1 >= len(timestamps):
+                    break
+                timestamp_1 = timestamp
+                timestamp_2 = timestamps[i + 1]
+                dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
+                if dependencies:
+                    self.__graph_processor.generate_graph_from_zipkin(dependencies)
+                    service_edge_call_count = self.__graph_processor.edges_call_count()
+
+                    self.__time_series_db.send_numeric_metrics('call_count', service_edge_call_count,
+                                                               int((timestamp_1 + timestamp_2) / 2))
+
+                    most_popular_service = service_edge_call_count[0]
+                    self.view.display_tuple('Most popular service from {} to {} (Call Count)'
+                                            .format(my_time.from_timestamp_to_datetime(timestamp_1),
+                                                    my_time.from_timestamp_to_datetime(timestamp_2)),
+                                            most_popular_service)
+                else:
+                    self.view.display_message('No services from {} to {}'
+                                              .format(my_time.from_timestamp_to_datetime(timestamp_1),
+                                                      my_time.from_timestamp_to_datetime(timestamp_2)),
+                                              None)
+
+            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+
+        return NotImplemented
+
+    def show_service_status_code_analysis(self):
+        if self.__is_zipkin:
+            start_time = time.time()
+
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
+
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             service_names = zipkin.get_services()
 
             for service_name in service_names:
                 traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
-                                           lookback=end_timestamp - start_timestamp, limit=self.zipkin_limit)
+                                           lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
 
-                if len(traces) > self.zipkin_limit:
+                if len(traces) > self.__zipkin_limit:
                     self.view.display_message('Zipkin Trace Limit', 'traces limit exceeded: {}'.format(len(traces)))
 
                 status_codes = my_trace.get_status_codes(traces)
@@ -249,19 +323,17 @@ class Controller(object):
                 self.view.display_message(
                     'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(start_timestamp),
                                                         my_time.from_timestamp_to_datetime(end_timestamp)),
-                    '\nservice_name: {}'
-                    '\nstatus_codes: {}'
-                    '\nstatus_codes_percentage: {}'.format(service_name, my_dict.sort(status_codes),
-                                                           my_dict.sort(status_codes_percentage)))
+                    '\nservice_name: {}\nstatus_codes: {}\nstatus_codes_percentage: {}'.format(
+                        service_name, my_dict.sort(status_codes), my_dict.sort(status_codes_percentage)))
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
     def show_service_status_code_analysis_in_time(self):
-        if self.is_zipkin_running:
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
             self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
                                    start_timestamp)
@@ -279,17 +351,18 @@ class Controller(object):
 
                 for service_name in service_names:
                     traces = zipkin.get_traces(service_name=service_name, end_ts=timestamp_2,
-                                               lookback=timestamp_2 - timestamp_1, limit=self.zipkin_limit)
-                    if len(traces) > self.zipkin_limit:
-                        self.view.display_message('Zipkin Trace Limit', 'traces limit exceeded: {}'.format(len(traces)))
+                                               lookback=timestamp_2 - timestamp_1, limit=self.__zipkin_limit)
+                    if len(traces) > self.__zipkin_limit:
+                        self.view.display_message('Zipkin Trace Limit',
+                                                  'traces limit exceeded: {}'.format(len(traces)))
 
                     if traces:
                         status_codes = my_trace.get_status_codes(traces)
                         status_codes_percentage = my_dict.calc_percentage(status_codes)
 
-                        self.time_series_db.send_numeric_metrics('status_code.{}'.format(service_name),
-                                                                 status_codes_percentage,
-                                                                 int((timestamp_1 + timestamp_2) / 2))
+                        self.__time_series_db.send_numeric_metrics('status_code.{}'.format(service_name),
+                                                                   status_codes_percentage,
+                                                                   int((timestamp_1 + timestamp_2) / 2))
 
                         self.view.display_message(
                             'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(timestamp_1),
@@ -311,11 +384,11 @@ class Controller(object):
         return NotImplemented
 
     def show_morphology_analysis(self):
-        if self.is_zipkin_running:
+        if self.__is_zipkin:
             start_time = time.time()
 
-            start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-            end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
 
             self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
                                    start_timestamp)
@@ -332,36 +405,42 @@ class Controller(object):
 
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
                 if dependencies:
-                    generated_graph = self.graph_processor.generate_graph_from_zipkin(dependencies)
-                    generated_graph.name = '{}_{}'.format(timestamp_1, timestamp_2)
+                    current_graph = self.__graph_processor.generate_graph_from_zipkin(dependencies)
+                    current_graph.name = '{}_{}'.format(timestamp_1, timestamp_2)
 
-                    print('len(nodes):', len(generated_graph.nodes))
-                    print('len(edges):', len(generated_graph.edges))
-
-                    # Persist graph
+                    # Persist current graph
+                    self.__graph_db.insert_graph(timestamp_1, timestamp_2, list(current_graph.edges(data=True)),
+                                                 self.__graph_db.graph_db)
 
                     if previous_graph:
-                        # graph_diff = self.graph_processor.graphs_difference(previous_graph, generated_graph)
-                        # graph_diff_inverted = self.graph_processor.graphs_difference(generated_graph,
-                        #                                                             previous_graph)
-                        # print('graph_diff:', graph_diff.edges(data=True))
-                        # print('graph_diff_inverted:', graph_diff_inverted.edges(data=True))
-                        #
-                        # graph_simm = self.graph_processor.graphs_symmetric_difference(previous_graph,
-                        #                                                              generated_graph)
-                        # graph_simm_inverted = self.graph_processor.graphs_symmetric_difference(generated_graph,
-                        #                                                                       previous_graph)
-                        # print('graph_simm:', graph_simm.edges(data=True))
-                        # print('graph_simm_inverted:', graph_simm_inverted.edges(data=True))
-                        #
-                        # edges_diff = self.graph_processor.graphs_edges_difference(previous_graph, generated_graph)
-                        # edges_diff_inverted = self.graph_processor.graphs_edges_difference(generated_graph,
-                        #                                                                   previous_graph)
-                        #
-                        nodes_diff = self.graph_processor.graphs_nodes_difference(previous_graph, generated_graph)
-                        nodes_diff = self.graph_processor.graphs_nodes_difference(generated_graph, previous_graph)
+                        graph_diff = self.__graph_processor.graphs_difference(previous_graph, current_graph)
 
-                    previous_graph = generated_graph.copy()
+                        # Persist graph difference
+                        self.__graph_db.insert_graph(timestamp_1, timestamp_2, list(graph_diff.edges(data=True)),
+                                                     self.__graph_db.graph_diff_db)
+
+                        self.view.display_message('System Morphology from {} to {}'
+                                                  .format(my_time.from_timestamp_to_datetime(timestamp_1),
+                                                          my_time.from_timestamp_to_datetime(timestamp_2)),
+                                                  '\nprevious_graph.Nodes:{}\nprevious_graph.Edges:{}'
+                                                  '\nprevious_graph.NodesLen:{}\nprevious_graph.EdgesLen:{}'
+                                                  '\ncurrent_graph.Nodes:{}\ncurrent_graph.Edges:{}'
+                                                  '\ncurrent_graph.NodesLen:{}\ncurrent_graph.EdgesLen:{}'
+                                                  '\ngraph_diff.Nodes:{}\ngraph_diff.Edges:{}'
+                                                  '\ngraph_diff.NodesLen:{}\ngraph_diff.EdgesLen:{}'
+                                                  .format(previous_graph.nodes, previous_graph.edges(data=True),
+                                                          len(previous_graph.nodes), len(previous_graph.edges),
+                                                          current_graph.nodes, current_graph.edges(data=True),
+                                                          len(current_graph.nodes), len(current_graph.edges),
+                                                          graph_diff.nodes, graph_diff.edges(data=True),
+                                                          len(graph_diff.nodes), len(graph_diff.edges)))
+
+                    previous_graph = current_graph.copy()
+                else:
+                    self.view.display_message('No system graph from {} to {}'
+                                              .format(my_time.from_timestamp_to_datetime(timestamp_1),
+                                                      my_time.from_timestamp_to_datetime(timestamp_2)),
+                                              None)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
@@ -376,3 +455,23 @@ class Controller(object):
 
     def show_clients_request_analysis(self):
         return NotImplemented
+
+
+# TODO: The following code is for testing purposes only [REMOVE].
+
+def main():
+    from graphy.utils import config
+    graphy_config = config.get('GRAPHY')
+
+    file = files.get_absolute_path(graphy_config['TRACE_FILE'], graphy_config['TRACE_FILE_FROM_PROJECT'])
+
+    from graphy.view.console_view import ConsoleView
+    view = ConsoleView()
+    controller = Controller(view)
+    controller.setup_zipkin(file)
+
+    controller.show_morphology_analysis()
+
+
+if __name__ == '__main__':
+    main()

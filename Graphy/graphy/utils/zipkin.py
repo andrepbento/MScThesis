@@ -1,18 +1,18 @@
 """
     Author: André Bento
-    Date last modified: 12-02-2019
+    Date last modified: 26-02-2019
 """
 import json as json
-import logging
 import sys
 import time
 
 import requests
 
 from graphy.utils import config
+from graphy.utils import logger as my_logger
 from graphy.utils.files import read_file
 
-logger = logging.getLogger(__name__)
+logger = my_logger.setup_logging(__name__)
 
 zipkin_config = config.get('ZIPKIN')
 
@@ -34,13 +34,11 @@ def get_services():
 
     :return: a list with all services presented in Zipkin
     """
-    logger.debug('get_services()')
-
     try:
         response = requests.get(address_v2 + 'services')
         return json.loads(response.text)
     except ConnectionError as ex:
-        logger.error('{}: {}', type(ex), ex)
+        logger.error('{}: {}'.format(type(ex), ex))
         sys.exit(status=1)
 
 
@@ -52,14 +50,12 @@ def get_spans(service_name):
     enumerates possible input values.
     :return: the spans data
     """
-    logger.debug('get_spans()')
-
     try:
         params = {'serviceName': service_name}
         response = requests.get(address_v2 + 'spans', params)
         return json.loads(response.text)
     except ConnectionError as ex:
-        logger.error('{}: {}', type(ex), ex)
+        logger.error('{}: {}'.format(type(ex), ex))
         sys.exit(status=1)
 
 
@@ -70,14 +66,12 @@ def post_spans(spans_file):
     :param spans_file: spans file path
     :return: if the operation was successful (equal to HTTP code 202) or not
     """
-    logger.debug('post_spans()')
-
     try:
         spans_data = read_file(spans_file)
         response = requests.post(address_v1 + 'spans', data=spans_data, headers=headers)
         return response.status_code == 202
-    except ConnectionError as ex:
-        logger.error('{}: {}', type(ex), ex)
+    except Exception as ex:
+        logger.error('{}: {}'.format(type(ex), ex))
         sys.exit(status=1)
 
 
@@ -103,8 +97,6 @@ def get_traces(lookback=365 * 24 * 60 * 60 * 1000, service_name=None, span_name=
     :param limit: Maximum number of traces to return. Defaults to 10
     :return: list of traces with respect to the provided parameters.
     """
-    logger.debug('get_trace()')
-
     try:
         params = {
             'serviceName': service_name,
@@ -119,7 +111,7 @@ def get_traces(lookback=365 * 24 * 60 * 60 * 1000, service_name=None, span_name=
         response = requests.get(address_v2 + 'traces', params)
         return json.loads(response.text)
     except ConnectionError as ex:
-        logger.error('{}: {}', type(ex), ex)
+        logger.error('{}: {}'.format(type(ex), ex))
         sys.exit(status=1)
 
 
@@ -130,10 +122,7 @@ def get_trace(trace_id):
     :param trace_id: Trace identifier, set on all spans within it
     :return: the trace data
     """
-    logger.debug('get_trace()')
-
     response = requests.get(address_v2 + 'trace/{}'.format(trace_id))
-
     return json.loads(response.text)
 
 
@@ -144,17 +133,16 @@ def get_dependencies(end_ts, lookback=60 * 60 * 1000):
     :param lookback: Timestamp in milliseconds of lookback, 1 hour default.
     :return: the dependencies data or None
     """
-    logger.debug('get_dependencies()')
-
     try:
         params = {'endTs': end_ts, 'lookback': lookback}
         response = requests.get(address_v2 + 'dependencies', params)
         return None if response.status_code != 200 else json.loads(response.text)
     except ConnectionError as ex:
-        logger.error('{}: {}', type(ex), ex)
+        logger.error('{}: {}'.format(type(ex), ex))
         sys.exit(status=1)
 
 
+# TODO: the following lines are only for testing purposes [REMOVE]
 if __name__ == '__main__':
     start_date_time_str = "01/01/2018 00:00:00"
     end_date_time_str = "30/12/2018 00:00:00"
@@ -164,7 +152,6 @@ if __name__ == '__main__':
     start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
     end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
 
-    # TODO: the following lines are only for testing purposes [REMOVE]
     # print('\nServices:\n{}'.format(get_services()))
 
     # print('\nSpans:\n{}'.format(get_spans('api_com')))

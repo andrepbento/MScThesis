@@ -4,7 +4,7 @@ version: 1
 GRAPHY:
   ACTIVATE_ZIPKIN: true
   # The trace file absolute or relative path.
-  TRACE_FILE: "data/traces-2018-06-29.json"
+  TRACE_FILE: "data/traces-2018-06-28.json"
   # If changed to false, make sure the TRACE_FILE is an absolute file path.
   TRACE_FILE_FROM_PROJECT: true
   PRINT_GRAPH: false
@@ -12,14 +12,21 @@ GRAPHY:
   PRINT_SPAN_TREE: false
   SAVE_GRAPH: false
   SHOW_GRAPH: false
+
   # Timestamp resolution stands for the time interval between analysis, expressed in milliseconds.
   TIMESTAMP_RESOLUTION: 3600000
+
+  DEFAULT_START_TIME: "25/06/2018 00:00:00"
+  DEFAULT_END_TIME: "30/06/2018 00:00:00"
+
+  ZIPKIN_TRACES_LIMIT: 1000000
 
 ARANGODB:
   ARANGO_URL: "http://127.0.0.1:8529"
   IP: "127.0.0.1"
   PORT: "8529"
-  DB_NAME: "test_graph_db"
+  GRAPH_DB_NAME: "graph_db"
+  GRAPH_DIFF_DB_NAME: "graph_diff_db"
   PASSWORD: "password"
   STORE_IN_DB: true
   USERNAME: "root"

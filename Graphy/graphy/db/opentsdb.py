@@ -1,14 +1,13 @@
 """
     Author: André Bento
-    Date last modified: 20-02-2019
+    Date last modified: 25-02-2019
 """
-import logging
-
 import potsdb
 
 from graphy.utils import config
+from graphy.utils import logger as my_logger
 
-logger = logging.getLogger(__name__)
+logger = my_logger.setup_logging(__name__)
 
 opentsdb_config = config.get('OPENTSDB')
 

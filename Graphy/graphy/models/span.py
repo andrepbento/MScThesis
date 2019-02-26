@@ -1,8 +1,7 @@
 """
     Author: André Bento
-    Date last modified: 13-02-2019
-"""
-"""
+    Date last modified: 25-02-2019
+
 Fields:
 -------
 * traceId - unique id of a trace, 128-bit string
@@ -29,15 +28,15 @@ Notes:
 2. Trace spans may contain more fields, except those mentioned here
 """
 import json
-import logging
 from enum import Enum
 
 from graphy.models.annotation import Annotation
 from graphy.models.attributes import get_attribute, set_attribute_value
 from graphy.models.binary_annotation import BinaryAnnotation
 from graphy.utils import dict as my_dict
+from graphy.utils import logger as my_logger
 
-logger = logging.getLogger(__name__)
+logger = my_logger.setup_logging(__name__)
 
 
 class Span(object):
@@ -163,6 +162,11 @@ class Kind(Enum):
 
 
 def fix_timestamps(spans):
+    """
+    Fixes multiple timestamp values in a span list.
+
+    :param spans: The span list.
+    """
     if type(spans) is not list:
         return
 
@@ -174,9 +178,9 @@ def fix_timestamps(spans):
 
 def fix_timestamp(timestamp):
     """
-    Fix timestamp values.
+    Fix timestamp values, due to a len issue when posting them to Zipkin.
 
-    This function fixes the timestamp len issue.
+    :param timestamp: The unix timestamp format.
     """
     default_timestamp_len = 16
     if len(str(timestamp)) < default_timestamp_len:
@@ -192,7 +196,7 @@ def get_status_code(span):
         if tags:
             http_status_code = tags.get('http.status_code', False)
             return http_status_code
-        return span['tags']['http.status_code']
+        return tags
     except Exception as e:
         logger.error(e)
         return False

@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 11-02-2019
+    Date last modified: 26-02-2019
 """
 
 
@@ -15,7 +15,7 @@ class ConsoleView(object):
         print('\nGraphy exited!\nGoodbye!')
 
     @staticmethod
-    def show_number_point_list(item_type, items):
+    def show_number_point_list(item_type: str, items: dict):
         print('\n--- {} list ---'.format(item_type.upper()))
         for i, item in enumerate(items):
             print('{}. {}'.format(i + 1, item))
@@ -27,10 +27,14 @@ class ConsoleView(object):
     @staticmethod
     def display_dictionary(label, dictionary):
         print('\n--- {} ---'.format(label))
-        for x in dictionary:
-            print(x)
-            for i, y in enumerate(dictionary[x]):
-                print((i + 1), ':', y)
+        for key in dictionary:
+            print(key)
+            values = dictionary[key]
+            if isinstance(values, int):
+                print(values)
+            elif isinstance(values, dict):
+                for i, y in enumerate(values):
+                    print((i + 1), ':', y)
 
     @staticmethod
     def display_exception(exception):

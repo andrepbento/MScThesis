@@ -1,11 +1,13 @@
 """
     Author: André Bento
-    Date last modified: 20-02-2019
+    Date last modified: 26-02-2019
 """
 import subprocess
+import sys
 from os.path import dirname, abspath, join
 
 from setuptools import find_packages, Command, setup
+from setuptools.command.test import test as TestCommand
 
 this_dir = abspath(dirname(__file__))
 
@@ -25,8 +27,10 @@ with open(join(this_dir, 'requirements.txt')) as file:
     requirements = file.read().splitlines()
 
 
-class InstallCommand(Command):
-    user_options = []
+class Install(Command):
+    user_options = [
+        ['pip3', 'install', '-r', 'requirements.txt']
+    ]
 
     def initialize_options(self):
         pass
@@ -34,16 +38,12 @@ class InstallCommand(Command):
     def finalize_options(self):
         pass
 
-    def run(self):
-        commands = [
-            ['./scripts/create-directories.sh'],
-            ['pip3', 'install', '-r', 'requirements.txt']
-        ]
-        for command in commands:
+    def run_install(self):
+        for command in self.user_options:
             subprocess.run(command)
 
 
-class RunCommand(Command):
+class Run(Command):
     user_options = []
 
     def initialize_options(self):
@@ -57,22 +57,23 @@ class RunCommand(Command):
         Graphy.run()
 
 
-class TestCommand(Command):
-    description = 'run tests'
-    user_options = []
+class Test(TestCommand):
+    user_options = [('pytest-args=', 'a', "Arguments to pass to py.test")]
 
     def initialize_options(self):
-        pass
+        TestCommand.initialize_options(self)
+        self.pytest_args = []
 
     def finalize_options(self):
-        pass
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
 
-    def run(self):
-        print('Hello')
-        """Run all tests!"""
-        # error = call(['py.test', '--cov=graphy', '--cov-report=term-missing'])
-        # raise SystemExit(error)
-        pass
+    def run_tests(self):
+        import pytest
+
+        err = pytest.main(self.pytest_args)
+        sys.exit(err)
 
 
 setup(
@@ -101,6 +102,7 @@ setup(
     keywords='cli',
     packages=find_packages(exclude=('tests*', 'docs')),
     install_requires=requirements,
+    tests_requires=['pytest'],
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov'],
     },
@@ -110,8 +112,8 @@ setup(
         ],
     },
     cmdclass={
-        'install': InstallCommand,
-        'run': RunCommand,
-        'test': TestCommand
+        'install': Install,
+        'run': Run,
+        'test': Test
     },
 )
