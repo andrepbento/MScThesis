@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 26-02-2019
+    Date last modified: 27-02-2019
 """
 import os
 import sys
@@ -58,7 +58,7 @@ class Controller(object):
                 'Show most popular service [call count] in time (EXPERIMENTAL)':
                     self.show_most_popular_service_call_count_in_time,
                 'Show service status code analysis':
-                    self.show_service_status_code_analysis,
+                    self.show_service_status_codes_analysis,
                 'Show service status code analysis in time (EXPERIMENTAL)':
                     self.show_service_status_code_analysis_in_time,
                 'Show response time analysis (NOT IMPLEMENTED)':
@@ -73,6 +73,8 @@ class Controller(object):
                     self.show_load_analysis,
                 'Show clients request analysis (NOT IMPLEMENTED)':
                     self.show_clients_request_analysis,
+                'Gather and show all metrics in time (EXPERIMENTAL) [neighbours, degree, call count, status codes]':
+                    self.show_all_metrics,
                 'Exit':
                     self.__end
             }
@@ -138,14 +140,8 @@ class Controller(object):
                                    end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.__graph_processor.generate_graph_from_zipkin(dependencies)
-            self.view.display_dictionary('All service neighbors from {} to {}'
-                                         .format(my_time.from_str_to_datetime(self.__start_date_time_str),
-                                                 my_time.from_str_to_datetime(self.__end_date_time_str)),
-                                         self.__graph_processor.neighbors())
-            service_name = 'api_com'
-            self.view.display_dictionary('{} service neighbors'.format(service_name),
-                                         self.__graph_processor.neighbors(service_name))
+
+            self.__service_neighbours(dependencies, start_timestamp, end_timestamp)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
@@ -169,19 +165,23 @@ class Controller(object):
                 timestamp_1 = timestamp
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2)
-                if dependencies:
-                    self.__graph_processor.generate_graph_from_zipkin(dependencies)
-                    self.view.display_dictionary('All neighbors from {} to {}'
-                                                 .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                         my_time.from_timestamp_to_datetime(timestamp_2)),
-                                                 self.__graph_processor.neighbors())
-                else:
-                    self.view.display_message('No services from {} to {}'
-                                              .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                      my_time.from_timestamp_to_datetime(timestamp_2)),
-                                              None)
+
+                self.__service_neighbours(dependencies, timestamp_1, timestamp_2)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+
+    def __service_neighbours(self, dependencies, start_timestamp, end_timestamp):
+        if dependencies:
+            self.__graph_processor.generate_graph_from_zipkin(dependencies, start_timestamp, end_timestamp)
+            self.view.display_dictionary('All service neighbors from {} to {}'
+                                         .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                                 my_time.from_timestamp_to_datetime(end_timestamp)),
+                                         self.__graph_processor.neighbors())
+        else:
+            self.view.display_message('No services from {} to {}'
+                                      .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                              my_time.from_timestamp_to_datetime(end_timestamp)),
+                                      'Can\'t calculate service neighbours')
 
     def show_most_popular_service(self):
         if self.__is_zipkin:
@@ -195,8 +195,8 @@ class Controller(object):
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.__graph_processor.generate_graph_from_zipkin(dependencies)
-            self.view.display_tuple_list('Most popular services (Degrees)', self.__graph_processor.degrees())
+
+            self.__service_degree(dependencies, start_timestamp, end_timestamp)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
@@ -219,25 +219,29 @@ class Controller(object):
                 timestamp_1 = timestamp
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
-                if dependencies:
-                    self.__graph_processor.generate_graph_from_zipkin(dependencies)
-                    service_degrees = self.__graph_processor.degrees()
 
-                    self.__time_series_db.send_numeric_metrics('degree', service_degrees,
-                                                               int((timestamp_1 + timestamp_2) / 2))
-
-                    most_popular_service = service_degrees[0]
-                    self.view.display_tuple('Most popular service from {} to {} (Degrees)'
-                                            .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                    my_time.from_timestamp_to_datetime(timestamp_2)),
-                                            most_popular_service)
-                else:
-                    self.view.display_message('No services from {} to {}'
-                                              .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                      my_time.from_timestamp_to_datetime(timestamp_2)),
-                                              None)
+                self.__service_degree(dependencies, timestamp_1, timestamp_2)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+
+    def __service_degree(self, dependencies, start_timestamp, end_timestamp):
+        if dependencies:
+            self.__graph_processor.generate_graph_from_zipkin(dependencies, start_timestamp, end_timestamp)
+            service_degrees = self.__graph_processor.degrees()
+
+            self.__time_series_db.send_numeric_metrics('degree', service_degrees,
+                                                       int((start_timestamp + end_timestamp) / 2))
+
+            most_popular_service = service_degrees[0]
+            self.view.display_tuple('Most popular service from {} to {} (Degrees)'
+                                    .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                            my_time.from_timestamp_to_datetime(end_timestamp)),
+                                    most_popular_service)
+        else:
+            self.view.display_message('No services from {} to {}'
+                                      .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                              my_time.from_timestamp_to_datetime(end_timestamp)),
+                                      'Can\'t calculate service degree')
 
     def show_most_popular_service_call_count(self):
         if self.__is_zipkin:
@@ -251,9 +255,8 @@ class Controller(object):
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-            self.__graph_processor.generate_graph_from_zipkin(dependencies)
-            self.view.display_tuple_list('Most popular services (Call Count)',
-                                         self.__graph_processor.edges_call_count())
+
+            self.__service_call_count(dependencies, start_timestamp, end_timestamp)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
@@ -276,29 +279,33 @@ class Controller(object):
                 timestamp_1 = timestamp
                 timestamp_2 = timestamps[i + 1]
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
-                if dependencies:
-                    self.__graph_processor.generate_graph_from_zipkin(dependencies)
-                    service_edge_call_count = self.__graph_processor.edges_call_count()
 
-                    self.__time_series_db.send_numeric_metrics('call_count', service_edge_call_count,
-                                                               int((timestamp_1 + timestamp_2) / 2))
-
-                    most_popular_service = service_edge_call_count[0]
-                    self.view.display_tuple('Most popular service from {} to {} (Call Count)'
-                                            .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                    my_time.from_timestamp_to_datetime(timestamp_2)),
-                                            most_popular_service)
-                else:
-                    self.view.display_message('No services from {} to {}'
-                                              .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                      my_time.from_timestamp_to_datetime(timestamp_2)),
-                                              None)
+                self.__service_call_count(dependencies, timestamp_1, timestamp_2)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
         return NotImplemented
 
-    def show_service_status_code_analysis(self):
+    def __service_call_count(self, dependencies, start_timestamp, end_timestamp):
+        if dependencies:
+            self.__graph_processor.generate_graph_from_zipkin(dependencies, start_timestamp, end_timestamp)
+            service_edge_call_count = self.__graph_processor.edges_call_count()
+
+            self.__time_series_db.send_numeric_metrics('call_count', service_edge_call_count,
+                                                       int((start_timestamp + end_timestamp) / 2))
+
+            most_popular_service = service_edge_call_count[0]
+            self.view.display_tuple('Most popular service from {} to {} (Call Count)'
+                                    .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                            my_time.from_timestamp_to_datetime(end_timestamp)),
+                                    most_popular_service)
+        else:
+            self.view.display_message('No services from {} to {}'
+                                      .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                              my_time.from_timestamp_to_datetime(end_timestamp)),
+                                      'Can\'t calculate service call count')
+
+    def show_service_status_codes_analysis(self):
         if self.__is_zipkin:
             start_time = time.time()
 
@@ -311,20 +318,7 @@ class Controller(object):
 
             service_names = zipkin.get_services()
 
-            for service_name in service_names:
-                traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
-                                           lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
-
-                if len(traces) > self.__zipkin_limit:
-                    self.view.display_message('Zipkin Trace Limit', 'traces limit exceeded: {}'.format(len(traces)))
-
-                status_codes = my_trace.get_status_codes(traces)
-                status_codes_percentage = my_dict.calc_percentage(status_codes)
-                self.view.display_message(
-                    'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(start_timestamp),
-                                                        my_time.from_timestamp_to_datetime(end_timestamp)),
-                    '\nservice_name: {}\nstatus_codes: {}\nstatus_codes_percentage: {}'.format(
-                        service_name, my_dict.sort(status_codes), my_dict.sort(status_codes_percentage)))
+            self.__service_status_codes(service_names, start_timestamp, end_timestamp)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
@@ -349,36 +343,38 @@ class Controller(object):
                 timestamp_1 = timestamp
                 timestamp_2 = timestamps[i + 1]
 
-                for service_name in service_names:
-                    traces = zipkin.get_traces(service_name=service_name, end_ts=timestamp_2,
-                                               lookback=timestamp_2 - timestamp_1, limit=self.__zipkin_limit)
-                    if len(traces) > self.__zipkin_limit:
-                        self.view.display_message('Zipkin Trace Limit',
-                                                  'traces limit exceeded: {}'.format(len(traces)))
-
-                    if traces:
-                        status_codes = my_trace.get_status_codes(traces)
-                        status_codes_percentage = my_dict.calc_percentage(status_codes)
-
-                        self.__time_series_db.send_numeric_metrics('status_code.{}'.format(service_name),
-                                                                   status_codes_percentage,
-                                                                   int((timestamp_1 + timestamp_2) / 2))
-
-                        self.view.display_message(
-                            'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                                my_time.from_timestamp_to_datetime(timestamp_2)),
-                            '\nservice_name: {}'
-                            '\nstatus_codes: {}'
-                            '\nstatus_codes_percentage: {}'.format(service_name, my_dict.sort(status_codes),
-                                                                   my_dict.sort(status_codes_percentage)))
-                    else:
-                        self.view.display_message('No traces from {} to {} for service {}'
-                                                  .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                          my_time.from_timestamp_to_datetime(timestamp_2),
-                                                          service_name),
-                                                  None)
+                self.__service_status_codes(service_names, timestamp_1, timestamp_2)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+
+    def __service_status_codes(self, service_names, start_timestamp, end_timestamp):
+        for service_name in service_names:
+            traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
+                                       lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
+            if len(traces) > self.__zipkin_limit:
+                raise zipkin.ZipkinTraceLimit(len(traces))
+
+            if traces:
+                status_codes = my_trace.get_status_codes(traces)
+                status_codes_percentage = my_dict.calc_percentage(status_codes)
+
+                self.__time_series_db.send_numeric_metrics('status_code.{}'.format(service_name),
+                                                           status_codes_percentage,
+                                                           int((start_timestamp + end_timestamp) / 2))
+
+                self.view.display_message(
+                    'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                                        my_time.from_timestamp_to_datetime(end_timestamp)),
+                    '\nservice_name: {}'
+                    '\nstatus_codes: {}'
+                    '\nstatus_codes_percentage: {}'.format(service_name, my_dict.sort(status_codes),
+                                                           my_dict.sort(status_codes_percentage)))
+            else:
+                self.view.display_message('No traces found from {} to {} for service {}'
+                                          .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                                  my_time.from_timestamp_to_datetime(end_timestamp),
+                                                  service_name),
+                                          'Can\'t calculate service status codes')
 
     def show_response_time_analysis(self):
         return NotImplemented
@@ -404,45 +400,50 @@ class Controller(object):
                 timestamp_2 = timestamps[i + 1]
 
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
-                if dependencies:
-                    current_graph = self.__graph_processor.generate_graph_from_zipkin(dependencies)
-                    current_graph.name = '{}_{}'.format(timestamp_1, timestamp_2)
 
-                    # Persist current graph
-                    self.__graph_db.insert_graph(timestamp_1, timestamp_2, list(current_graph.edges(data=True)),
-                                                 self.__graph_db.graph_db)
-
-                    if previous_graph:
-                        graph_diff = self.__graph_processor.graphs_difference(previous_graph, current_graph)
-
-                        # Persist graph difference
-                        self.__graph_db.insert_graph(timestamp_1, timestamp_2, list(graph_diff.edges(data=True)),
-                                                     self.__graph_db.graph_diff_db)
-
-                        self.view.display_message('System Morphology from {} to {}'
-                                                  .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                          my_time.from_timestamp_to_datetime(timestamp_2)),
-                                                  '\nprevious_graph.Nodes:{}\nprevious_graph.Edges:{}'
-                                                  '\nprevious_graph.NodesLen:{}\nprevious_graph.EdgesLen:{}'
-                                                  '\ncurrent_graph.Nodes:{}\ncurrent_graph.Edges:{}'
-                                                  '\ncurrent_graph.NodesLen:{}\ncurrent_graph.EdgesLen:{}'
-                                                  '\ngraph_diff.Nodes:{}\ngraph_diff.Edges:{}'
-                                                  '\ngraph_diff.NodesLen:{}\ngraph_diff.EdgesLen:{}'
-                                                  .format(previous_graph.nodes, previous_graph.edges(data=True),
-                                                          len(previous_graph.nodes), len(previous_graph.edges),
-                                                          current_graph.nodes, current_graph.edges(data=True),
-                                                          len(current_graph.nodes), len(current_graph.edges),
-                                                          graph_diff.nodes, graph_diff.edges(data=True),
-                                                          len(graph_diff.nodes), len(graph_diff.edges)))
-
-                    previous_graph = current_graph.copy()
-                else:
-                    self.view.display_message('No system graph from {} to {}'
-                                              .format(my_time.from_timestamp_to_datetime(timestamp_1),
-                                                      my_time.from_timestamp_to_datetime(timestamp_2)),
-                                              None)
+                previous_graph = self.__service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
 
             self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+
+    def __service_morphology(self, dependencies, start_timestamp, end_timestamp, previous_graph):
+        if dependencies:
+            current_graph = self.__graph_processor.generate_graph_from_zipkin(dependencies, start_timestamp,
+                                                                              end_timestamp)
+            current_graph.name = '{}_{}'.format(start_timestamp, end_timestamp)
+
+            self.__graph_db.insert_graph(start_timestamp, end_timestamp, list(current_graph.edges(data=True)),
+                                         self.__graph_db.graph_db)
+
+            if previous_graph:
+                graph_diff = self.__graph_processor.graphs_difference(previous_graph, current_graph)
+
+                self.__graph_db.insert_graph(start_timestamp, end_timestamp, list(graph_diff.edges(data=True)),
+                                             self.__graph_db.graph_diff_db)
+
+                self.view.display_message('System Morphology from {} to {}'
+                                          .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                                  my_time.from_timestamp_to_datetime(end_timestamp)),
+                                          '\nprevious_graph.Nodes:{}\nprevious_graph.Edges:{}'
+                                          '\nprevious_graph.NodesLen:{}\nprevious_graph.EdgesLen:{}'
+                                          '\ncurrent_graph.Nodes:{}\ncurrent_graph.Edges:{}'
+                                          '\ncurrent_graph.NodesLen:{}\ncurrent_graph.EdgesLen:{}'
+                                          '\ngraph_diff.Nodes:{}\ngraph_diff.Edges:{}'
+                                          '\ngraph_diff.NodesLen:{}\ngraph_diff.EdgesLen:{}'
+                                          .format(previous_graph.nodes, previous_graph.edges(data=True),
+                                                  len(previous_graph.nodes), len(previous_graph.edges),
+                                                  current_graph.nodes, current_graph.edges(data=True),
+                                                  len(current_graph.nodes), len(current_graph.edges),
+                                                  graph_diff.nodes, graph_diff.edges(data=True),
+                                                  len(graph_diff.nodes), len(graph_diff.edges)))
+
+            previous_graph = current_graph.copy()
+            return previous_graph
+        else:
+            self.view.display_message('No system graph from {} to {}'
+                                      .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                              my_time.from_timestamp_to_datetime(end_timestamp)),
+                                      'Can\'t calculate service morphology')
+            return None
 
     def show_request_work_flow_analysis(self):
         return NotImplemented
@@ -455,6 +456,36 @@ class Controller(object):
 
     def show_clients_request_analysis(self):
         return NotImplemented
+
+    def show_all_metrics(self):
+        if self.__is_zipkin:
+            start_time = time.time()
+
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
+
+            self.view.display_time('start_time:', my_time.from_timestamp_to_datetime(start_timestamp),
+                                   start_timestamp)
+            self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
+
+            timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
+
+            previous_graph = None
+            for i, timestamp in enumerate(timestamps):
+                if i + 1 >= len(timestamps):
+                    break
+                timestamp_1 = timestamp
+                timestamp_2 = timestamps[i + 1]
+
+                dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
+
+                self.__service_neighbours(dependencies, timestamp_1, timestamp_2)
+                self.__service_degree(dependencies, timestamp_1, timestamp_2)
+                self.__service_call_count(dependencies, timestamp_1, timestamp_2)
+                self.__service_status_codes(dependencies, timestamp_1, timestamp_2)
+                self.__service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
+
+            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
 
 
 # TODO: The following code is for testing purposes only [REMOVE].

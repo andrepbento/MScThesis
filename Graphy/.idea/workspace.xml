@@ -2,45 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Deploy_All.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Deploy_ArangoDB.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Deploy_Zipkin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphy/utils/list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/logging_error.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_dict.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_files.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_json.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_logger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_time.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/utils/test_zipkin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/andrepbento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/andrepbento.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Create_Directories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Deploy_Graphy__NOT_FINISHED_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Deploy_Graphy__NOT_FINISHED_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/controller/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/controller/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/db/arangodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/arangodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/db/opentsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/opentsdb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/graph/graph_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/logging.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/logging.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/span.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/span_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/trace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/json.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/utils/zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/zipkin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/view/console_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/view/console_view.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/json.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,22 +56,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+        <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="282" selection-start-line="282" selection-end-line="282" />
+            <state relative-caret-position="472">
+              <caret line="33" column="101" selection-start-line="33" selection-start-column="101" selection-end-line="33" selection-end-column="101" />
               <folding>
-                <element signature="e#67#76#0" expanded="true" />
+                <element signature="e#67#86#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="707">
+              <caret line="485" column="96" selection-start-line="485" selection-start-column="96" selection-end-line="485" selection-end-column="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+            <state relative-caret-position="442">
+              <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -132,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/view/console_view.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="435">
+              <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -141,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="433" selection-start-line="433" selection-end-line="433" />
+            <state relative-caret-position="1343">
+              <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
               <folding>
                 <element signature="e#67#102#0" expanded="true" />
               </folding>
@@ -151,10 +124,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphy/cli.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="309">
+              <caret line="58" column="15" selection-start-line="58" selection-start-column="15" selection-end-line="58" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1642">
-              <caret line="218" selection-start-line="218" selection-end-line="218" />
+            <state relative-caret-position="741">
+              <caret line="243" column="34" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
               <folding>
                 <element signature="e#67#98#0" expanded="true" />
               </folding>
@@ -258,7 +240,6 @@
         <option value="$PROJECT_DIR$/tests/utils/test_list.py" />
         <option value="$PROJECT_DIR$/graphy/utils/json.py" />
         <option value="$PROJECT_DIR$/graphy/utils/logger.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_zipkin.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_dict.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_time.py" />
@@ -271,13 +252,14 @@
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/graphy/app.py" />
         <option value="$PROJECT_DIR$/graphy/view/console_view.py" />
-        <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
-        <option value="$PROJECT_DIR$/graphy/controller/controller.py" />
         <option value="$PROJECT_DIR$/graphy/config.yaml" />
+        <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
+        <option value="$PROJECT_DIR$/graphy/controller/controller.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="y" value="27" />
     <option name="width" value="960" />
     <option name="height" value="1053" />
@@ -451,7 +433,7 @@
       <option name="presentableId" value="Default" />
       <updated>1540565507023</updated>
       <workItem from="1551195886214" duration="222000" />
-      <workItem from="1551196118785" duration="10328000" />
+      <workItem from="1551196118785" duration="14653000" />
     </task>
     <servers />
   </component>
@@ -488,7 +470,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10550000" />
+    <option name="totallyTimeSpent" value="14875000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -510,7 +492,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32959184" />
       <window_info anchor="bottom" id="Run" internal_type="SLIDING" order="2" weight="0.41530612" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4994664" visible="true" weight="0.48265305" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4994664" weight="0.48265305" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
@@ -618,30 +600,15 @@
           <line>76</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>437</line>
-          <option name="timeStamp" value="227" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>407</line>
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>415</line>
-          <option name="timeStamp" value="241" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/graphy/graph/graph_processor.py</url>
-          <line>404</line>
+          <line>414</line>
           <option name="timeStamp" value="283" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>254</line>
-          <option name="timeStamp" value="286" />
+          <line>416</line>
+          <option name="timeStamp" value="292" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -670,16 +637,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="200" column="23" lean-forward="true" selection-start-line="200" selection-start-column="23" selection-end-line="200" selection-end-column="23" />
-          <folding>
-            <element signature="e#967#978#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/utils/info.log" />
     <entry file="file:///usr/lib/python3.6/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -902,16 +859,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="69" column="21" selection-start-line="69" selection-start-column="21" selection-end-line="69" selection-end-column="21" />
-          <folding>
-            <element signature="e#67#86#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/setuptools/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -983,16 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1642">
-          <caret line="218" selection-start-line="218" selection-end-line="218" />
-          <folding>
-            <element signature="e#67#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/networkx/classes/multidigraph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -1014,23 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/view/console_view.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="433" selection-start-line="433" selection-end-line="433" />
-          <folding>
-            <element signature="e#67#102#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/errors.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1044,20 +964,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+    <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="282" selection-start-line="282" selection-end-line="282" />
+        <state relative-caret-position="442">
+          <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/cli.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="58" column="15" selection-start-line="58" selection-start-column="15" selection-end-line="58" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="243" column="34" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
           <folding>
-            <element signature="e#67#76#0" expanded="true" />
+            <element signature="e#67#98#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
+    <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+        <state relative-caret-position="1343">
+          <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+          <folding>
+            <element signature="e#67#102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="33" column="101" selection-start-line="33" selection-start-column="101" selection-end-line="33" selection-end-column="101" />
+          <folding>
+            <element signature="e#67#86#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/view/console_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="707">
+          <caret line="485" column="96" selection-start-line="485" selection-start-column="96" selection-end-line="485" selection-end-column="96" />
         </state>
       </provider>
     </entry>

@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 26-02-2019
+    Date last modified: 27-02-2019
 """
 from collections import defaultdict
 
@@ -20,6 +20,10 @@ class GraphProcessor:
     def __init__(self):
         """ Initiate a new GraphProcessor. """
         self.__graph = nx.MultiDiGraph()
+
+        self.__start_timestamp = None
+        self.__end_timestamp = None
+
         self.span_tree = None
 
     @property
@@ -31,10 +35,10 @@ class GraphProcessor:
         Generates the graph using the tuple list.
 
         :param tuple_list: The tuple list with the from and to nodes.
+        :return: Generated graph.
         """
-        logger.info('generate_graph()')
-
         self.__graph.add_edges_from(tuple_list)
+        return self.__graph
 
     def generate_graph_from_spans(self, spans_array):
         """
@@ -42,21 +46,23 @@ class GraphProcessor:
 
         :param spans_array: Array of span objects.
         """
-        logger.info('generate_graph_from_spans()')
-
-        # Create the span tree to generate the graph
+        # TODO: Check if it is needed or should be removed.
         self.span_tree = SpanTree(spans_array)
         # Generate nodes and edges
         self.__generate_nodes_and_edges()
 
-    def generate_graph_from_zipkin(self, dependencies):
+    def generate_graph_from_zipkin(self, dependencies, start_timestamp, end_timestamp):
         """
         Generates the graph using the Dependencies from Zipkin.
 
         :param dependencies: Graph dependencies data in Zipkin format.
+        :param start_timestamp: Start unix timestamp of the graph.
+        :param end_timestamp: End unix timestamp of the graph.
         :return: Generated graph.
         """
-        logger.debug('generate_graph_from_zipkin()')
+        if start_timestamp == self.__start_timestamp and end_timestamp == self.__end_timestamp:
+            return self.__graph
+
         self.__graph.clear()
         for dependency in dependencies:
             self.__graph.add_edge(dependency['parent'],
@@ -64,14 +70,18 @@ class GraphProcessor:
                                   weight=dependency['callCount'])
         return self.__graph
 
-    def generate_graph_from_edge_list(self, edge_list):
+    def generate_graph_from_edge_list(self, edge_list, start_timestamp, end_timestamp):
         """
         Generates the graph using a list of edges.
 
         :param edge_list: A list edges in ArangoDB format.
+        :param start_timestamp: Start unix timestamp of the graph.
+        :param end_timestamp: End unix timestamp of the graph.
         :return: Generated graph.
         """
-        logger.debug('generate_graph_from_edge_list()')
+        if start_timestamp == self.__start_timestamp and end_timestamp == self.__end_timestamp:
+            return self.__graph
+
         self.__graph.clear()
         for edge in edge_list:
             node_from = edge.get('_from').split('/')[-1]

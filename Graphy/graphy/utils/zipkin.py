@@ -28,6 +28,12 @@ address_v2 = base_address + api_v2_endpoint
 headers = {'content-type': 'application/json'}
 
 
+class ZipkinTraceLimit(Exception):
+
+    def __init__(self, trace_len: int) -> None:
+        super(ZipkinTraceLimit, self).__init__('trace limit exceeded with {} traces'.format(trace_len))
+
+
 def get_services():
     """
     Get all the service names from the Zipkin API.
