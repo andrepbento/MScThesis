@@ -27,7 +27,6 @@ services:
     volumes:
       - arangodb-storage:/var/lib/arangodb3
 
-
   grafana:
     image: grafana/grafana:latest
     container_name: graphy_grafana

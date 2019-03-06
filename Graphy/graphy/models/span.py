@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 25-02-2019
+    Date last modified: 28-02-2019
 
 Fields:
 -------
@@ -27,7 +27,6 @@ Notes:
 1. Time units are not consistent, some fields are in milliseconds and some are in microseconds
 2. Trace spans may contain more fields, except those mentioned here
 """
-import json
 from enum import Enum
 
 from graphy.models.annotation import Annotation
@@ -35,6 +34,11 @@ from graphy.models.attributes import get_attribute, set_attribute_value
 from graphy.models.binary_annotation import BinaryAnnotation
 from graphy.utils import dict as my_dict
 from graphy.utils import logger as my_logger
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 logger = my_logger.setup_logging(__name__)
 

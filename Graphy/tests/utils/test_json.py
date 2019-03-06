@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 25-02-2019
+    Date last modified: 06-03-2019
 """
 from unittest import TestCase
 
@@ -19,6 +19,12 @@ class TestJson(TestCase):
 
     def test_to_json(self):
         """ Tests to_json function. """
-        json_file = '.json'
-        not_json_file = '.jsonl'
+        json_file = '28_06_simplified_100_spans.json'
+        not_json_file = '28_06_simplified_100_spans.jsonl'
         self.assertEqual(my_json.to_json(json_file), json_file)
+
+        # TODO: Write tests.
+
+        # my_json.to_json(json_file)
+
+        # self.assertEqual, not_json_file)

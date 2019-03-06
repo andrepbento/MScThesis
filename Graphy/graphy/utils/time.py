@@ -4,8 +4,6 @@
 """
 from datetime import datetime, timezone
 
-import pandas
-
 date_format = "%d/%m/%Y %H:%M:%S"
 
 
@@ -43,6 +41,7 @@ def from_timestamp_to_datetime(timestamp, unit='ms'):
     :param unit: measurement unit used in the timestamp.
     :return: the timestamp in date_time format.
     """
+    import pandas
     return pandas.to_datetime(timestamp, unit=unit)
 
 

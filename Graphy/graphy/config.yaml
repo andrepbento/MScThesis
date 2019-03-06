@@ -5,6 +5,9 @@ GRAPHY:
   ACTIVATE_ZIPKIN: true
   # The trace file absolute or relative path.
   TRACE_FILE: "data/traces-2018-06-28.json"
+  # TRACE_FILE: "data/traces-2018-06-29.json"
+  # TRACE_FILE: "data/28_06_simplified_100_spans.json"
+  # TRACE_FILE: "data/28_06_simplified_10000_spans.json"
   # If changed to false, make sure the TRACE_FILE is an absolute file path.
   TRACE_FILE_FROM_PROJECT: true
   PRINT_GRAPH: false

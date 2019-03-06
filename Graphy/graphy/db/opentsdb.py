@@ -1,39 +1,109 @@
 """
     Author: André Bento
-    Date last modified: 25-02-2019
+    Date last modified: 04-03-2019
 """
+import sys
+
 import potsdb
+import requests
 
 from graphy.utils import config
 from graphy.utils import logger as my_logger
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 logger = my_logger.setup_logging(__name__)
 
 opentsdb_config = config.get('OPENTSDB')
 
+opentsdb_address = 'http://{}:{}/'.format(opentsdb_config['IP'], opentsdb_config['PORT'])
+api_query = 'api/query'
 
-def send_numeric_metrics(pre_label, metrics, metric_timestamp):
+
+def erase_metrics(name: str, start_timestamp: int, end_timestamp: int) -> object:
+    """
+    Erases metrics from OpenTSDB.
+
+    :param name: Metric name.
+    :param start_timestamp: Start unix timestamp value.
+    :param end_timestamp: End unix timestamp value.
+    :return: The erased metrics if success, None otherwise.
+    """
+    if end_timestamp < start_timestamp:
+        return False
+
+    data = None
+    try:
+        params = {'start': start_timestamp, 'end': end_timestamp, 'm': 'avg:1m-avg:{}'.format(name)}
+        response = requests.delete(opentsdb_address + api_query, params=params)
+        if response.status_code == 200:
+            response_text = json.loads(response.text)
+            if response_text:
+                data = response_text[0].get('dps', None)
+        return data
+    except ConnectionError as ex:
+        logger.error('{}: {}'.format(type(ex), ex))
+        return None
+
+
+def get_metrics(name: str, start_timestamp: int, end_timestamp: int) -> object:
+    """
+    Gets the metrics from OpenTSDB.
+
+    :param name: The name of the metrics.
+    :param start_timestamp: The start unix timestamp of the metric.
+    :param end_timestamp: The end unix timestamp of the metric.
+    :return: The metrics as a dictionary if success, None otherwise.
+    """
+    json_body = {
+        "start": start_timestamp,
+        "end": end_timestamp,
+        "queries": [{"aggregator": "sum", "metric": name},
+                    {"aggregator": "sum", "tsuids": ["000001000002000042", "000001000002000043"]}]
+    }
+
+    data = None
+    try:
+        response = requests.post(opentsdb_address + api_query, data=json.dumps(json_body),
+                                 headers={'content-type': 'application/json'})
+        if response.status_code == 200:
+            response_text = json.loads(response.text)
+            if response_text:
+                data = response_text[0].get('dps', None)
+        return data
+    except ConnectionError as ex:
+        logger.error('{}: {}'.format(type(ex), ex))
+        sys.exit(status=1)
+
+
+def send_numeric_metrics(pre_label: str, metrics, metric_timestamp: int) -> list:
     """
     Sends a collection of metrics to the Time-Series database.
 
     :param pre_label: The pre label of the metric in string format. Ex.: degree or status_code
     :param metrics: The list of the metrics. Each metric must be a tuple. Ex.: service: value.
     :param metric_timestamp: The metric unix timestamp.
-    :return: True if success, False otherwise.
+    :return: Metric names if success, Empty list otherwise.
     """
+    metric_names = []
     if isinstance(metrics, list):
         for tuple_item in metrics:
             x, y = tuple_item
-            send_numeric_metric('{}.{}'.format(pre_label, x), y, metric_timestamp)
+            metric_name = '{}.{}'.format(pre_label, x)
+            metric_names.append(metric_name)
+            send_numeric_metric(metric_name, y, metric_timestamp)
     elif isinstance(metrics, dict):
         for k, v in metrics.items():
-            send_numeric_metric('{}.{}'.format(pre_label, k), v, metric_timestamp)
-    else:
-        return False
-    return True
+            metric_name = '{}.{}'.format(pre_label, k)
+            metric_names.append(metric_name)
+            send_numeric_metric(metric_name, v, metric_timestamp)
+    return metric_names
 
 
-def send_numeric_metric(metric_name, metric_value, metric_timestamp):
+def send_numeric_metric(metric_name: str, metric_value, metric_timestamp: int) -> bool:
     """
     Sends a single metric to the Time-Series database.
 

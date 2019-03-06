@@ -5,6 +5,7 @@
       <w>arango</w>
       <w>arangodb</w>
       <w>bento</w>
+      <w>coverability</w>
     </words>
   </dictionary>
 </component>

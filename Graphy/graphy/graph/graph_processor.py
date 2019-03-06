@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 27-02-2019
+    Date last modified: 28-02-2019
 """
 from collections import defaultdict
 
@@ -9,6 +9,7 @@ import networkx as nx
 import networkx.algorithms as nx_algorithms
 
 from graphy.models.span_tree import SpanTree
+from graphy.utils import list as my_list
 from graphy.utils import logger as my_logger
 
 logger = my_logger.setup_logging(__name__)
@@ -132,6 +133,31 @@ class GraphProcessor:
 
         return g_diff
 
+    @staticmethod
+    def graphs_variance(previous_graph: nx.MultiDiGraph, current_graph: nx.MultiDiGraph) -> dict:
+        """
+        TODO: Add doc.
+
+        :param previous_graph:
+        :param current_graph:
+        :return:
+        """
+        graph_1 = previous_graph.copy()
+        graph_2 = current_graph.copy()
+
+        graph_1_nodes = list(graph_1.nodes)
+        graph_2_nodes = list(graph_2.nodes)
+
+        diff_1_2 = my_list.diff(graph_1_nodes, graph_2_nodes)
+        diff_2_1 = my_list.diff(graph_2_nodes, graph_1_nodes)
+
+        return {
+            'loss': len(diff_1_2),
+            'gain': len(diff_2_1),
+            'lost_nodes': diff_1_2,
+            'gain_nodes': diff_2_1
+        }
+
     def draw_graph(self, save=False, show=False):
         """
         Draw the graph using the data presented in the graph tool.
@@ -188,20 +214,6 @@ class GraphProcessor:
         else:
             logger.info('graph_edges[{}]: {}'.format(self.__graph.number_of_edges(), self.__graph.edges()))
 
-    def __count_edge_occurrence(self):
-        """ Prints the number of edges types and their sum """
-        logger.info('count_edge_occurrence()')
-        # Count each edge occurrence
-        edge_type_counter = {}
-        for edge in self.__graph.edges():
-            if edge in edge_type_counter:
-                edge_type_counter[edge] += 1
-            else:
-                edge_type_counter[edge] = 1
-
-        logger.info('edge_type_counter[{}]: {}'.format(len(edge_type_counter.keys()), edge_type_counter))
-        logger.info('edge_type_sum: {}'.format(sum(edge_type_counter.values())))
-
     def generate_graph_statistics(self, print_graph_statistics=True):
         """ Print graph statistics to logger """
         if not print_graph_statistics:
@@ -248,9 +260,6 @@ class GraphProcessor:
 
         logger.info('Other Algorithms')
         logger.info('neighbors: {}'.format(self.all_neighbors()))
-
-        # TODO: maybe convert the GraphTool to use more than one graph
-        # TODO: problem -> # Found infinite path length because the digraph is not strongly connected
 
     # Assortativity Algorithms -----------------------------------------------------------------------------------------
 

@@ -2,9 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/db/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/db/test_arangodb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/db/test_opentsdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Graphy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Graphy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/andrepbento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/andrepbento.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/controller/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/controller/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/db/arangodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/arangodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/db/opentsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/opentsdb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/graph/graph_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/models/span.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/models/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/trace.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/json.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/list.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/utils/zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/zipkin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_zipkin.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,19 +36,37 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig_test_get.coverage" NAME="Unittests for test_config.TestConfig.test_get Coverage Results" MODIFIED="1551196015592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig.coverage" NAME="Unittests for test_config.TestConfig Coverage Results" MODIFIED="1551196158663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_get_absolute_path.coverage" NAME="Unittests for test_files.TestFiles.test_get_absolute_path Coverage Results" MODIFIED="1551197199658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_logger_TestLogger_test_setup_logging.coverage" NAME="Unittests for test_logger.TestLogger.test_setup_logging Coverage Results" MODIFIED="1551198237439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_get_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_get_metrics Coverage Results" MODIFIED="1551719990303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_list_TestList.coverage" NAME="Unittests for test_list.TestList Coverage Results" MODIFIED="1551393363911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_timestamp_millis_split.coverage" NAME="Unittests for test_time.TestTime.test_timestamp_millis_split Coverage Results" MODIFIED="1551880173713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$zipkin.coverage" NAME="zipkin Coverage Results" MODIFIED="1551368350521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1551453694912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphy$Test.coverage" NAME="Test Coverage Results" MODIFIED="1551451331930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_calc_percentage.coverage" NAME="Unittests for test_dict.TestDict.test_calc_percentage Coverage Results" MODIFIED="1551449455511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime.coverage" NAME="Unittests for test_time.TestTime Coverage Results" MODIFIED="1551880322352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$app.coverage" NAME="app Coverage Results" MODIFIED="1551196347236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles.coverage" NAME="Unittests for test_files.TestFiles Coverage Results" MODIFIED="1551197681872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_update.coverage" NAME="Unittests for test_dict.TestDict.test_update Coverage Results" MODIFIED="1551451062492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig.coverage" NAME="Unittests for test_config.TestConfig Coverage Results" MODIFIED="1551196158663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_get_absolute_path.coverage" NAME="Unittests for test_files.TestFiles.test_get_absolute_path Coverage Results" MODIFIED="1551197199658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_logger_TestLogger_test_setup_logging.coverage" NAME="Unittests for test_logger.TestLogger.test_setup_logging Coverage Results" MODIFIED="1551274901188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_read_file.coverage" NAME="Unittests for test_files.TestFiles.test_read_file Coverage Results" MODIFIED="1551197502842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1551206450629" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_send_numeric_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_send_numeric_metrics Coverage Results" MODIFIED="1551718395572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_in_test_config_py.coverage" NAME="Unittests in test_config.py Coverage Results" MODIFIED="1551196420009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Test.coverage" NAME="Test Coverage Results" MODIFIED="1551196527853" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig_test_get.coverage" NAME="Unittests for test_config.TestConfig.test_get Coverage Results" MODIFIED="1551196015592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit.coverage" NAME="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit Coverage Results" MODIFIED="1551881167115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_erase_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_erase_metrics Coverage Results" MODIFIED="1551718066011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_in_test_opentsdb_py.coverage" NAME="Unittests in test_opentsdb.py Coverage Results" MODIFIED="1551451876916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_filter.coverage" NAME="Unittests for test_dict.TestDict.test_filter Coverage Results" MODIFIED="1551450645679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict.coverage" NAME="Unittests for test_dict.TestDict Coverage Results" MODIFIED="1551451299309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_from_timestamp_to_datetime.coverage" NAME="Unittests for test_time.TestTime.test_from_timestamp_to_datetime Coverage Results" MODIFIED="1551879987156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_from_str_to_datetime.coverage" NAME="Unittests for test_time.TestTime.test_from_str_to_datetime Coverage Results" MODIFIED="1551880306964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB Coverage Results" MODIFIED="1551720134206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_list_TestList_test_diff.coverage" NAME="Unittests for test_list.TestList.test_diff Coverage Results" MODIFIED="1551393143836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_to_unix_time.coverage" NAME="Unittests for test_time.TestTime.test_to_unix_time Coverage Results" MODIFIED="1551879193761" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="502" />
+    <option name="myElementSize" value="392" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -45,122 +86,48 @@
     <favorites_list name="Graphy" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="48" column="86" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="86" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="33" column="101" selection-start-line="33" selection-start-column="101" selection-end-line="33" selection-end-column="101" />
-              <folding>
-                <element signature="e#67#86#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="707">
-              <caret line="485" column="96" selection-start-line="485" selection-start-column="96" selection-end-line="485" selection-end-column="96" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-123">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
-              <folding>
-                <element signature="e#67#80#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/errors.log">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/view/console_view.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
-              <folding>
-                <element signature="e#67#102#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/cli.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="58" column="15" selection-start-line="58" selection-start-column="15" selection-end-line="58" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="741">
-              <caret line="243" column="34" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
-              <folding>
-                <element signature="e#67#98#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-1211">
+                  <caret line="34" column="22" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#67#77#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tests/utils/test_zipkin.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="748">
+                  <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Unit Test" />
         <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>nova-scheduler-cascaded</find>
-      <find>batch_console</find>
-      <find>nova-conductor-cascaded</find>
-      <find>nova-api-cascading</find>
-      <find>get_dependencies</find>
-      <find>span</find>
       <find>Graph</find>
       <find>delete</find>
       <find>createG</find>
@@ -185,6 +152,12 @@
       <find>logger</find>
       <find>Logger</find>
       <find>end_date_time_str</find>
+      <find>\nfinish</find>
+      <find>simplejson</find>
+      <find>send_numeric_metrics</find>
+      <find>opentsdb</find>
+      <find>__metric_3</find>
+      <find>degree</find>
     </findStrings>
     <replaceStrings>
       <replace>:</replace>
@@ -197,6 +170,7 @@
       <replace>graph_2</replace>
       <replace>self.__start_date_time_str</replace>
       <replace>self.__end_date_time_str</replace>
+      <replace>finish</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -205,29 +179,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/graphy/statistics/timestamp.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/__init__.py" />
-        <option value="$PROJECT_DIR$/graphy/view/__init__.py" />
-        <option value="$PROJECT_DIR$/graphy/__init__.py" />
-        <option value="$PROJECT_DIR$/graphy/cli.py" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
-        <option value="$PROJECT_DIR$/Dockerfile" />
-        <option value="$PROJECT_DIR$/scripts/docker-stop-rm-all.sh" />
-        <option value="$PROJECT_DIR$/graphy/utils/dict.py" />
         <option value="$PROJECT_DIR$/graphy/utils/profile.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/time.py" />
         <option value="$PROJECT_DIR$/venv/lib/python3.6/site-packages/pyArango/database.py" />
         <option value="$PROJECT_DIR$/graphy/config.json" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/scripts/create-directories.sh" />
         <option value="$PROJECT_DIR$/graphy/test.py" />
-        <option value="$PROJECT_DIR$/graphy/db/opentsdb.py" />
-        <option value="$PROJECT_DIR$/graphy/models/span.py" />
         <option value="$PROJECT_DIR$/graphy/models/span_tree.py" />
-        <option value="$PROJECT_DIR$/graphy/models/trace.py" />
         <option value="$PROJECT_DIR$/tests/utils/time.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/list.py" />
         <option value="$PROJECT_DIR$/tests/utils/json.py" />
         <option value="$PROJECT_DIR$/tests/utils/list.py" />
         <option value="$PROJECT_DIR$/tests/utils/__init__.py" />
@@ -235,27 +195,41 @@
         <option value="$PROJECT_DIR$/tests/test.py" />
         <option value="$PROJECT_DIR$/graphy/logging.yaml" />
         <option value="$PROJECT_DIR$/tests/test_app.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_json.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_config.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_list.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/json.py" />
         <option value="$PROJECT_DIR$/graphy/utils/logger.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_zipkin.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_dict.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_time.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/files.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_files.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_logger.py" />
         <option value="$PROJECT_DIR$/tests/utils/logging_error.yaml" />
-        <option value="$PROJECT_DIR$/graphy/db/arangodb.py" />
         <option value="$PROJECT_DIR$/graphy/utils/config.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/graphy/app.py" />
         <option value="$PROJECT_DIR$/graphy/view/console_view.py" />
-        <option value="$PROJECT_DIR$/graphy/config.yaml" />
-        <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_logger.py" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
+        <option value="$PROJECT_DIR$/graphy/utils/files.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/time.py" />
+        <option value="$PROJECT_DIR$/data/TRASH.json" />
+        <option value="$PROJECT_DIR$/graphy/models/trace.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/list.py" />
         <option value="$PROJECT_DIR$/graphy/controller/controller.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_list.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/dict.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_dict.py" />
+        <option value="$PROJECT_DIR$/tests/db/__init__.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
+        <option value="$PROJECT_DIR$/graphy/config.yaml" />
+        <option value="$PROJECT_DIR$/graphy/db/opentsdb.py" />
+        <option value="$PROJECT_DIR$/tests/db/test_arango.py" />
+        <option value="$PROJECT_DIR$/graphy/models/span.py" />
+        <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
+        <option value="$PROJECT_DIR$/graphy/db/arangodb.py" />
+        <option value="$PROJECT_DIR$/tests/db/test_opentsdb.py" />
+        <option value="$PROJECT_DIR$/tests/db/test_arangodb.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_time.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/json.py" />
+        <option value="$PROJECT_DIR$/data/28_06_simplified_100_spans.jsonl" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/tests/utils/test_json.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_files.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_zipkin.py" />
       </list>
     </option>
   </component>
@@ -287,28 +261,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
-          <expand>
-            <path>
-              <item name="Graphy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="graphy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="graphy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="models" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -319,37 +271,12 @@
             <path>
               <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
               <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
               <item name="Graphy" type="462c0819:PsiDirectoryNode" />
               <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graph" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="statistics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
@@ -357,18 +284,36 @@
               <item name="graphy" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="Node&#9;FILE&#9;file:///media/apbento/B6C8BAECC8BAAA4F/André/UC/Tese/MScThesis/Graphy/venv/lib/python3.6/site-packages/treelib/node.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../MScThesisExtra" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -408,7 +353,104 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Run">
+  <component name="RunManager" selected="Python tests.Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_time.TestTime" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_time.TestTime&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_time.TestTime.test_from_str_to_datetime" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_time.TestTime.test_from_str_to_datetime&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_time.TestTime.test_from_timestamp_to_datetime" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_time.TestTime.test_from_timestamp_to_datetime&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_time.TestTime.test_timestamp_millis_split&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_zipkin.TestZipkin.test_ZipkinTraceLimit&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Bash.Docker Stop and Remove all" />
       <item itemvalue="Docker.Deploy All" />
@@ -420,7 +462,21 @@
       <item itemvalue="Python.Run" />
       <item itemvalue="Python.Install" />
       <item itemvalue="Python.Test" />
+      <item itemvalue="Python tests.Unittests for test_time.TestTime" />
+      <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_str_to_datetime" />
+      <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_timestamp_to_datetime" />
+      <item itemvalue="Python tests.Unittests for test_time.TestTime.test_timestamp_millis_split" />
+      <item itemvalue="Python tests.Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" />
+        <item itemvalue="Python tests.Unittests for test_time.TestTime" />
+        <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_str_to_datetime" />
+        <item itemvalue="Python tests.Unittests for test_time.TestTime.test_timestamp_millis_split" />
+        <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_timestamp_to_datetime" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -433,44 +489,50 @@
       <option name="presentableId" value="Default" />
       <updated>1540565507023</updated>
       <workItem from="1551195886214" duration="222000" />
-      <workItem from="1551196118785" duration="14653000" />
+      <workItem from="1551196118785" duration="29935000" />
+      <workItem from="1551348935940" duration="36000" />
+      <workItem from="1551350123736" duration="601000" />
+      <workItem from="1551351976715" duration="46743000" />
+      <workItem from="1551712122126" duration="121000" />
+      <workItem from="1551712515437" duration="7549000" />
+      <workItem from="1551873336355" duration="3863000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_files_TestFiles_test_get_absolute_path - 2019.02.26 at 16h 06m 40s.xml">
-      <configuration name="Unittests for test_files.TestFiles.test_get_absolute_path" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime_test_timestamp_millis_split - 2019.03.06 at 13h 47m 20s.xml">
+      <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_files_TestFiles_test_read_file - 2019.02.26 at 16h 12m 48s.xml">
-      <configuration name="Unittests for test_files.TestFiles.test_read_file" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime_test_timestamp_millis_split - 2019.03.06 at 13h 49m 33s.xml">
+      <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_files_TestFiles - 2019.02.26 at 16h 14m 42s.xml">
-      <configuration name="Unittests for test_files.TestFiles" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime_test_timestamp_millis_split - 2019.03.06 at 13h 49m 34s.xml">
+      <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 18m 15s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime - 2019.03.06 at 13h 49m 44s.xml">
+      <configuration name="Unittests for test_time.TestTime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 18m 21s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime - 2019.03.06 at 13h 50m 47s.xml">
+      <configuration name="Unittests for test_time.TestTime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 19m 28s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime - 2019.03.06 at 13h 51m 58s.xml">
+      <configuration name="Unittests for test_time.TestTime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 23m 00s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime - 2019.03.06 at 13h 52m 08s.xml">
+      <configuration name="Unittests for test_time.TestTime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 23m 07s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_time_TestTime_test_from_str_to_datetime - 2019.03.06 at 13h 52m 19s.xml">
+      <configuration name="Unittests for test_time.TestTime.test_from_str_to_datetime" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 23m 54s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit - 2019.03.06 at 14h 06m 01s.xml">
+      <configuration name="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_for_test_logger_TestLogger_test_setup_logging - 2019.02.26 at 16h 23m 58s.xml">
-      <configuration name="Unittests for test_logger.TestLogger.test_setup_logging" configurationId="tests" />
+    <history-entry file="Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit - 2019.03.06 at 14h 06m 07s.xml">
+      <configuration name="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14875000" />
+    <option name="totallyTimeSpent" value="89070000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -485,31 +547,32 @@
     <frame x="0" y="-37" width="1920" height="1117" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49036777" visible="true" weight="0.14727855" />
-      <window_info id="Structure" order="1" sideWeight="0.50963223" side_tool="true" weight="0.13125989" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4886562" visible="true" weight="0.1755603" />
+      <window_info id="Structure" order="1" sideWeight="0.5113438" side_tool="true" weight="0.13340448" />
       <window_info id="Favorites" order="2" sideWeight="0.50672644" side_tool="true" weight="0.14391144" />
-      <window_info anchor="bottom" id="Concurrent Activities Diagram" weight="0.32959184" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32959184" />
       <window_info anchor="bottom" id="Run" internal_type="SLIDING" order="2" weight="0.41530612" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4994664" weight="0.48265305" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49893278" weight="0.34591836" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32959184" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.35714287" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053364" side_tool="true" weight="0.45102042" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49920928" weight="0.5040816" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5010672" side_tool="true" weight="0.48265305" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49920928" weight="0.50306123" />
       <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.49973643" weight="0.28061223" />
       <window_info active="true" anchor="bottom" id="Dependency Graph" order="12" visible="true" weight="0.030612245" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32959184" />
-      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" weight="0.32959184" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Coverage" order="3" weight="0.32977587" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2497332" />
+      <window_info anchor="right" id="Coverage" order="3" weight="0.28708646" />
       <window_info anchor="right" id="Database" order="4" weight="0.32977587" />
-      <window_info anchor="right" id="SciView" order="5" weight="0.32977587" />
+      <window_info anchor="right" id="SciView" order="5" weight="0.28762007" />
+      <window_info anchor="right" x="0" y="0" width="430" height="917" id="Documentation" order="6" side_tool="true" weight="0.32977587" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49036777" visible="true" weight="0.17022412" />
@@ -587,12 +650,12 @@
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/graphy/models/span.py</url>
-          <line>198</line>
+          <line>202</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/graphy/models/span.py</url>
-          <line>195</line>
+          <line>199</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -600,24 +663,87 @@
           <line>76</line>
           <option name="timeStamp" value="152" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/graph/graph_processor.py</url>
-          <line>414</line>
-          <option name="timeStamp" value="283" />
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
+          <line>348</line>
+          <option name="timeStamp" value="295" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
+          <line>349</line>
+          <option name="timeStamp" value="297" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>416</line>
-          <option name="timeStamp" value="292" />
+          <line>353</line>
+          <option name="timeStamp" value="298" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>111</line>
+          <option name="timeStamp" value="328" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>104</line>
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>82</line>
+          <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>106</line>
+          <option name="timeStamp" value="333" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
+          <line>354</line>
+          <option name="timeStamp" value="337" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>181</line>
+          <option name="timeStamp" value="354" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>179</line>
+          <option name="timeStamp" value="357" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>140</line>
+          <option name="timeStamp" value="365" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>178</line>
+          <option name="timeStamp" value="366" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>164</line>
+          <option name="timeStamp" value="369" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>171</line>
+          <option name="timeStamp" value="370" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/models/trace.py</url>
+          <line>183</line>
+          <option name="timeStamp" value="371" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
+          <line>456</line>
+          <option name="timeStamp" value="380" />
         </line-breakpoint>
       </breakpoints>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
@@ -635,243 +761,85 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>trace[0]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/utils/info.log" />
-    <entry file="file:///usr/lib/python3.6/unittest/case.py">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/simplejson/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="604" selection-start-line="604" selection-end-line="604" />
+        <state relative-caret-position="361">
+          <caret line="399" selection-start-line="399" selection-end-line="399" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/__init__.py">
+    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret selection-end-line="4" />
+          <folding>
+            <element signature="e#4#1155#0" />
+            <element signature="e#1159#2068#0" />
+            <element signature="e#2072#3221#0" />
+            <element signature="e#3225#4132#0" />
+            <element signature="e#4136#5287#0" />
+            <element signature="e#5291#6200#0" />
+            <element signature="e#6204#7353#0" />
+            <element signature="e#7357#8264#0" />
+            <element signature="e#8268#9421#0" />
+            <element signature="e#9425#10336#0" />
+            <element signature="e#10340#11493#0" />
+            <element signature="e#11497#12408#0" />
+            <element signature="e#12412#13563#0" />
+            <element signature="e#13567#14476#0" />
+            <element signature="e#14480#15629#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_apig_console.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_api_com.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/TRASH.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="182" column="7" selection-start-line="181" selection-start-column="2" selection-end-line="200" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/graphy.egg-info/requires.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_json.py">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#67#96#0" expanded="true" />
-          </folding>
+          <caret line="8" selection-start-line="8" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="30" selection-start-line="1" selection-start-column="30" selection-end-line="1" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/utils/test_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        <state relative-caret-position="425">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="e#67#82#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/models/span_tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-          <folding>
-            <element signature="e#68#92#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/json.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
-          <folding>
-            <element signature="e#67#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/statistics/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/debug.log" />
-    <entry file="file://$PROJECT_DIR$/debug.log">
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/models/trace.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JavaScript-modules-diagram//mnt/B6C8BAECC8BAAA4F/André/UC/Tese/MScThesis/Graphy">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JavaScript-modules-diagram</ID>
-          <OriginalElement>$PROJECT_DIR$</OriginalElement>
-          <nodes>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/matplotlib/backends/web_backend/all_figures.html</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/coverage_html.js</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/index.html</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/jquery.ba-throttle-debounce.min.js</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/jquery.hotkeys.js</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/jquery.isonscreen.js</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/jquery.min.js</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/jquery.tablesorter.min.js</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/keybd_closed.png</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/keybd_open.png</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/pyfile.html</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/matplotlib/backends/web_backend/single_figure.html</node>
-            <node x="" y="">$PROJECT_DIR$/venv/lib/python3.6/site-packages/coverage/htmlfiles/style.css</node>
-            <node x="" y="">{{ extra_css }}</node>
-            <node x="" y="">{{ prefix }}/_static/css/boilerplate.css</node>
-            <node x="" y="">{{ prefix }}/_static/css/fbm.css</node>
-            <node x="" y="">{{ prefix }}/_static/css/page.css</node>
-            <node x="" y="">{{ prefix }}/_static/jquery/css/themes/base/jquery-ui.min.css</node>
-            <node x="" y="">{{ prefix }}/_static/jquery/js/jquery-1.11.3.min.js</node>
-            <node x="" y="">{{ prefix }}/_static/jquery/js/jquery-ui.min.js</node>
-            <node x="" y="">{{ prefix }}/_static/js/mpl_tornado.js</node>
-            <node x="" y="">{{ prefix }}/js/mpl.js</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.1667863554757631" x="204.10724726881057" y="846.2449607631943" />
-          <SelectedNodes />
-          <Categories>
-            <Category>All</Category>
-          </Categories>
-          <VISIBILITY>Details</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/info.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.coverage">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_zipkin.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="e#67#96#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_dict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.6/logging/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="1252" column="12" selection-start-line="1252" selection-start-column="6" selection-end-line="1252" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/logging_error.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="41" column="37" selection-start-line="41" selection-start-column="37" selection-end-line="41" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/logging.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="22" column="20" lean-forward="true" selection-end-line="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_logger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
-          <folding>
-            <element signature="e#67#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/setuptools/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/logger.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#67#81#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -886,139 +854,289 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/files.py">
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_config.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="221">
+          <caret line="120" column="36" lean-forward="true" selection-start-line="120" selection-start-column="27" selection-end-line="120" selection-end-column="36" />
           <folding>
-            <element signature="e#67#76#0" expanded="true" />
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3.6/distutils/core.py">
+    <entry file="file://$PROJECT_DIR$/tests/debug.log" />
+    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_app.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="148" selection-start-line="148" selection-end-line="148" />
+        <state relative-caret-position="11">
+          <caret line="40" column="35" lean-forward="true" selection-start-line="40" selection-start-column="35" selection-end-line="40" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/lib/python3.6/distutils/dist.py">
+    <entry file="file://$PROJECT_DIR$/trace_cov_service_api_com.png" />
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/unittest/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="954" selection-start-line="954" selection-end-line="954" />
+        <state relative-caret-position="317">
+          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
+    <entry file="file:///usr/lib/python3.6/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="239">
+          <caret line="604" selection-start-line="604" selection-end-line="604" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/db/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
           <folding>
-            <element signature="e#67#84#0" expanded="true" />
+            <element signature="e#67#77#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#68#119#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/networkx/classes/multidigraph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="512" column="8" selection-start-line="512" selection-start-column="8" selection-end-line="512" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/684237410/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="519" column="4" selection-start-line="519" selection-start-column="4" selection-end-line="519" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="48" column="86" selection-start-line="48" selection-start-column="72" selection-end-line="48" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/errors.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-123">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#67#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="14" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/cli.py">
+    <entry file="file://$PROJECT_DIR$/graphy/models/trace.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="58" column="15" selection-start-line="58" selection-start-column="15" selection-end-line="58" selection-end-column="15" />
+        <state relative-caret-position="334">
+          <caret line="183" selection-start-line="183" selection-end-line="183" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
+    <entry file="file://$PROJECT_DIR$/graphy/models/annotation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="243" column="34" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="34" />
+        <state relative-caret-position="323">
+          <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7225">
+          <caret line="438" selection-start-line="438" selection-end-line="438" />
           <folding>
-            <element signature="e#67#98#0" expanded="true" />
+            <element signature="e#67#76#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2618">
+          <caret line="160" column="16" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="16" />
+          <folding>
+            <element signature="e#967#988#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/endpoint.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/binary_annotation.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/attributes.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="33" lean-forward="true" selection-start-line="79" selection-start-column="33" selection-end-line="79" selection-end-column="33" />
+        <state relative-caret-position="136">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
           <folding>
             <element signature="e#67#102#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
+    <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="33" column="101" selection-start-line="33" selection-start-column="101" selection-end-line="33" selection-end-column="101" />
+        <state relative-caret-position="248">
+          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
           <folding>
-            <element signature="e#67#86#0" expanded="true" />
+            <element signature="e#68#97#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/view/console_view.py">
+    <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="44" column="8" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+        <state relative-caret-position="-789">
+          <caret line="152" column="23" selection-start-line="152" selection-start-column="8" selection-end-line="152" selection-end-column="23" />
+          <folding>
+            <element signature="e#67#98#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+    <entry file="file://$PROJECT_DIR$/tests/db/test_opentsdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="485" column="96" selection-start-line="485" selection-start-column="96" selection-end-line="485" selection-end-column="96" />
+        <state relative-caret-position="353">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="e#67#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/db/test_arangodb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="877">
+          <caret line="54" column="28" selection-start-line="54" selection-start-column="28" selection-end-line="54" selection-end-column="28" />
+          <folding>
+            <element signature="e#67#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pandas/core/tools/datetimes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1195">
+          <caret line="400" column="4" selection-start-line="400" selection-start-column="4" selection-end-line="400" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="57" column="41" lean-forward="true" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#67#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/traces-2018-06-28.jsonl">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="787">
+          <caret line="100" selection-end-line="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.jsonl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="99" column="632" selection-start-line="99" selection-start-column="632" selection-end-line="99" selection-end-column="632" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="129" column="1" selection-start-line="129" selection-start-column="1" selection-end-line="129" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <folding>
+            <element signature="e#67#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_json.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <element signature="e#67#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-561" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/json.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="43" column="9" lean-forward="true" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+          <folding>
+            <element signature="e#67#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1211">
+          <caret line="34" column="22" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="22" />
+          <folding>
+            <element signature="e#67#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_files.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utils/test_zipkin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
         </state>
       </provider>
     </entry>

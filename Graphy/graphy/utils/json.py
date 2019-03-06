@@ -25,7 +25,7 @@ def is_json(file_path):
 
 def to_json(file_path, limit=None):
     """
-    Converts a file to JSON
+    Converts a file to JSON.
 
     :param file_path: The file path.
     :param limit: Limit the number of entries to convert to the new file.

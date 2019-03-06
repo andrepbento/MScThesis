@@ -1,14 +1,95 @@
 """
     Author: André Bento
-    Date last modified: 01-03-2019
+    Date last modified: 04-03-2019
 """
-import unittest
+import time
+from unittest import TestCase
+
+from graphy.db import opentsdb
+
+TIME_WAIT = 3
 
 
-class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)
+class TestOpenTSDB(TestCase):
 
+    def setUp(self) -> None:
+        super().setUp()
 
-if __name__ == '__main__':
-    unittest.main()
+        self.__metric_name = 'test_metric'
+
+        self.__metric_1 = {'ts': 1546304400, 'name': self.__metric_name, 'value': 100}  # ts: 2019.1.1 - 01:00:00
+        self.__metric_2 = {'ts': 1546390800, 'name': self.__metric_name, 'value': 200}  # ts: 2019.1.2 - 01:00:00
+
+        self.__start_timestamp = 1546300800  # 2019.1.1 - 00:00:00
+        self.__end_timestamp = 1546473600  # 2019.1.3 - 00:00:00
+
+        opentsdb.erase_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp)
+
+        time.sleep(TIME_WAIT)
+
+    def tearDown(self) -> None:
+        super().tearDown()
+
+        opentsdb.erase_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp)
+
+    def test_erase_metrics(self):
+        """ Tests erase_metrics function. """
+
+        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_1.get('name'), self.__metric_1.get('value'),
+                                                     self.__metric_1.get('ts')))
+        time.sleep(TIME_WAIT)
+
+        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_2.get('name'), self.__metric_2.get('value'),
+                                                     self.__metric_2.get('ts')))
+        time.sleep(TIME_WAIT)
+
+        self.assertEqual(opentsdb.erase_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp),
+                         {'1546304400': 100.0, '1546390800': 200.0})
+
+        time.sleep(TIME_WAIT)
+
+        self.assertEqual(opentsdb.erase_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp), None)
+
+        time.sleep(TIME_WAIT)
+
+    def test_get_metrics(self):
+        """ Tests get_metrics function. """
+        self.assertEqual(opentsdb.get_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp), None)
+
+        time.sleep(TIME_WAIT)
+
+        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_1.get('name'), self.__metric_1.get('value'),
+                                                     self.__metric_1.get('ts')))
+
+        time.sleep(TIME_WAIT)
+
+        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_2.get('name'), self.__metric_2.get('value'),
+                                                     self.__metric_2.get('ts')))
+
+        time.sleep(TIME_WAIT)
+
+        self.assertEqual(opentsdb.get_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp),
+                         {'1546304400': 100.0, '1546390800': 200.0})
+
+        time.sleep(TIME_WAIT)
+
+    def test_send_numeric_metrics(self):
+        """ Tests send_numeric_metrics function. """
+        list_of_metrics = [('service_1', 3), ('service_2', 5)]
+
+        metric_names = opentsdb.send_numeric_metrics(self.__metric_name, list_of_metrics, 1546304400)
+
+        time.sleep(TIME_WAIT)
+
+        name_1 = '{}.{}'.format(self.__metric_name, 'service_1')
+        name_2 = '{}.{}'.format(self.__metric_name, 'service_2')
+
+        self.assertListEqual(metric_names, [name_1, name_2])
+
+    def test_send_numeric_metric(self):
+        """ Tests send_numeric_metric function. """
+        metric_name = self.__metric_name
+
+        self.assertTrue(opentsdb.send_numeric_metric(metric_name, 100, 1546304400))  # 2019.1.1 01:00:00
+
+        time.sleep(TIME_WAIT)

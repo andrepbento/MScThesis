@@ -3,7 +3,6 @@
     Date last modified: 25-02-2019
 """
 from arango import ArangoClient
-from profilehooks import profile
 
 from graphy.utils import config
 

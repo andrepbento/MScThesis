@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 27-02-2019
+    Date last modified: 28-02-2019
 """
 import os
 import sys
@@ -36,7 +36,7 @@ class Controller(object):
         self.__start_date_time_str = graphy_config.get('DEFAULT_START_TIME')
         self.__end_date_time_str = graphy_config.get('DEFAULT_END_TIME')
 
-        self.__zipkin_limit = graphy_config.get('ZIPKIN_TRACE_LIMIT')
+        self.__zipkin_limit = graphy_config.get('ZIPKIN_TRACES_LIMIT')
         self.__is_zipkin = graphy_config.get('ACTIVATE_ZIPKIN')
 
     def start(self):
@@ -64,7 +64,7 @@ class Controller(object):
                 'Show response time analysis (NOT IMPLEMENTED)':
                     self.show_response_time_analysis,
                 'Show morphology analysis (EXPERIMENTAL)':
-                    self.show_morphology_analysis,
+                    self.show_morphology_analysis_in_time,
                 'Show request work-flow analysis (NOT IMPLEMENTED)':
                     self.show_request_work_flow_analysis,
                 'Show service order distribution analysis (NOT IMPLEMENTED)':
@@ -143,7 +143,7 @@ class Controller(object):
 
             self.__service_neighbours(dependencies, start_timestamp, end_timestamp)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def show_service_neighbours_in_time(self):
         if self.__is_zipkin:
@@ -168,7 +168,7 @@ class Controller(object):
 
                 self.__service_neighbours(dependencies, timestamp_1, timestamp_2)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def __service_neighbours(self, dependencies, start_timestamp, end_timestamp):
         if dependencies:
@@ -198,7 +198,7 @@ class Controller(object):
 
             self.__service_degree(dependencies, start_timestamp, end_timestamp)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def show_most_popular_service_degree_in_time(self):
         if self.__is_zipkin:
@@ -222,7 +222,7 @@ class Controller(object):
 
                 self.__service_degree(dependencies, timestamp_1, timestamp_2)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def __service_degree(self, dependencies, start_timestamp, end_timestamp):
         if dependencies:
@@ -258,7 +258,7 @@ class Controller(object):
 
             self.__service_call_count(dependencies, start_timestamp, end_timestamp)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def show_most_popular_service_call_count_in_time(self):
         if self.__is_zipkin:
@@ -282,9 +282,7 @@ class Controller(object):
 
                 self.__service_call_count(dependencies, timestamp_1, timestamp_2)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
-
-        return NotImplemented
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def __service_call_count(self, dependencies, start_timestamp, end_timestamp):
         if dependencies:
@@ -320,7 +318,7 @@ class Controller(object):
 
             self.__service_status_codes(service_names, start_timestamp, end_timestamp)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def show_service_status_code_analysis_in_time(self):
         if self.__is_zipkin:
@@ -345,16 +343,17 @@ class Controller(object):
 
                 self.__service_status_codes(service_names, timestamp_1, timestamp_2)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def __service_status_codes(self, service_names, start_timestamp, end_timestamp):
         for service_name in service_names:
             traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
                                        lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
-            if len(traces) > self.__zipkin_limit:
-                raise zipkin.ZipkinTraceLimit(len(traces))
 
             if traces:
+                if len(traces) >= self.__zipkin_limit:
+                    raise zipkin.ZipkinTraceLimit(len(traces))
+
                 status_codes = my_trace.get_status_codes(traces)
                 status_codes_percentage = my_dict.calc_percentage(status_codes)
 
@@ -377,9 +376,42 @@ class Controller(object):
                                           'Can\'t calculate service status codes')
 
     def show_response_time_analysis(self):
-        return NotImplemented
+        if self.__is_zipkin:
+            start_time = time.time()
 
-    def show_morphology_analysis(self):
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
+
+            service_names = zipkin.get_services()
+
+            for i, service_name in enumerate(service_names):
+                traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
+                                           lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
+
+                if traces:
+                    trace_coverability = my_trace.trace_coverability(traces)
+                    print('TC: {}:\n{}'.format(service_name, trace_coverability))
+                    from graphy.utils import files as my_files
+                    from matplotlib import pyplot as plt
+                    fig = plt.gcf()
+                    del trace_coverability['error']
+                    x = list(trace_coverability.keys())
+                    y = my_dict.filter(trace_coverability, 'value').values()
+                    plt.bar(x, y,
+                            color='b')
+                    plt.title('Trace coverability for service {}'.format(service_name))
+                    plt.show()
+                    plt.draw()
+                    import os
+                    path = os.path.join(my_files.ROOT_PROJECT_DIRECTORY,
+                                        'data/trace_cov_service_{}.png'.format(service_name))
+                    fig.savefig(path, dpi=100)
+
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
+
+        raise NotImplemented
+
+    def show_morphology_analysis_in_time(self):
         if self.__is_zipkin:
             start_time = time.time()
 
@@ -403,7 +435,7 @@ class Controller(object):
 
                 previous_graph = self.__service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
     def __service_morphology(self, dependencies, start_timestamp, end_timestamp, previous_graph):
         if dependencies:
@@ -419,6 +451,16 @@ class Controller(object):
 
                 self.__graph_db.insert_graph(start_timestamp, end_timestamp, list(graph_diff.edges(data=True)),
                                              self.__graph_db.graph_diff_db)
+
+                graph_variance = self.__graph_processor.graphs_variance(previous_graph, current_graph)
+
+                self.__time_series_db.send_numeric_metric('graph_gain_variance', graph_variance.get('gain'),
+                                                          int((start_timestamp + end_timestamp) / 2))
+                self.__time_series_db.send_numeric_metric('graph_loss_variance', graph_variance.get('loss'),
+                                                          int((start_timestamp + end_timestamp) / 2))
+                self.__time_series_db.send_numeric_metric('graph_variance',
+                                                          graph_variance.get('gain') - graph_variance.get('loss'),
+                                                          int((start_timestamp + end_timestamp) / 2))
 
                 self.view.display_message('System Morphology from {} to {}'
                                           .format(my_time.from_timestamp_to_datetime(start_timestamp),
@@ -471,6 +513,8 @@ class Controller(object):
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
 
             previous_graph = None
+            service_names = zipkin.get_services()
+
             for i, timestamp in enumerate(timestamps):
                 if i + 1 >= len(timestamps):
                     break
@@ -482,10 +526,10 @@ class Controller(object):
                 self.__service_neighbours(dependencies, timestamp_1, timestamp_2)
                 self.__service_degree(dependencies, timestamp_1, timestamp_2)
                 self.__service_call_count(dependencies, timestamp_1, timestamp_2)
-                self.__service_status_codes(dependencies, timestamp_1, timestamp_2)
+                self.__service_status_codes(service_names, timestamp_1, timestamp_2)
                 self.__service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
 
-            self.view.display_message('Time processing', '\nfinish in {} seconds'.format(time.time() - start_time))
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
 
 # TODO: The following code is for testing purposes only [REMOVE].
@@ -501,7 +545,7 @@ def main():
     controller = Controller(view)
     controller.setup_zipkin(file)
 
-    controller.show_morphology_analysis()
+    controller.show_morphology_analysis_in_time()
 
 
 if __name__ == '__main__':

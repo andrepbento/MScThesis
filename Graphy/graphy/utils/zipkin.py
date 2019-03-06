@@ -1,16 +1,20 @@
 """
     Author: André Bento
-    Date last modified: 26-02-2019
+    Date last modified: 01-03-2019
 """
-import json as json
 import sys
 import time
 
 import requests
 
 from graphy.utils import config
+from graphy.utils import files as my_files
 from graphy.utils import logger as my_logger
-from graphy.utils.files import read_file
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 logger = my_logger.setup_logging(__name__)
 
@@ -29,6 +33,7 @@ headers = {'content-type': 'application/json'}
 
 
 class ZipkinTraceLimit(Exception):
+    """ Exception for Zipkin request trace limit. # """
 
     def __init__(self, trace_len: int) -> None:
         super(ZipkinTraceLimit, self).__init__('trace limit exceeded with {} traces'.format(trace_len))
@@ -38,7 +43,7 @@ def get_services():
     """
     Get all the service names from the Zipkin API.
 
-    :return: a list with all services presented in Zipkin
+    :return: A list with all services presented in Zipkin.
     """
     try:
         response = requests.get(address_v2 + 'services')
@@ -48,7 +53,7 @@ def get_services():
         sys.exit(status=1)
 
 
-def get_spans(service_name):
+def get_spans(service_name: str) -> list:
     """
     Get all the span names recorded by a particular service from the Zipkin API.
 
@@ -73,7 +78,7 @@ def post_spans(spans_file):
     :return: if the operation was successful (equal to HTTP code 202) or not
     """
     try:
-        spans_data = read_file(spans_file)
+        spans_data = my_files.read_file(spans_file)
         response = requests.post(address_v1 + 'spans', data=spans_data, headers=headers)
         return response.status_code == 202
     except Exception as ex:
@@ -146,45 +151,3 @@ def get_dependencies(end_ts, lookback=60 * 60 * 1000):
     except ConnectionError as ex:
         logger.error('{}: {}'.format(type(ex), ex))
         sys.exit(status=1)
-
-
-# TODO: the following lines are only for testing purposes [REMOVE]
-if __name__ == '__main__':
-    start_date_time_str = "01/01/2018 00:00:00"
-    end_date_time_str = "30/12/2018 00:00:00"
-
-    from graphy.utils import time as my_time
-
-    start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
-    end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
-
-    # print('\nServices:\n{}'.format(get_services()))
-
-    # print('\nSpans:\n{}'.format(get_spans('api_com')))
-
-    # print('\nDependencies:\n'.format(get_dependencies(1530227280000)))
-
-    # print(get_trace('236a2805784a45d10a891d8327fc58f1'))
-
-    traces = get_traces(end_ts=end_timestamp, lookback=start_timestamp, limit=100000)
-    min_timestamp = None
-    max_timestamp = None
-    trace_count = 0
-    span_count = 0
-    for trace in traces:
-        trace_count += 1
-        for span in trace:
-            span_count += 1
-            if min_timestamp is None:
-                min_timestamp = span['timestamp']
-            if max_timestamp is None:
-                max_timestamp = span['timestamp']
-            if min_timestamp > span['timestamp']:
-                min_timestamp = span['timestamp']
-            if max_timestamp < span['timestamp']:
-                max_timestamp = span['timestamp']
-
-    print('trace_count: {}'.format(trace_count))
-    print('span_count: {}'.format(span_count))
-    print('min_timestamp: {}'.format(min_timestamp))
-    print('max_timestamp: {}'.format(max_timestamp))
