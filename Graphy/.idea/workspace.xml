@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/db/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/db/test_arangodb.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/db/test_opentsdb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Graphy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Graphy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/andrepbento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/andrepbento.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/controller/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/controller/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/db/arangodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/arangodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/db/opentsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/opentsdb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/graph/graph_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/span.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/trace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/dict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/json.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/list.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/zipkin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/test_dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_dict.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/test_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/test_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/test_logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/test_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/utils/test_zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_zipkin.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,6 +28,7 @@
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_read_file.coverage" NAME="Unittests for test_files.TestFiles.test_read_file Coverage Results" MODIFIED="1551197502842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_send_numeric_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_send_numeric_metrics Coverage Results" MODIFIED="1551718395572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_in_test_config_py.coverage" NAME="Unittests in test_config.py Coverage Results" MODIFIED="1551196420009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin.coverage" NAME="Unittests for test_zipkin.TestZipkin Coverage Results" MODIFIED="1551881327813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig_test_get.coverage" NAME="Unittests for test_config.TestConfig.test_get Coverage Results" MODIFIED="1551196015592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit.coverage" NAME="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit Coverage Results" MODIFIED="1551881167115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_erase_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_erase_metrics Coverage Results" MODIFIED="1551718066011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
@@ -86,37 +62,7 @@
     <favorites_list name="Graphy" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-1211">
-                  <caret line="34" column="22" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#67#77#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/tests/utils/test_zipkin.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="748">
-                  <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -273,34 +219,6 @@
               <item name="Graphy" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -353,7 +271,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit">
+  <component name="RunManager" selected="Python tests.Unittests for test_zipkin.TestZipkin">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Graphy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -406,21 +324,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests for test_time.TestTime.test_from_timestamp_to_datetime" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="Graphy" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_time.TestTime.test_from_timestamp_to_datetime&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Graphy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -433,6 +336,21 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_time.TestTime.test_timestamp_millis_split&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_zipkin.TestZipkin" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="Graphy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_zipkin.TestZipkin&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -464,17 +382,17 @@
       <item itemvalue="Python.Test" />
       <item itemvalue="Python tests.Unittests for test_time.TestTime" />
       <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_str_to_datetime" />
-      <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_timestamp_to_datetime" />
       <item itemvalue="Python tests.Unittests for test_time.TestTime.test_timestamp_millis_split" />
       <item itemvalue="Python tests.Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" />
+      <item itemvalue="Python tests.Unittests for test_zipkin.TestZipkin" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_zipkin.TestZipkin" />
         <item itemvalue="Python tests.Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" />
         <item itemvalue="Python tests.Unittests for test_time.TestTime" />
         <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_str_to_datetime" />
         <item itemvalue="Python tests.Unittests for test_time.TestTime.test_timestamp_millis_split" />
-        <item itemvalue="Python tests.Unittests for test_time.TestTime.test_from_timestamp_to_datetime" />
       </list>
     </recent_temporary>
   </component>
@@ -495,14 +413,11 @@
       <workItem from="1551351976715" duration="46743000" />
       <workItem from="1551712122126" duration="121000" />
       <workItem from="1551712515437" duration="7549000" />
-      <workItem from="1551873336355" duration="3863000" />
+      <workItem from="1551873336355" duration="4112000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_time_TestTime_test_timestamp_millis_split - 2019.03.06 at 13h 47m 20s.xml">
-      <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_time_TestTime_test_timestamp_millis_split - 2019.03.06 at 13h 49m 33s.xml">
       <configuration name="Unittests for test_time.TestTime.test_timestamp_millis_split" configurationId="tests" />
     </history-entry>
@@ -530,9 +445,12 @@
     <history-entry file="Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit - 2019.03.06 at 14h 06m 07s.xml">
       <configuration name="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_test_zipkin_TestZipkin - 2019.03.06 at 14h 08m 48s.xml">
+      <configuration name="Unittests for test_zipkin.TestZipkin" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89070000" />
+    <option name="totallyTimeSpent" value="89319000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -545,7 +463,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-37" width="1920" height="1117" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4886562" visible="true" weight="0.1755603" />
       <window_info id="Structure" order="1" sideWeight="0.5113438" side_tool="true" weight="0.13340448" />
@@ -558,7 +475,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32959184" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32959184" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.35714287" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.35714287" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5010672" side_tool="true" weight="0.48265305" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49920928" weight="0.50306123" />
       <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.49973643" weight="0.28061223" />
@@ -1116,16 +1033,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1211">
-          <caret line="34" column="22" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="22" />
-          <folding>
-            <element signature="e#67#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/utils/test_files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1137,6 +1044,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="748">
           <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1197">
+          <caret line="34" column="22" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="22" />
+          <folding>
+            <element signature="e#67#77#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
