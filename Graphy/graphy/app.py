@@ -2,10 +2,10 @@
     Author: André Bento
     Date last modified: 26-02-2019
 """
+import multiprocessing
 
 from graphy.controller.controller import Controller
 from graphy.utils import config
-from graphy.utils import files
 from graphy.view.console_view import ConsoleView
 
 
@@ -20,9 +20,13 @@ class Graphy(object):
         view = ConsoleView()
         controller = Controller(view)
 
+        processes = []
         for trace_file in trace_files:
-            trace_file_path = files.get_absolute_path(trace_file, graphy_config.get('TRACE_FILE_FROM_PROJECT'))
-            print('Posting file: {} to Zipkin'.format(trace_file_path))
-            controller.setup_zipkin(trace_file_path)
+            p = multiprocessing.Process(target=controller.setup_zipkin, args=(trace_file,))
+            processes.append(p)
+            p.start()
+
+        for process in processes:
+            process.join()
 
         controller.start()

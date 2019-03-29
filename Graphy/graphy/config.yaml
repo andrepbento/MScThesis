@@ -20,16 +20,14 @@ GRAPHY:
   # Timestamp resolution stands for the time interval between analysis, expressed in milliseconds.
   # TIMESTAMP_RESOLUTION: 3600000 # 1 hour
   # TIMESTAMP_RESOLUTION: 600000  # 10 min
-  # TIMESTAMP_RESOLUTION: 60000  # 1 min
-  TIMESTAMP_RESOLUTION: 30000  # 30 sec
+  TIMESTAMP_RESOLUTION: 60000  # 1 min
+  # TIMESTAMP_RESOLUTION: 30000  # 30 sec
 
   # Start and end default time.
-  DEFAULT_START_TIME: "27/06/2018 23:00:00"
-  DEFAULT_END_TIME: "29/06/2018 13:00:00"
+  DEFAULT_START_TIME: "27/06/2018 18:00:00"
+  DEFAULT_END_TIME: "30/06/2018 19:00:00"
   # DEFAULT_START_TIME: "01/03/2019 00:00:00"
   # DEFAULT_END_TIME: "07/03/2019 15:00:00"
-
-  ZIPKIN_TRACES_LIMIT: 1000000
 
 ARANGODB:
   HOST: "127.0.0.1"
@@ -64,3 +62,4 @@ ZIPKIN:
   API_V2: "/api/v2/"
   # Post data: (yes)true, (no) false.
   POST_DATA: true
+  TRACE_LIMIT: 1000000

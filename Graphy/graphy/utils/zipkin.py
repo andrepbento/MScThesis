@@ -89,7 +89,7 @@ def post_spans(spans_file):
 
 
 def get_traces(lookback=365 * 24 * 60 * 60 * 1000, service_name=None, span_name=None, annotation_query=None,
-               min_duration=None, max_duration=None, end_ts=None, limit=10):
+               min_duration=None, max_duration=None, end_ts=None, limit=zipkin_config.get('TRACE_LIMIT')):
     """
     Get all the traces from the Zipkin API.
 

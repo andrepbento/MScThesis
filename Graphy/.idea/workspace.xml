@@ -2,31 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/graphy/analysis_algorithms/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphy/utils/plots.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphy/controller/controller_logic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/cli.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/controller/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/controller/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/db/arangodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/arangodb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/db/opentsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/opentsdb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/graph/graph_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_processor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/annotation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/attributes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/binary_annotation.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/endpoint.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/span.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/span_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/span_tree.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/models/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/trace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/files.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/utils/zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/zipkin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/db/test_opentsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/db/test_opentsdb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,22 +76,39 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="545" column="38" selection-start-line="545" selection-start-column="38" selection-end-line="545" selection-end-column="38" />
+            <state relative-caret-position="294">
+              <caret line="248" selection-start-line="248" selection-end-line="248" />
               <folding>
-                <element signature="e#67#76#0" expanded="true" />
+                <element signature="e#67#95#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
+        <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="114" column="14" selection-start-line="114" selection-start-column="14" selection-end-line="114" selection-end-column="14" />
+            <state relative-caret-position="799">
+              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
               <folding>
-                <element signature="e#67#77#0" expanded="true" />
+                <element signature="e#968#1008#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphy/controller/controller_logic.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="833">
+              <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+              <folding>
+                <element signature="e#66#96#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -119,8 +117,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="22" column="31" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="31" />
+            <state relative-caret-position="425">
+              <caret line="25" column="30" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1105">
+              <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -128,8 +135,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="52" column="85" selection-start-line="52" selection-start-column="85" selection-end-line="52" selection-end-column="85" />
+            <state relative-caret-position="1003">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#67#106#0" expanded="true" />
               </folding>
@@ -138,56 +145,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setup.py">
+        <entry file="file://$PROJECT_DIR$/graphy/utils/plots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="561">
+              <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
               <folding>
-                <element signature="e#67#84#0" expanded="true" />
+                <element signature="e#67#76#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/models/trace.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="215" selection-start-line="215" selection-end-line="215" />
-              <folding>
-                <element signature="e#337#1987#0" />
-                <element signature="e#358#471#0" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/graphy/utils/logger.py">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+            <state relative-caret-position="442">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
               <folding>
-                <element signature="e#68#119#0" expanded="true" />
+                <element signature="e#67#89#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/utils/files.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/uc-01/README.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1683">
-              <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -204,8 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>remove_node</find>
-      <find>weight</find>
       <find>G</find>
       <find>H</find>
       <find>first_graph</find>
@@ -233,6 +212,8 @@
       <find>call_count</find>
       <find>TRACE_FILE</find>
       <find>graph_variance</find>
+      <find>f9e26b7bd3e471f7a60621bfef974c9d</find>
+      <find>http.url</find>
       <find>TIMESTAMP_RESOLUTION</find>
     </findStrings>
     <replaceStrings>
@@ -256,8 +237,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tests/utils/time.py" />
-        <option value="$PROJECT_DIR$/tests/utils/json.py" />
         <option value="$PROJECT_DIR$/tests/utils/list.py" />
         <option value="$PROJECT_DIR$/tests/utils/__init__.py" />
         <option value="$PROJECT_DIR$/tests/__init__.py" />
@@ -292,7 +271,6 @@
         <option value="$PROJECT_DIR$/graphy/db/arangodb.py" />
         <option value="$PROJECT_DIR$/graphy/cli.py" />
         <option value="$PROJECT_DIR$/graphy/logging.yaml" />
-        <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
         <option value="$PROJECT_DIR$/graphy/utils/files.py" />
         <option value="$PROJECT_DIR$/graphy/utils/time.py" />
         <option value="$PROJECT_DIR$/graphy/models/span.py" />
@@ -302,11 +280,14 @@
         <option value="$PROJECT_DIR$/spark.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
-        <option value="$PROJECT_DIR$/graphy/app.py" />
-        <option value="$PROJECT_DIR$/graphy/models/trace.py" />
         <option value="$PROJECT_DIR$/graphy/utils/plots.py" />
-        <option value="$PROJECT_DIR$/graphy/controller/controller.py" />
+        <option value="$PROJECT_DIR$/graphy/models/trace.py" />
+        <option value="$PROJECT_DIR$/data/28_06_simplified_100_spans.json" />
+        <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
         <option value="$PROJECT_DIR$/graphy/config.yaml" />
+        <option value="$PROJECT_DIR$/graphy/controller/controller_logic.py" />
+        <option value="$PROJECT_DIR$/graphy/app.py" />
+        <option value="$PROJECT_DIR$/graphy/controller/controller.py" />
       </list>
     </option>
   </component>
@@ -356,30 +337,6 @@
               <item name="Graphy" type="462c0819:PsiDirectoryNode" />
               <item name="graphy" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graph" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="statistics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
@@ -571,6 +528,9 @@
       <workItem from="1553772476056" duration="1042000" />
       <workItem from="1553779673876" duration="5725000" />
       <workItem from="1553793356934" duration="11685000" />
+      <workItem from="1553859314812" duration="4535000" />
+      <workItem from="1553870906725" duration="11630000" />
+      <workItem from="1553883415304" duration="41000" />
     </task>
     <servers />
   </component>
@@ -607,7 +567,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="242784000" />
+    <option name="totallyTimeSpent" value="258990000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -620,19 +580,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-37" width="1920" height="1117" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47682118" visible="true" weight="0.17129135" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47682118" visible="true" weight="0.17662753" />
       <window_info id="Structure" order="1" sideWeight="0.5231788" side_tool="true" weight="0.17129135" />
       <window_info id="Favorites" order="2" sideWeight="0.50672644" side_tool="true" weight="0.14391144" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3294271" />
       <window_info anchor="bottom" id="Run" internal_type="SLIDING" order="2" sideWeight="0.4994664" weight="0.36734694" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49530202" weight="0.53775513" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49530202" visible="true" weight="0.53775513" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3294271" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3294271" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49932885" weight="0.30510205" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49932885" visible="true" weight="0.30510205" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.504698" side_tool="true" weight="0.53776044" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49839914" weight="0.5026042" />
       <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.49786553" weight="0.2887755" />
@@ -645,7 +606,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.2497332" />
       <window_info anchor="right" id="Coverage" order="3" weight="0.28708646" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.4989796" weight="0.32977587" />
-      <window_info anchor="right" id="SciView" order="5" sideWeight="0.4989796" visible="true" weight="0.28762007" />
+      <window_info anchor="right" id="SciView" order="5" sideWeight="0.4989796" weight="0.28762007" />
       <window_info anchor="right" x="0" y="0" width="430" height="917" id="Documentation" order="6" sideWeight="0.50102043" side_tool="true" weight="0.28762007" />
     </layout>
     <layout-to-restore>
@@ -748,11 +709,6 @@
           <option name="timeStamp" value="489" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>425</line>
-          <option name="timeStamp" value="495" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/client.py</url>
           <line>155</line>
           <option name="timeStamp" value="498" />
@@ -762,11 +718,16 @@
           <line>130</line>
           <option name="timeStamp" value="499" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
+          <line>247</line>
+          <option name="timeStamp" value="508" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1553804134437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1553882559344" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -792,39 +753,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_json.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
-          <folding>
-            <element signature="e#67#96#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_zipkin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/docker-compose.yml" />
-    <entry file="file:///usr/lib/python3.6/distutils/dist.py" />
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/684237410/builtins.py" />
     <entry file="file://$PROJECT_DIR$/tests/utils/test_logger.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -861,16 +789,6 @@
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/treelib/node.py" />
     <entry file="file:///usr/lib/python3.6/codecs.py" />
     <entry file="file://$PROJECT_DIR$/graphy/cli.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="76" column="39" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
-          <folding>
-            <element signature="e#67#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/logging.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-384">
@@ -934,16 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-          <folding>
-            <element signature="e#968#1008#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/models/span_tree.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
@@ -952,11 +860,6 @@
             <element signature="e#68#92#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-137" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
@@ -976,22 +879,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/plots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
-          <folding>
-            <element signature="e#67#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6681">
           <caret line="400" column="8" selection-start-line="400" selection-start-column="8" selection-end-line="400" selection-end-column="8" />
           <folding>
             <element signature="e#67#102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/multiprocessing/__init__.pyi">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1836">
+          <caret line="114" column="14" selection-start-line="114" selection-start-column="14" selection-end-line="114" selection-end-column="14" />
+          <folding>
+            <element signature="e#67#77#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1006,16 +919,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-          <folding>
-            <element signature="e#68#119#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/utils/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1023,24 +926,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/uc-01/README.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.jsonl">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/models/trace.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="215" selection-start-line="215" selection-end-line="215" />
+        <state relative-caret-position="240">
+          <caret line="193" column="35" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
           <folding>
             <element signature="e#337#1987#0" />
             <element signature="e#358#471#0" />
@@ -1048,39 +940,106 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
+    <entry file="file://$PROJECT_DIR$/data/uc-01/README.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="52" column="85" selection-start-line="52" selection-start-column="85" selection-end-line="52" selection-end-column="85" />
-          <folding>
-            <element signature="e#67#106#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="357">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
+    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="114" column="14" selection-start-line="114" selection-start-column="14" selection-end-line="114" selection-end-column="14" />
+        <state relative-caret-position="309">
+          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
           <folding>
             <element signature="e#67#77#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/lib/python3.6/multiprocessing/pool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="118" selection-start-line="118" selection-end-line="118" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="545" column="38" selection-start-line="545" selection-start-column="38" selection-end-line="545" selection-end-column="38" />
+        <state relative-caret-position="294">
+          <caret line="248" selection-start-line="248" selection-end-line="248" />
+          <folding>
+            <element signature="e#67#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
+          <folding>
+            <element signature="e#968#1008#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/controller/controller_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+          <folding>
+            <element signature="e#66#96#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1105">
+          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1003">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#67#106#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/plots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
           <folding>
             <element signature="e#67#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/logger.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#67#89#0" expanded="true" />
           </folding>
         </state>
       </provider>
