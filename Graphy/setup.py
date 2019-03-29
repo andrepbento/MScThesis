@@ -53,6 +53,7 @@ class Run(Command):
         pass
 
     def run(self):
+        print()
         from graphy.app import Graphy
         Graphy.run()
 
@@ -81,7 +82,7 @@ setup(
     version=VERSION,
     description='A micro-services system monitor command line program in Python.',
     long_description=readme,
-    long_description_content_type='text/markdown',
+    # long_description_content_type='text/markdown',
     url='https://github.com/andrepbento/MScThesis/tree/master/Graphy',
     author='André Bento',
     author_email='apbento@student.dei.uc.pt',
@@ -102,14 +103,9 @@ setup(
     keywords='cli',
     packages=find_packages(exclude=('tests*', 'docs')),
     install_requires=requirements,
-    tests_requires=['pytest'],
+    tests_require=['pytest'],
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov'],
-    },
-    entry_points={
-        'console_scripts': [
-            'graphy=graphy.cli:cli',
-        ],
     },
     cmdclass={
         'install': Install,

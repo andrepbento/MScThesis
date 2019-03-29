@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 25-02-2019
+    Date last modified: 08-03-2019
 """
 from arango import ArangoClient
 
@@ -16,7 +16,7 @@ class ArangoDB(object):
 
         :param purge_database: True to purge all existing database, False otherwise.
         """
-        self.__ip = arango_db_config.get('IP')
+        self.__ip = arango_db_config.get('HOST')
         self.__port = arango_db_config.get('PORT')
 
         self.__username = arango_db_config.get('USERNAME')
@@ -30,7 +30,8 @@ class ArangoDB(object):
         self.__db = self.__sys_db()
 
         if purge_database:
-            self.__delete_database()
+            self.__delete_database(self.__graph_db)
+            self.__delete_database(self.__graph_diff_db)
 
         self.__connect_database()
 
@@ -217,7 +218,6 @@ class ArangoDB(object):
 
 def main():
     from graphy.graph.graph_processor import GraphProcessor
-    from graphy.utils import zipkin
     from graphy.utils import time as my_time
 
     graph_processor = GraphProcessor()
@@ -228,19 +228,40 @@ def main():
     start_timestamp = my_time.to_unix_time_millis(start_date_time_str)
     end_timestamp = my_time.to_unix_time_millis(end_date_time_str)
 
-    dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
-    graph_processor.generate_graph_from_zipkin(dependencies)
+    # dependencies = zipkin.get_dependencies(end_ts=end_timestamp, lookback=end_timestamp - start_timestamp)
+    # graph_processor.generate_graph_from_zipkin(dependencies)
+    #
+    # nodes = list(graph_processor.graph.nodes(data=True))
+    # edges = list(graph_processor.graph.edges(data=True))
+    # print('nodes: {}'.format(nodes))
+    # print('edges: {}'.format(edges))
 
-    nodes = list(graph_processor.graph.nodes(data=True))
-    edges = list(graph_processor.graph.edges(data=True))
-    print('nodes: {}'.format(nodes))
-    print('edges: {}'.format(edges))
+    from graphy.db import opentsdb
+
+    time_series_db = opentsdb
 
     arango_db = ArangoDB()
-    graph = arango_db.insert_graph(start_timestamp, end_timestamp,
-                                   edges)  # name='graph_{}_{}'.format(timestamp1, timestamp2))
-    graph_edge_list = arango_db.get_graph_edges(graph.name)
-    edges1 = list(graph_processor.generate_graph_from_edge_list(graph_edge_list).edges(data=True))
+    # arango_db = ArangoDB(purge_database=True)
+    graph_names = arango_db.get_graphs(arango_db.graph_diff_db)
+
+    for graph_name in graph_names:
+        graph_name_split = graph_name.split('_')
+        graph_start_timestamp = int(graph_name_split[1])
+        graph_end_timestamp = int(graph_name_split[2])
+
+        graph_edge_list = arango_db.get_graph_edges(graph_name)
+
+        graph_processor.generate_graph_from_edge_list(graph_edge_list, graph_start_timestamp, graph_end_timestamp)
+
+        service_degrees = graph_processor.degrees()
+
+        time_series_db.send_numeric_metrics('degree_graph_diff', service_degrees,
+                                            int((graph_start_timestamp + graph_end_timestamp) / 2))
+
+    print(1)
+
+    # graph_edge_list = arango_db.get_graph_edges(graph.name)
+    # edges1 = list(graph_processor.generate_graph_from_edge_list(graph_edge_list).edges(data=True))
 
 
 if __name__ == '__main__':

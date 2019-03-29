@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 28-02-2019
+    Date last modified: 22-03-2019
 """
 import os
 import sys
@@ -11,9 +11,9 @@ from graphy.db.arangodb import ArangoDB
 from graphy.graph.graph_processor import GraphProcessor
 from graphy.models import trace as my_trace
 from graphy.utils import dict as my_dict, config
-from graphy.utils import files
 from graphy.utils import json as my_json
 from graphy.utils import logger as my_logger
+from graphy.utils import plots as my_plots
 from graphy.utils import time as my_time
 from graphy.utils import zipkin
 
@@ -61,6 +61,8 @@ class Controller(object):
                     self.show_service_status_codes_analysis,
                 'Show service status code analysis in time (EXPERIMENTAL)':
                     self.show_service_status_code_analysis_in_time,
+                'Show trace quality analysis (EXPERIMENTAL)':
+                    self.show_trace_quality_analysis,
                 'Show response time analysis (NOT IMPLEMENTED)':
                     self.show_response_time_analysis,
                 'Show morphology analysis (EXPERIMENTAL)':
@@ -228,8 +230,14 @@ class Controller(object):
         if dependencies:
             self.__graph_processor.generate_graph_from_zipkin(dependencies, start_timestamp, end_timestamp)
             service_degrees = self.__graph_processor.degrees()
+            service_in_degrees = self.__graph_processor.degrees('in')
+            service_out_degrees = self.__graph_processor.degrees('out')
 
             self.__time_series_db.send_numeric_metrics('degree', service_degrees,
+                                                       int((start_timestamp + end_timestamp) / 2))
+            self.__time_series_db.send_numeric_metrics('degree_in', service_in_degrees,
+                                                       int((start_timestamp + end_timestamp) / 2))
+            self.__time_series_db.send_numeric_metrics('degree_out', service_out_degrees,
                                                        int((start_timestamp + end_timestamp) / 2))
 
             most_popular_service = service_degrees[0]
@@ -292,6 +300,16 @@ class Controller(object):
             self.__time_series_db.send_numeric_metrics('call_count', service_edge_call_count,
                                                        int((start_timestamp + end_timestamp) / 2))
 
+            service_in_edge_call_count = self.__graph_processor.in_edges_call_count()
+
+            self.__time_series_db.send_numeric_metrics('call_count_in', service_in_edge_call_count,
+                                                       int((start_timestamp + end_timestamp) / 2))
+
+            service_out_edge_call_count = self.__graph_processor.out_edges_call_count()
+
+            self.__time_series_db.send_numeric_metrics('call_count_out', service_out_edge_call_count,
+                                                       int((start_timestamp + end_timestamp) / 2))
+
             most_popular_service = service_edge_call_count[0]
             self.view.display_tuple('Most popular service from {} to {} (Call Count)'
                                     .format(my_time.from_timestamp_to_datetime(start_timestamp),
@@ -316,7 +334,11 @@ class Controller(object):
 
             service_names = zipkin.get_services()
 
-            self.__service_status_codes(service_names, start_timestamp, end_timestamp)
+            for service_name in service_names:
+                traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
+                                           lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
+
+                self.__service_status_codes(service_name, traces, start_timestamp, end_timestamp)
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
@@ -341,41 +363,41 @@ class Controller(object):
                 timestamp_1 = timestamp
                 timestamp_2 = timestamps[i + 1]
 
-                self.__service_status_codes(service_names, timestamp_1, timestamp_2)
+                for service_name in service_names:
+                    traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
+                                               lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
+
+                    self.__service_status_codes(service_name, traces, timestamp_1, timestamp_2)
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
-    def __service_status_codes(self, service_names, start_timestamp, end_timestamp):
-        for service_name in service_names:
-            traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
-                                       lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
+    def __service_status_codes(self, service_name, traces, start_timestamp, end_timestamp):
+        if traces:
+            if len(traces) >= self.__zipkin_limit:
+                raise zipkin.ZipkinTraceLimit(len(traces))
 
-            if traces:
-                if len(traces) >= self.__zipkin_limit:
-                    raise zipkin.ZipkinTraceLimit(len(traces))
+            status_codes = my_trace.get_status_codes(traces)
+            status_codes_percentage = my_dict.calc_percentage(status_codes)
 
-                status_codes = my_trace.get_status_codes(traces)
-                status_codes_percentage = my_dict.calc_percentage(status_codes)
+            self.__time_series_db.send_numeric_metrics('status_code.{}'.format(service_name),
+                                                       status_codes_percentage,
+                                                       int((start_timestamp + end_timestamp) / 2))
 
-                self.__time_series_db.send_numeric_metrics('status_code.{}'.format(service_name),
-                                                           status_codes_percentage,
-                                                           int((start_timestamp + end_timestamp) / 2))
+            self.view.display_message(
+                'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                                    my_time.from_timestamp_to_datetime(end_timestamp)),
+                '\nservice_name: {}'
+                '\nstatus_codes: {}'
+                '\nstatus_codes_percentage: {}'.format(service_name, my_dict.sort(status_codes),
+                                                       my_dict.sort(status_codes_percentage)))
+        else:
+            self.view.display_message('No traces found from {} to {} for service {}'
+                                      .format(my_time.from_timestamp_to_datetime(start_timestamp),
+                                              my_time.from_timestamp_to_datetime(end_timestamp),
+                                              service_name),
+                                      'Can\'t calculate service status codes')
 
-                self.view.display_message(
-                    'Status Codes from {} to {}'.format(my_time.from_timestamp_to_datetime(start_timestamp),
-                                                        my_time.from_timestamp_to_datetime(end_timestamp)),
-                    '\nservice_name: {}'
-                    '\nstatus_codes: {}'
-                    '\nstatus_codes_percentage: {}'.format(service_name, my_dict.sort(status_codes),
-                                                           my_dict.sort(status_codes_percentage)))
-            else:
-                self.view.display_message('No traces found from {} to {} for service {}'
-                                          .format(my_time.from_timestamp_to_datetime(start_timestamp),
-                                                  my_time.from_timestamp_to_datetime(end_timestamp),
-                                                  service_name),
-                                          'Can\'t calculate service status codes')
-
-    def show_response_time_analysis(self):
+    def show_trace_quality_analysis(self):
         if self.__is_zipkin:
             start_time = time.time()
 
@@ -389,27 +411,92 @@ class Controller(object):
                                            lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
 
                 if traces:
-                    trace_coverability = my_trace.trace_coverability(traces)
-                    print('TC: {}:\n{}'.format(service_name, trace_coverability))
-                    from graphy.utils import files as my_files
-                    from matplotlib import pyplot as plt
-                    fig = plt.gcf()
-                    del trace_coverability['error']
-                    x = list(trace_coverability.keys())
-                    y = my_dict.filter(trace_coverability, 'value').values()
-                    plt.bar(x, y,
-                            color='b')
-                    plt.title('Trace coverability for service {}'.format(service_name))
-                    plt.show()
-                    plt.draw()
-                    import os
-                    path = os.path.join(my_files.ROOT_PROJECT_DIRECTORY,
-                                        'data/trace_cov_service_{}.png'.format(service_name))
-                    fig.savefig(path, dpi=100)
+                    span_trees = my_trace.generate_span_trees(traces)
+                    trace_metrics_data = my_trace.extract_metrics(span_trees)
+
+                    self.view.display_message(
+                        'Trace quality analysis from {} to {} for service {}'.format(
+                            my_time.from_timestamp_to_datetime(start_timestamp),
+                            my_time.from_timestamp_to_datetime(end_timestamp),
+                            service_name),
+                        'Analysing...')
+
+                    file_path = self.__trace_quality_analysis(service_name, trace_metrics_data)
+
+                    self.view.display_message(
+                        'Analysis completed!',
+                        'Please check file: {}'.format(file_path))
+                else:
+                    self.view.display_message(
+                        'No traces found from {} to {} for service {}'.format(
+                            my_time.from_timestamp_to_datetime(start_timestamp),
+                            my_time.from_timestamp_to_datetime(end_timestamp),
+                            service_name),
+                        '\nCan\'t calculate service status codes')
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
-        raise NotImplemented
+    def __trace_quality_analysis(self, service_name: str, trace_metrics_data: my_trace.TraceMetricsData):
+        del trace_metrics_data.coverability_count['error']
+        return my_plots.plot_service_trace_cov(service_name, trace_metrics_data, True)
+
+    def show_response_time_analysis(self):
+        if self.__is_zipkin:
+            start_time = time.time()
+
+            start_timestamp = my_time.to_unix_time_millis(self.__start_date_time_str)
+            end_timestamp = my_time.to_unix_time_millis(self.__end_date_time_str)
+
+            timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
+
+            service_names = zipkin.get_services()
+
+            for i, timestamp in enumerate(timestamps):
+                if i + 1 >= len(timestamps):
+                    break
+                timestamp_1 = timestamp
+                timestamp_2 = timestamps[i + 1]
+
+                # TODO: IMPROVE DATA USAGE.
+                for service_name in service_names:
+                    traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
+                                               lookback=end_timestamp - start_timestamp, limit=self.__zipkin_limit)
+
+                    span_trees = my_trace.generate_span_trees(traces)
+                    trace_metrics_data = my_trace.extract_metrics(span_trees)
+
+                    self.__service_response_time_analysis(service_name, trace_metrics_data, timestamp_1, timestamp_2)
+
+            self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
+
+    def __service_response_time_analysis(self, service_name: str, trace_metrics_data, start_timestamp, end_timestamp):
+        if trace_metrics_data.response_time_avg is not -1:
+            self.view.display_message(
+                'Response time analysis from {} to {} for service {}'.format(
+                    my_time.from_timestamp_to_datetime(start_timestamp),
+                    my_time.from_timestamp_to_datetime(end_timestamp),
+                    service_name),
+                'Analysing...')
+
+            response_time_avg = trace_metrics_data.response_time_avg
+
+            self.__time_series_db.send_numeric_metric(['response_time_avg', service_name],
+                                                      response_time_avg,
+                                                      int((start_timestamp + end_timestamp) / 2))
+
+            self.view.display_message('Response time analysis from {} to {} for service {}\nAVG: {}'.format(
+                my_time.from_timestamp_to_datetime(start_timestamp),
+                my_time.from_timestamp_to_datetime(end_timestamp),
+                service_name,
+                response_time_avg),
+                'Analysis completed!')
+        else:
+            self.view.display_message(
+                'No data found from {} to {} for service {}'.format(
+                    my_time.from_timestamp_to_datetime(start_timestamp),
+                    my_time.from_timestamp_to_datetime(end_timestamp),
+                    service_name),
+                '\nCan\'t perform response time analysis')
 
     def show_morphology_analysis_in_time(self):
         if self.__is_zipkin:
@@ -454,11 +541,11 @@ class Controller(object):
 
                 graph_variance = self.__graph_processor.graphs_variance(previous_graph, current_graph)
 
-                self.__time_series_db.send_numeric_metric('graph_gain_variance', graph_variance.get('gain'),
+                self.__time_series_db.send_numeric_metric(['graph_gain_variance'], graph_variance.get('gain'),
                                                           int((start_timestamp + end_timestamp) / 2))
-                self.__time_series_db.send_numeric_metric('graph_loss_variance', graph_variance.get('loss'),
+                self.__time_series_db.send_numeric_metric(['graph_loss_variance'], graph_variance.get('loss'),
                                                           int((start_timestamp + end_timestamp) / 2))
-                self.__time_series_db.send_numeric_metric('graph_variance',
+                self.__time_series_db.send_numeric_metric(['graph_variance'],
                                                           graph_variance.get('gain') - graph_variance.get('loss'),
                                                           int((start_timestamp + end_timestamp) / 2))
 
@@ -488,6 +575,7 @@ class Controller(object):
             return None
 
     def show_request_work_flow_analysis(self):
+        # TODO: Analise the requests from the graphs || spans (How?)
         return NotImplemented
 
     def show_service_order_distribution_analysis(self):
@@ -526,27 +614,17 @@ class Controller(object):
                 self.__service_neighbours(dependencies, timestamp_1, timestamp_2)
                 self.__service_degree(dependencies, timestamp_1, timestamp_2)
                 self.__service_call_count(dependencies, timestamp_1, timestamp_2)
-                self.__service_status_codes(service_names, timestamp_1, timestamp_2)
-                self.__service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
+                previous_graph = self.__service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
+
+                for service_name in service_names:
+                    traces = zipkin.get_traces(service_name=service_name, end_ts=timestamp_2,
+                                               lookback=timestamp_2 - timestamp_1, limit=self.__zipkin_limit)
+
+                    span_trees = my_trace.generate_span_trees(traces)
+                    trace_metrics_data = my_trace.extract_metrics(span_trees)
+
+                    self.__service_status_codes(service_name, traces, timestamp_1, timestamp_2)
+                    # self.__trace_quality_analysis(service_name, trace_metrics_data)
+                    self.__service_response_time_analysis(service_name, trace_metrics_data, timestamp_1, timestamp_2)
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
-
-
-# TODO: The following code is for testing purposes only [REMOVE].
-
-def main():
-    from graphy.utils import config
-    graphy_config = config.get('GRAPHY')
-
-    file = files.get_absolute_path(graphy_config['TRACE_FILE'], graphy_config['TRACE_FILE_FROM_PROJECT'])
-
-    from graphy.view.console_view import ConsoleView
-    view = ConsoleView()
-    controller = Controller(view)
-    controller.setup_zipkin(file)
-
-    controller.show_morphology_analysis_in_time()
-
-
-if __name__ == '__main__':
-    main()

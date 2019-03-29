@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 01-03-2019
+    Date last modified: 07-03-2019
 """
 import sys
 import time
@@ -20,9 +20,9 @@ logger = my_logger.setup_logging(__name__)
 
 zipkin_config = config.get('ZIPKIN')
 
-zipkin_ip = zipkin_config['IP']
-zipkin_port = zipkin_config['PORT']
-base_address = 'http://{}:{}'.format(zipkin_ip, zipkin_port)
+zipkin_protocol = zipkin_config['PROTOCOL']
+zipkin_address = zipkin_config['ADDRESS']
+base_address = '{}://{}'.format(zipkin_protocol, zipkin_address)
 api_v1_endpoint = zipkin_config['API_V1']
 api_v2_endpoint = zipkin_config['API_V2']
 
@@ -72,11 +72,13 @@ def get_spans(service_name: str) -> list:
 
 def post_spans(spans_file):
     """
-    Post the spans utils file to the Zipkin API
+    Post the spans utils file to the Zipkin API if it's not already there.
 
-    :param spans_file: spans file path
-    :return: if the operation was successful (equal to HTTP code 202) or not
+    :param spans_file: spans file path.
+    :return: True if the operation was successful (equal to HTTP code 202), False otherwise.
     """
+    if not zipkin_config['POST_DATA']:
+        return True
     try:
         spans_data = my_files.read_file(spans_file)
         response = requests.post(address_v1 + 'spans', data=spans_data, headers=headers)

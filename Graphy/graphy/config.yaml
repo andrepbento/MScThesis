@@ -4,8 +4,9 @@ version: 1
 GRAPHY:
   ACTIVATE_ZIPKIN: true
   # The trace file absolute or relative path.
-  TRACE_FILE: "data/traces-2018-06-28.json"
-  # TRACE_FILE: "data/traces-2018-06-29.json"
+  TRACE_FILES:
+    - "data/traces-2018-06-28.json"
+    - "data/traces-2018-06-29.json"
   # TRACE_FILE: "data/28_06_simplified_100_spans.json"
   # TRACE_FILE: "data/28_06_simplified_10000_spans.json"
   # If changed to false, make sure the TRACE_FILE is an absolute file path.
@@ -17,30 +18,49 @@ GRAPHY:
   SHOW_GRAPH: false
 
   # Timestamp resolution stands for the time interval between analysis, expressed in milliseconds.
-  TIMESTAMP_RESOLUTION: 3600000
+  # TIMESTAMP_RESOLUTION: 3600000 # 1 hour
+  # TIMESTAMP_RESOLUTION: 600000  # 10 min
+  # TIMESTAMP_RESOLUTION: 60000  # 1 min
+  TIMESTAMP_RESOLUTION: 30000  # 30 sec
 
-  DEFAULT_START_TIME: "25/06/2018 00:00:00"
-  DEFAULT_END_TIME: "30/06/2018 00:00:00"
+  # Start and end default time.
+  DEFAULT_START_TIME: "27/06/2018 23:00:00"
+  DEFAULT_END_TIME: "29/06/2018 13:00:00"
+  # DEFAULT_START_TIME: "01/03/2019 00:00:00"
+  # DEFAULT_END_TIME: "07/03/2019 15:00:00"
 
   ZIPKIN_TRACES_LIMIT: 1000000
 
 ARANGODB:
-  ARANGO_URL: "http://127.0.0.1:8529"
-  IP: "127.0.0.1"
+  HOST: "127.0.0.1"
+  # HOST: "graphy.powertrip.pt"
   PORT: "8529"
   GRAPH_DB_NAME: "graph_db"
   GRAPH_DIFF_DB_NAME: "graph_diff_db"
-  PASSWORD: "password"
-  STORE_IN_DB: true
   USERNAME: "root"
+  PASSWORD: "password"
 
 OPENTSDB:
-  IP: "127.0.0.1"
-  PORT: 4242
-  STORE_IN_DB: true
+  HOST: "127.0.0.1"
+  # HOST: "192.92.149.163"
+  # HOST: "176.79.133.111"
+  # HOST: "2.81.115.188"
+  # HOST: "graphy.powertrip.pt"
+  PORT: "4242"
+  # Protocol: https, http
+  PROTOCOL: "http"
+  # Change the STORE_NAME to the corresponding storage name.
+  # STORE_NAME: "test"
+  STORE_NAME: "huawei"
 
 ZIPKIN:
+  # Address: (local)127.0.0.1:9411 or (remote).
+  ADDRESS: "127.0.0.1:9411"
+  # ADDRESS: "docssleuth-zipkin-server.cfapps.io/zipkin"
+  # ADDRESS: "graphy.powertrip.pt:9411"
+  # Protocol: https, http
+  PROTOCOL: "http"
   API_V1: "/api/v1/"
   API_V2: "/api/v2/"
-  IP: "127.0.0.1"
-  PORT: "9411"
+  # Post data: (yes)true, (no) false.
+  POST_DATA: true

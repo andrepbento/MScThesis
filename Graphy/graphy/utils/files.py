@@ -1,11 +1,12 @@
 """
     Author: André Bento
-    Date last modified: 26-02-2019
+    Date last modified: 21-03-2019
 """
 import os
 from os.path import dirname
 
 ROOT_PROJECT_DIRECTORY = os.path.join(dirname(dirname(dirname(__file__))))
+DATA_PROJECT_DIRECTORY = os.path.join(ROOT_PROJECT_DIRECTORY, 'data')
 
 
 def get_absolute_path(relative_path, from_project=False):
@@ -16,7 +17,7 @@ def get_absolute_path(relative_path, from_project=False):
 
     if os.path.isfile(abs_path) is True and os.path.exists(abs_path):
         return abs_path
-    raise FileNotFoundError
+    raise FileNotFoundError(abs_path)
 
 
 def read_file(path):

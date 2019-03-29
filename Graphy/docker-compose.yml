@@ -55,13 +55,16 @@ services:
       - ./opentsdb.conf:/etc/opentsdb/opentsdb.conf
 
   zipkin:
-    image: openzipkin/zipkin
+    image: openzipkin/zipkin:2.12.0
     container_name: graphy_zipkin
     restart: always
     # networks:
     #   - graphy-network
     ports:
       - 9411:9411
+    # environment:
+    #   - STORAGE_TYPE=elasticsearch
+    #   - ES_HOSTS=http://172.17.0.2:9200
 
   # networks:
   #   graphy-network:

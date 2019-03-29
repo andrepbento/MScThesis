@@ -1,10 +1,14 @@
 """
     Author: André Bento
-    Date last modified: 11-02-2019
+    Date last modified: 22-03-2019
 """
 from datetime import datetime, timezone
 
-date_format = "%d/%m/%Y %H:%M:%S"
+from graphy.utils import config as my_config
+
+graphy_config = my_config.get('GRAPHY')
+
+date_format = '%d/%m/%Y %H:%M:%S'
 
 
 def to_unix_time(date_time_str):
@@ -45,7 +49,8 @@ def from_timestamp_to_datetime(timestamp, unit='ms'):
     return pandas.to_datetime(timestamp, unit=unit)
 
 
-def timestamp_millis_split(init_timestamp, end_timestamp, interval_time=60 * 60 * 1000):
+def timestamp_millis_split(init_timestamp, end_timestamp,
+                           interval_time=graphy_config.get('TIMESTAMP_RESOLUTION', 60 * 60 * 1000)):
     """
     Creates a list of timestamps in milliseconds from a given initial timestamp to a given end timestamp.
 

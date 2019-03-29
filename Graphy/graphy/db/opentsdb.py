@@ -19,8 +19,21 @@ logger = my_logger.setup_logging(__name__)
 
 opentsdb_config = config.get('OPENTSDB')
 
-opentsdb_address = 'http://{}:{}/'.format(opentsdb_config['IP'], opentsdb_config['PORT'])
+opentsdb_address = '{}://{}:{}/'.format(opentsdb_config['PROTOCOL'], opentsdb_config['HOST'], opentsdb_config['PORT'])
 api_query = 'api/query'
+
+
+def format_metric_name(naming_list):
+    """
+    Format the metric name.
+
+    :param naming_list: List of names to append to the metric_name.
+    :return: The metric name.
+    """
+    metric_name = '{}'.format(opentsdb_config['STORE_NAME'])
+    for name in naming_list:
+        metric_name += '.{}'.format(name)
+    return metric_name
 
 
 def erase_metrics(name: str, start_timestamp: int, end_timestamp: int) -> object:
@@ -79,11 +92,11 @@ def get_metrics(name: str, start_timestamp: int, end_timestamp: int) -> object:
         sys.exit(status=1)
 
 
-def send_numeric_metrics(pre_label: str, metrics, metric_timestamp: int) -> list:
+def send_numeric_metrics(label: str, metrics, metric_timestamp: int) -> list:
     """
     Sends a collection of metrics to the Time-Series database.
 
-    :param pre_label: The pre label of the metric in string format. Ex.: degree or status_code
+    :param label: The pre label of the metric in string format. Ex.: degree or status_code
     :param metrics: The list of the metrics. Each metric must be a tuple. Ex.: service: value.
     :param metric_timestamp: The metric unix timestamp.
     :return: Metric names if success, Empty list otherwise.
@@ -92,28 +105,25 @@ def send_numeric_metrics(pre_label: str, metrics, metric_timestamp: int) -> list
     if isinstance(metrics, list):
         for tuple_item in metrics:
             x, y = tuple_item
-            metric_name = '{}.{}'.format(pre_label, x)
-            metric_names.append(metric_name)
-            send_numeric_metric(metric_name, y, metric_timestamp)
+            send_numeric_metric([label, x], y, metric_timestamp)
     elif isinstance(metrics, dict):
         for k, v in metrics.items():
-            metric_name = '{}.{}'.format(pre_label, k)
-            metric_names.append(metric_name)
-            send_numeric_metric(metric_name, v, metric_timestamp)
+            send_numeric_metric([label, k], v, metric_timestamp)
     return metric_names
 
 
-def send_numeric_metric(metric_name: str, metric_value, metric_timestamp: int) -> bool:
+def send_numeric_metric(metric_naming_list: list, metric_value, metric_timestamp: int) -> bool:
     """
     Sends a single metric to the Time-Series database.
 
-    :param metric_name: The metric name in string format.
+    :param metric_naming_list: The metric naming list.
     :param metric_value: The metric value in float, integer, or string (convertible to float or integer) format.
     :param metric_timestamp: The metric unix timestamp.
     :return: True if success, False otherwise.
     """
+    metric_name = format_metric_name(metric_naming_list)
     try:
-        client = potsdb.Client(host=opentsdb_config['IP'], port=opentsdb_config['PORT'], check_host=True)
+        client = potsdb.Client(host=opentsdb_config['HOST'], port=opentsdb_config['PORT'], check_host=True)
         client.log(name=metric_name, val=metric_value, timestamp=metric_timestamp)
         client.close()
         return True

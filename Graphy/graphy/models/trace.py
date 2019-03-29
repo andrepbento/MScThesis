@@ -1,115 +1,142 @@
 """
     Author: André Bento
-    Date last modified: 28-02-2019
+    Date last modified: 21-03-2019
 """
 from graphy.models import span as my_span
+from graphy.models.span_tree import SpanTree
+from graphy.utils import logger as my_logger
+
+logger = my_logger.setup_logging(__name__)
 
 
-def count_trace_coverability(trace_coverability):
-    """
-    Counts the trace coverability for each trace.
-
-    :param trace_coverability: A dictionary with the trace coverability data.
-    :return: A dictionary with the interval trace coverability counting.
-    """
-
-    # TODO: Improve method [If else and dict creation].
-    trace_coverability_count = {
-        '<1%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '1-10%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '11-20%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '21-30%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '31-40%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '41-50%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '51-60%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '61-70%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '71-80%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '81-90%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        '91-100%': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
-        },
-        'error': {
-            'value': 0,
-            'trace_ids': set(),
-            'span_ids': set()
+class TraceMetricsData(object):
+    def __init__(self):
+        self.__coverability_count = {
+            '<1%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '1-10%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '11-20%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '21-30%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '31-40%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '41-50%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '51-60%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '61-70%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '71-80%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '81-90%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            '91-100%': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            },
+            'error': {
+                'value': 0,
+                'trace_ids': set(),
+                'span_ids': set()
+            }
         }
-    }
-    for key in trace_coverability.keys():
-        percentage = trace_coverability[key].get('%')
-        span_ids = trace_coverability[key]['span_ids']
-        if percentage < 1.0:
-            trace_coverability_item = trace_coverability_count['<1%']
-        elif 1.0 <= percentage < 10.0:
-            trace_coverability_item = trace_coverability_count['1-10%']
-        elif 11.0 <= percentage < 20.0:
-            trace_coverability_item = trace_coverability_count['11-20%']
-        elif 21.0 <= percentage < 30.0:
-            trace_coverability_item = trace_coverability_count['21-30%']
-        elif 31.0 <= percentage < 40.0:
-            trace_coverability_item = trace_coverability_count['31-40%']
-        elif 41.0 <= percentage < 50.0:
-            trace_coverability_item = trace_coverability_count['41-50%']
-        elif 51.0 <= percentage < 60.0:
-            trace_coverability_item = trace_coverability_count['51-60%']
-        elif 61.0 <= percentage < 70.0:
-            trace_coverability_item = trace_coverability_count['61-70%']
-        elif 71.0 <= percentage < 80.0:
-            trace_coverability_item = trace_coverability_count['71-80%']
-        elif 81.0 <= percentage < 90.0:
-            trace_coverability_item = trace_coverability_count['81-90%']
-        elif 91.0 <= percentage < 100.0:
-            trace_coverability_item = trace_coverability_count['91-100%']
-        else:
-            trace_coverability_item = trace_coverability_count['error']
+        self.__span_trees_metrics = {}
+        self.__response_times = {}
 
-        if trace_coverability_item:
-            trace_coverability_item['value'] += 1
-            trace_coverability_item['trace_ids'].add(key)
-            trace_coverability_item['span_ids'].update(span_ids)
+    @property
+    def coverability_count(self) -> dict:
+        return self.__coverability_count
 
-    return trace_coverability_count
+    @property
+    def response_times(self) -> dict:
+        return self.__response_times
+
+    @property
+    def response_time_avg(self) -> float:
+        if not self.__response_times:
+            return -1
+        return sum(self.__response_times.values()) / len(self.__response_times)
+
+    def update_coverability(self, trace_times: dict) -> None:
+        """
+        Counts the trace coverability for each trace.
+
+        :param trace_times: A dictionary with the trace coverability data.
+        :return: A dictionary with the interval trace coverability counting.
+        """
+
+        # TODO: Improve method [If else].
+        for key in trace_times.keys():
+            percentage = trace_times[key].get('%')
+            span_ids = trace_times[key]['span_ids']
+            if percentage < 1.0:
+                trace_coverability_item = self.__coverability_count['<1%']
+            elif 1.0 <= percentage < 10.0:
+                trace_coverability_item = self.__coverability_count['1-10%']
+            elif 11.0 <= percentage < 20.0:
+                trace_coverability_item = self.__coverability_count['11-20%']
+            elif 21.0 <= percentage < 30.0:
+                trace_coverability_item = self.__coverability_count['21-30%']
+            elif 31.0 <= percentage < 40.0:
+                trace_coverability_item = self.__coverability_count['31-40%']
+            elif 41.0 <= percentage < 50.0:
+                trace_coverability_item = self.__coverability_count['41-50%']
+            elif 51.0 <= percentage < 60.0:
+                trace_coverability_item = self.__coverability_count['51-60%']
+            elif 61.0 <= percentage < 70.0:
+                trace_coverability_item = self.__coverability_count['61-70%']
+            elif 71.0 <= percentage < 80.0:
+                trace_coverability_item = self.__coverability_count['71-80%']
+            elif 81.0 <= percentage < 90.0:
+                trace_coverability_item = self.__coverability_count['81-90%']
+            elif 91.0 <= percentage < 100.0:
+                trace_coverability_item = self.__coverability_count['91-100%']
+            else:
+                trace_coverability_item = self.__coverability_count['error']
+
+            if trace_coverability_item:
+                trace_coverability_item['value'] += 1
+                trace_coverability_item['trace_ids'].add(key)
+                trace_coverability_item['span_ids'].update(span_ids)
+
+    # def update_span_trees_metrics(self, trace_id: str, ):
+    #     self.__span_trees_metrics[trace_id] =
+
+    def update_response_time(self, trace_id: str, response_time: float) -> None:
+        self.__response_times[trace_id] = response_time
 
 
 def get_status_codes(trace_list):
@@ -134,55 +161,88 @@ def get_status_codes(trace_list):
     return status_codes_dict
 
 
-def trace_coverability(traces):
-    # Remove duplicates
+def __calculate_trace_metrics_data(trace_metrics_data: TraceMetricsData, span_tree_obj: SpanTree) -> None:
+    """
+    Calculates the trace metrics data for a certain SpanTree.
+
+    :param trace_metrics_data: A TraceMetricsData object.
+    :param span_tree_obj: A SpanTree object.
+    """
+    trace_id = span_tree_obj.trace_id
+    span_tree = span_tree_obj.span_tree
+
+    response_times = list()
+
     trace_times = dict()
-    span_count = 0
+    trace_times[trace_id] = {
+        't_parent': 0,
+        't_child': 0,
+        '%': -1.0,
+        'span_ids': set()
+    }
+
+    parent_node = span_tree.get_node(span_tree.root)  # TODO: Change to accept multiple levels.
+
+    try:
+        parent_duration = max(parent_node.data.get_durations())
+        trace_times[trace_id]['t_parent'] = parent_duration
+    except Exception as ex:
+        logger.error('{}: {}'.format(type(ex), ex))
+        return
+
+    for child in span_tree.children(span_tree.root):  # TODO: Change to accept multiple levels.
+        child_span_data: my_span.Span = child.data
+
+        span_id = child_span_data.id
+        trace_times[trace_id]['span_ids'].add(span_id)
+
+        duration = max(child_span_data.get_durations())
+        trace_times[trace_id]['t_child'] += duration
+
+        response_times.append(duration)
+
+    t_child = trace_times[trace_id]['t_child']
+    t_parent = trace_times[trace_id]['t_parent']
+    try:
+        t_percentage = (t_child / t_parent) * 100  # microseconds to milliseconds
+        if t_percentage < 0 or t_percentage > 100:
+            raise Exception('trace time percentage error; t_percentage={}'.format(t_percentage))
+        trace_times[trace_id]['%'] = t_percentage
+    except Exception as ex:
+        logger.error('{}: {}'.format(type(ex), ex))
+        trace_times[trace_id]['%'] = -1
+
+    trace_metrics_data.update_coverability(trace_times)
+    trace_metrics_data.update_response_time(trace_id, float(sum(response_times)) / max(len(response_times), 1))
+
+
+def generate_span_trees(traces: list) -> list:
+    """
+    Generates a list of SpanTree's from a list of traces.
+
+    :param traces: The list of traces.
+    :return: The list of SpanTree's.
+    """
+    span_trees = list()
+
     for trace in traces:
-        trace_id = ''
-        tmp_span_parent_id = None
-        for span in trace:
-            span_count += 1
+        span_tree_obj = SpanTree()
+        span_tree_obj.generate_span_tree(trace)
+        span_trees.append(span_tree_obj)
 
-            trace_id = span.get('traceId')
+    return span_trees
 
-            if trace_id not in trace_times:
-                trace_times[trace_id] = {
-                    't_parent': 0,
-                    't_child': 0,
-                    '%': 0.0,
-                    'span_ids': set()
-                }
 
-            span_id = span.get('id')
+def extract_metrics(span_trees) -> TraceMetricsData:
+    """
+    Extracts all metrics needed from a list of SpanTree's.
 
-            if span_id in trace_times[trace_id]['span_ids']:
-                continue
-            trace_times[trace_id]['span_ids'].add(span_id)
+    :param span_trees: The list of SpanTree's.
+    :return: The TraceMetricsData object.
+    """
+    trace_metrics_data = TraceMetricsData()
 
-            span_parent_id = span.get('parentId', False)
+    for span_tree_obj in span_trees:
+        __calculate_trace_metrics_data(trace_metrics_data, span_tree_obj)
 
-            if span_parent_id and span_parent_id == tmp_span_parent_id:
-                trace_times[trace_id]['t_child'] += span.get('duration')
-            else:
-                tmp_span_parent_id = span_id
-                trace_times[trace_id]['t_parent'] = span.get('duration')
-                continue
-
-        t_child = trace_times[trace_id]['t_child']
-        t_parent = trace_times[trace_id]['t_parent']
-        try:
-            percentage = (t_child / t_parent) * 100  # microseconds to milliseconds
-            # if percentage < 0 or percentage > 100:
-            #     print('percentage error:', percentage)
-            # else:
-            #     print('percentage ok:', percentage)
-            trace_times[trace_id]['%'] = percentage
-        except Exception as ex:
-            print(ex)
-            trace_times[trace_id]['%'] = -1
-    trace_coverability = count_trace_coverability(trace_times)
-    #print('span_count:', span_count)
-    #print('trace_count:', len(traces))
-    #print('trace_coverability:\n{}'.format(trace_coverability))
-    return trace_coverability
+    return trace_metrics_data

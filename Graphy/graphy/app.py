@@ -15,10 +15,14 @@ class Graphy(object):
     def run():
         graphy_config = config.get('GRAPHY')
 
-        file = files.get_absolute_path(graphy_config.get('TRACE_FILE'), graphy_config.get('TRACE_FILE_FROM_PROJECT'))
+        trace_files = graphy_config.get('TRACE_FILES')
 
         view = ConsoleView()
         controller = Controller(view)
-        controller.setup_zipkin(file)
+
+        for trace_file in trace_files:
+            trace_file_path = files.get_absolute_path(trace_file, graphy_config.get('TRACE_FILE_FROM_PROJECT'))
+            print('Posting file: {} to Zipkin'.format(trace_file_path))
+            controller.setup_zipkin(trace_file_path)
 
         controller.start()

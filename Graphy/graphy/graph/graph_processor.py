@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms as nx_algorithms
 
-from graphy.models.span_tree import SpanTree
 from graphy.utils import list as my_list
 from graphy.utils import logger as my_logger
 
@@ -40,17 +39,6 @@ class GraphProcessor:
         """
         self.__graph.add_edges_from(tuple_list)
         return self.__graph
-
-    def generate_graph_from_spans(self, spans_array):
-        """
-        Generates the graph using the spans array data.
-
-        :param spans_array: Array of span objects.
-        """
-        # TODO: Check if it is needed or should be removed.
-        self.span_tree = SpanTree(spans_array)
-        # Generate nodes and edges
-        self.__generate_nodes_and_edges()
 
     def generate_graph_from_zipkin(self, dependencies, start_timestamp, end_timestamp):
         """
@@ -106,7 +94,7 @@ class GraphProcessor:
         graph_1 = first_graph.copy()  # Copy to preserve values.
         graph_2 = second_graph.copy()
 
-        # Cycle through all edges in G.
+        # Cycle through all edges in the first graph.
         for n in graph_1.edges:
             if n not in graph_2.edges:
                 edge_weight = graph_1.get_edge_data(n[0], n[1])[0].get('weight')
@@ -188,7 +176,7 @@ class GraphProcessor:
         self.span_tree.print()
         logger.info('traces: {}'.format(self.span_tree.count_traces()))
         logger.info('spans: {}'.format(self.span_tree.count_spans()))
-        logger.info('spans_max_depth: {}'.format(self.span_tree.span_max_depth()))
+        logger.info('spans_max_depth: {}'.format(self.span_tree.depth()))
 
     def print_graph_data(self, print_graph_data=True):
         """ Print graph data. """
@@ -410,37 +398,80 @@ class GraphProcessor:
     def __floyd_warshall(self):
         return nx_algorithms.floyd_warshall(self.__graph)
 
-    def degrees(self, sort: bool = True) -> list:
+    def degrees(self, direction: str = None, sort: bool = True) -> list:
         """
         Calculates the degree for all nodes.
         Node degree is the sum of all input and output edges.
 
+        :param direction: The edge direction, 'in' - input, 'out' - output, other - both.
         :param sort: sort the list by degree in reverse order.
         :return: a tuple list containing all the nodes and their corresponding degree.
         """
         # TODO: The following lines of code can be used to get the input or output degree from all nodes
-        # in_degree = self.G.in_degree
-        # out_degree = self.G.out_degree
-        return sorted(self.__graph.degree, key=lambda tup: tup[1], reverse=sort)
+        if direction == 'in':
+            in_degrees = self.__graph.in_degree
+            return sorted(in_degrees, key=lambda tup: tup[1], reverse=sort)
+        elif direction == 'out':
+            out_degrees = self.__graph.out_degree
+            return sorted(out_degrees, key=lambda tup: tup[1], reverse=sort)
+        else:
+            return sorted(self.__graph.degree, key=lambda tup: tup[1], reverse=sort)
 
     def edges_call_count(self, service_name: str = None, sort: bool = True) -> list:
         """
         Calculates the number of calls for all nodes or for a specific node.
 
-        :param service_name: the service node name.
-        :param sort:
-        :return:
+        :param service_name: The service node name.
+        :param sort: True to sort the result, False otherwise.
+        :return: The list of call counts.
         """
-        # TODO: The following lines of code can be used to get the input and output from all edges
-        # in_edges = list(self.__graph.in_edges(data=True))
-        # out_edges = list(self.__graph.out_edges(data=True))
-
-        edges_call_count = dict()
-
         if service_name:
             edges = list(self.__graph.edges(service_name, data=True))
         else:
             edges = list(self.__graph.edges(data=True))
+
+        return self.__count_edges(edges, sort)
+
+    def in_edges_call_count(self, service_name: str = None, sort: bool = True) -> list:
+        """
+        Calculates the number of in calls for all nodes or for a specific node.
+
+        :param service_name: The service node name.
+        :param sort: True to sort the result, False otherwise.
+        :return: The list of call counts.
+        """
+        if service_name:
+            edges = list(self.__graph.in_edges(service_name, data=True))
+        else:
+            edges = list(self.__graph.in_edges(data=True))
+
+        return self.__count_edges(edges, sort)
+
+    def out_edges_call_count(self, service_name: str = None, sort: bool = True) -> list:
+        """
+        Calculates the number of out calls for all nodes or for a specific node.
+
+        :param service_name: The service node name.
+        :param sort: True to sort the result, False otherwise.
+        :return: The list of call counts.
+        """
+        if service_name:
+            edges = list(self.__graph.out_edges(service_name, data=True))
+        else:
+            edges = list(self.__graph.out_edges(data=True))
+
+        return self.__count_edges(edges, sort)
+
+    @staticmethod
+    def __count_edges(edges: list, sort: bool) -> list:
+        """
+        Counts the edges from a certain list of edges.
+
+        :param edges: The edge list with weight values.
+        :param sort: True to sort the result, False otherwise.
+        :return: The list of call counts.
+        """
+        edges_call_count = dict()
 
         for edge in edges:
             service_from = edge[0]

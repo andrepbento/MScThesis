@@ -9,8 +9,8 @@ pandas
 potsdb
 profilehooks
 pytest
-PyYAML
 python-arango
+PyYAML
 requests2
 simplejson
 treelib

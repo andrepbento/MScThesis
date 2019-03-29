@@ -6,6 +6,7 @@ import time
 from unittest import TestCase
 
 from graphy.db import opentsdb
+from graphy.utils import config as my_config
 
 TIME_WAIT = 3
 
@@ -32,14 +33,21 @@ class TestOpenTSDB(TestCase):
 
         opentsdb.erase_metrics(self.__metric_name, self.__start_timestamp, self.__end_timestamp)
 
+    def test_format_metric_name(self):
+        """ Tests format_metric_name function. """
+        naming_list = ['test', 'name']
+        expected_result = '{}.{}.{}'.format(my_config.get('OPENTSDB').get('STORE_NAME'), naming_list[0], naming_list[1])
+
+        self.assertEqual(opentsdb.format_metric_name(naming_list), expected_result)
+
     def test_erase_metrics(self):
         """ Tests erase_metrics function. """
 
-        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_1.get('name'), self.__metric_1.get('value'),
+        self.assertTrue(opentsdb.send_numeric_metric([self.__metric_1.get('name')], self.__metric_1.get('value'),
                                                      self.__metric_1.get('ts')))
         time.sleep(TIME_WAIT)
 
-        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_2.get('name'), self.__metric_2.get('value'),
+        self.assertTrue(opentsdb.send_numeric_metric([self.__metric_2.get('name')], self.__metric_2.get('value'),
                                                      self.__metric_2.get('ts')))
         time.sleep(TIME_WAIT)
 
@@ -58,12 +66,12 @@ class TestOpenTSDB(TestCase):
 
         time.sleep(TIME_WAIT)
 
-        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_1.get('name'), self.__metric_1.get('value'),
+        self.assertTrue(opentsdb.send_numeric_metric([self.__metric_1.get('name')], self.__metric_1.get('value'),
                                                      self.__metric_1.get('ts')))
 
         time.sleep(TIME_WAIT)
 
-        self.assertTrue(opentsdb.send_numeric_metric(self.__metric_2.get('name'), self.__metric_2.get('value'),
+        self.assertTrue(opentsdb.send_numeric_metric([self.__metric_2.get('name')], self.__metric_2.get('value'),
                                                      self.__metric_2.get('ts')))
 
         time.sleep(TIME_WAIT)
@@ -88,8 +96,6 @@ class TestOpenTSDB(TestCase):
 
     def test_send_numeric_metric(self):
         """ Tests send_numeric_metric function. """
-        metric_name = self.__metric_name
-
-        self.assertTrue(opentsdb.send_numeric_metric(metric_name, 100, 1546304400))  # 2019.1.1 01:00:00
+        self.assertTrue(opentsdb.send_numeric_metric([self.__metric_name], 100, 1546304400))  # 2019.1.1 01:00:00
 
         time.sleep(TIME_WAIT)

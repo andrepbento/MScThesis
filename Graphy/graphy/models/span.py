@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 28-02-2019
+    Date last modified: 20-03-2019
 
 Fields:
 -------
@@ -27,11 +27,7 @@ Notes:
 1. Time units are not consistent, some fields are in milliseconds and some are in microseconds
 2. Trace spans may contain more fields, except those mentioned here
 """
-from enum import Enum
 
-from graphy.models.annotation import Annotation
-from graphy.models.attributes import get_attribute, set_attribute_value
-from graphy.models.binary_annotation import BinaryAnnotation
 from graphy.utils import dict as my_dict
 from graphy.utils import logger as my_logger
 
@@ -44,136 +40,27 @@ logger = my_logger.setup_logging(__name__)
 
 
 class Span(object):
-    def __init__(self, data):
-        """ Span initialization using JSON data. """
-        self.__dict__ = json.loads(data)
+    def __init__(self, id: str, parent_id: str = None, spans_data: list = None):
+        if spans_data is None:
+            spans_data = list()
 
-    def __str__(self):
-        """
-        Span string representation containing all the object property values.
+        self.parent_id = parent_id
+        self.id = id
+        self.spans_data = spans_data
 
-        :return: the span as a string
-        """
-        return str(self.__dict__)
-
-    @property
-    def trace_id(self):
-        """
-        Span trace id, present in all spans.
-
-        :return: the trace id value
-        """
-        attribute_key = 'traceId'
-        return get_attribute(self, attribute_key)
-
-    @property
-    def name(self):
-        """
-        Span name in lowercase, rpc method for example.
-
-        :return: the span name value
-        """
-        attribute_key = 'name'
-        return get_attribute(self, attribute_key)
-
-    @property
-    def timestamp(self):
-        """
-        Epoch microseconds of the start of this span, possibly absent if this an incomplete span.
-
-        :return: the span timestamp value
-        """
-        attribute_key = 'timestamp'
-        attribute = get_attribute(self, attribute_key)
-        if attribute is None:
-            return None
-        timestamp = fix_timestamp(attribute)
-        set_attribute_value(self, attribute_key, timestamp)
-        return timestamp
-
-    @property
-    def parent_id(self):
-        attribute_key = 'parentId'
-        return get_attribute(self, attribute_key)
-
-    @property
-    def id(self):
-        attribute_key = 'id'
-        return get_attribute(self, attribute_key)
-
-    @property
-    def kind(self):
-        attribute_key = 'kind'
-        return Kind.CLIENT
-
-    @property
-    def local_service_name(self):
-        """
-        Local service name property
-
-        :return: the local service name
-        """
-        return 'lpn'
-
-    @property
-    def remote_service_name(self):
-        """
-        Remote service name property
-
-        :return: the remote service name
-        """
-        return 'rpn'
-
-    @property
-    def tags(self):
-        """
-        Spans tags are presented with all the binary annotations
-
-        :return: a dictionary containing all binary annotations
-        """
-        i = iter(self.binary_annotations)
-        tags = dict(zip(i, i))
-        return tags
-
-    @property
-    def binary_annotations(self):
-        attribute_key = 'binaryAnnotations'
-        binary_annotations = []
-        if attribute_key in self.__dict__:
-            for _, binary_annotation in enumerate(self.__dict__[attribute_key]):
-                binary_annotation = BinaryAnnotation(json.dumps(binary_annotation))
-                binary_annotations.append(binary_annotation)
-            return binary_annotations
-        return None
-
-    @property
-    def annotations(self):
-        attribute_key = 'annotations'
-        annotations = []
-        if attribute_key in self.__dict__:
-            for _, annotation_data in enumerate(self.__dict__[attribute_key]):
-                annotation = Annotation(json.dumps(annotation_data))
-                annotations.append(annotation)
-            return annotations
-        return None
+    def get_durations(self):
+        durations = list()
+        for span_data in self.spans_data:
+            durations.append(span_data.get('duration', 0))
+        return durations
 
 
-class Kind(Enum):
-    CLIENT = 1,
-    SERVER = 2,
-    PRODUCER = 3,
-    CONSUMER = 4
-
-
-def fix_timestamps(spans):
+def fix_timestamps(spans: list):
     """
     Fixes multiple timestamp values in a span list.
 
     :param spans: The span list.
     """
-    if type(spans) is not list:
-        return
-
     timestamp = 'timestamp'
 
     for span in spans:
@@ -204,18 +91,3 @@ def get_status_code(span):
     except Exception as e:
         logger.error(e)
         return False
-
-
-def parse_to_spans_array(spans_json_path):
-    """
-    Parses JSON data to Span Object Array.
-
-    Returns Span Array.
-    """
-    with open(spans_json_path) as fp:
-        span_json = fp.read()
-    loaded_json = json.loads(span_json)
-    spans_array = []
-    for _, json_obj in enumerate(loaded_json):
-        spans_array.append(Span(str(json_obj).replace('\'', '\"')))
-    return spans_array
