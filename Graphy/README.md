@@ -42,6 +42,10 @@ sudo python3 setup.py run
 You can modify some configurations regarding the application communication and interaction with other components, for 
 this use the [config.json](graphy/config.yaml) file.
 
+## OTP (OpenTracing Processor)
+
+The OpenTracing processor developed using Java Stream API is available in the following [repository](https://github.com/jaimelive/OpenTracingProcessor).
+
 ## Service Analysis Algorithms
 
-- [Work in progress...]
+- Available in the [Notebooks directory](../notebooks).
