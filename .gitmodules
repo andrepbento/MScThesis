@@ -4,3 +4,6 @@
 [submodule "OpenTracingProcessor"]
 	path = OpenTracingProcessor
 	url = https://github.com/jaimelive/OpenTracingProcessor
+[submodule "papers/IEEE_NCA_19_Tracing_Analysis_Paper"]
+	path = papers/IEEE_NCA_19_Tracing_Analysis_Paper
+	url = git@github.com:andrepbento/IEEE_NCA_19_Tracing_Analysis_Paper.git
