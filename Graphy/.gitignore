@@ -131,3 +131,6 @@ data/
 
 # Graphy: Temporary files
 tmp/
+
+# Log files
+*.log.*
