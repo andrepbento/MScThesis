@@ -126,8 +126,8 @@ ENV/
 data/
 
 # Graphy: Exception for sample trace files
-!28_06_simplified_100_spans.json
-!28_06_simplified_100_spans.jsonl
+!data/28_06_simplified_100_spans.json
+!data/28_06_simplified_100_spans.jsonl
 
 # Graphy: Temporary files
 tmp/
