@@ -334,20 +334,11 @@
     "parentId": "eb85cc515d176adf",
     "duration": 206505,
     "id": "d6a71525ee3eedd9",
-    "binaryAnnotations": [
-      {
-        "key": "http.status_code",
-        "value": "404"
-      },
-      {
-        "key": "http.url",
-        "value": "/v2/a7dc32c528384934b7ba607dd27ca43e/servers/e574e011-24ed-4dbe-8283-fc6ee9a60eaf"
-      },
-      {
-        "key": "protocol",
-        "value": "HTTP"
-      }
-    ],
+    "binaryAnnotations": {
+      "http.status_code": "404",
+      "http.url": "/v2/a7dc32c528384934b7ba607dd27ca43e/servers/e574e011-24ed-4dbe-8283-fc6ee9a60eaf",
+      "protocol": "HTTP"
+    },
     "annotations": [
       {
         "timestamp": 1530138186893528,

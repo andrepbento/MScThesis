@@ -1,6 +1,7 @@
 click
 click-log
 coloredlogs
+jsonschema
 matplotlib
 networkx
 numpy

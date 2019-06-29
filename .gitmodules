@@ -1,0 +1,6 @@
+[submodule "MScThesisReport"]
+	path = MScThesisReport
+	url = https://github.com/andrepbento/MScThesis
+[submodule "OpenTracingProcessor"]
+	path = OpenTracingProcessor
+	url = https://github.com/jaimelive/OpenTracingProcessor

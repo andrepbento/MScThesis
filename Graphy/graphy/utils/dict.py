@@ -2,6 +2,7 @@
     Author: André Bento
     Date last modified: 01-03-2019
 """
+import collections
 import operator
 
 
@@ -38,14 +39,27 @@ def filter(dictionary: dict, key) -> dict:
     return result_dict
 
 
-def sort(dictionary: dict) -> list:
+def merge_dicts(dict1: dict, dict2: dict) -> dict:
+    """
+    Merges two dicts adding up the values.
+
+    :param dict1: The first dict.
+    :param dict2: The second dict.
+    :return: A dict with the added values of first and second dicts.
+    """
+    return dict(collections.Counter(dict1) + collections.Counter(dict2))
+
+
+def sort(dictionary: dict, reverse: bool = True) -> dict:
     """
     Sorts a dictionary by their values.
 
     :param dictionary: The dictionary to sort.
+    :param reverse: True - reverse, False otherwise.
     :return: A list with the sorted values in reverse order.
     """
-    return sorted(dictionary.items(), key=operator.itemgetter(1), reverse=True)
+    sorted_list = sorted(dictionary.items(), key=operator.itemgetter(1), reverse=reverse)
+    return collections.OrderedDict(sorted_list)
 
 
 def update(dictionary: dict, key, func):

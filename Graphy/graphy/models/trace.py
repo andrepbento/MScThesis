@@ -1,6 +1,6 @@
 """
     Author: André Bento
-    Date last modified: 21-03-2019
+    Date last modified: 08-04-2019
 """
 from graphy.models import span as my_span
 from graphy.models.span_tree import SpanTree
@@ -73,8 +73,11 @@ class TraceMetricsData(object):
                 'span_ids': set()
             }
         }
-        self.__span_trees_metrics = {}
         self.__response_times = {}
+        self.__structural_issues = {
+            "count": 0,
+            "issue_list": list()
+        }
 
     @property
     def coverability_count(self) -> dict:
@@ -132,11 +135,12 @@ class TraceMetricsData(object):
                 trace_coverability_item['trace_ids'].add(key)
                 trace_coverability_item['span_ids'].update(span_ids)
 
-    # def update_span_trees_metrics(self, trace_id: str, ):
-    #     self.__span_trees_metrics[trace_id] =
-
     def update_response_time(self, trace_id: str, response_time: float) -> None:
         self.__response_times[trace_id] = response_time
+
+    def update_structural_issues(self, issue: Exception):
+        self.__structural_issues["count"] += 1
+        self.__structural_issues["issue_list"].append(issue)
 
 
 def get_status_codes(trace_list):

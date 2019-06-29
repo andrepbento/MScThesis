@@ -1,8 +1,7 @@
 """
     Author: André Bento
-    Date last modified: 22-03-2019
+    Date last modified: 08-04-2019
 """
-import multiprocessing as mp
 import os
 import sys
 import time
@@ -11,14 +10,10 @@ from graphy.controller import controller_logic as cl
 from graphy.models import trace as my_trace
 from graphy.utils import config, files
 from graphy.utils import json as my_json
+from graphy.utils import list as my_list
 from graphy.utils import logger as my_logger
 from graphy.utils import time as my_time
 from graphy.utils import zipkin
-
-try:
-    cpus = mp.cpu_count()
-except NotImplementedError:
-    cpus = 2  # arbitrary default
 
 logger = my_logger.setup_logging(__name__)
 
@@ -57,7 +52,7 @@ class Controller(object):
                     self.show_service_status_codes_analysis,
                 'Show service status code analysis in time (EXPERIMENTAL)':
                     self.show_service_status_code_analysis_in_time,
-                'Show trace quality analysis (EXPERIMENTAL)':
+                'Gather and show tracing quality analysis [Time coverability and structural testing] (EXPERIMENTAL)':
                     self.show_trace_quality_analysis,
                 'Show response time analysis (NOT IMPLEMENTED)':
                     self.show_response_time_analysis,
@@ -122,7 +117,7 @@ class Controller(object):
 
         if trace_file_path:
             logger.debug('Using file: {}'.format(trace_file_path))
-            print('Posting file: {} to Zipkin'.format(trace_file_path))
+            print('Posting file: {} to Zipkin -> {}'.format(trace_file_path, zipkin.base_address))
 
             if not zipkin.post_spans(trace_file_path):
                 logger.error('error posting data to zipkin')
@@ -160,7 +155,7 @@ class Controller(object):
                                    end_timestamp)
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
             for timestamp_1, timestamp_2 in timestamps:
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2)
@@ -200,7 +195,7 @@ class Controller(object):
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
             for timestamp_1, timestamp_2 in timestamps:
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
@@ -240,24 +235,15 @@ class Controller(object):
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
             print(len(timestamps))
 
-            processes = []
             for timestamp_1, timestamp_2 in timestamps:
-                p = mp.Process(target=cl.service_call_count, args=(timestamp_1, timestamp_2,))
-                processes.append(p)
-                p.start()
+                dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
 
-            for process in processes:
-                process.join()
-
-            # for timestamp_1, timestamp_2 in timestamps:
-            #    dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
-            #
-            #    message = cl.service_call_count(dependencies, timestamp_1, timestamp_2)
-            #    self.view.display_message(message[0], message[1])
+                message = cl.service_call_count(dependencies, timestamp_1, timestamp_2)
+                self.view.display_message(message[0], message[1])
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
 
@@ -297,7 +283,7 @@ class Controller(object):
             service_names = zipkin.get_services()
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
             for timestamp_1, timestamp_2 in timestamps:
                 for service_name in service_names:
@@ -318,7 +304,7 @@ class Controller(object):
 
             service_names = zipkin.get_services()
 
-            for i, service_name in enumerate(service_names):
+            for service_name in service_names:
                 traces = zipkin.get_traces(service_name=service_name, end_ts=end_timestamp,
                                            lookback=end_timestamp - start_timestamp)
 
@@ -337,7 +323,7 @@ class Controller(object):
             service_names = zipkin.get_services()
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
             for timestamp_1, timestamp_2 in timestamps:
                 # TODO: IMPROVE DATA USAGE.
@@ -366,13 +352,12 @@ class Controller(object):
             self.view.display_time('end_time:', my_time.from_timestamp_to_datetime(end_timestamp), end_timestamp)
 
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
-            previous_graph = None
             for timestamp_1, timestamp_2 in timestamps:
                 dependencies = zipkin.get_dependencies(end_ts=timestamp_2, lookback=timestamp_2 - timestamp_1)
 
-                message = cl.service_morphology(dependencies, timestamp_1, timestamp_2, previous_graph)
+                message = cl.service_morphology(dependencies, timestamp_1, timestamp_2)
                 self.view.display_message(message[0], message[1])
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))
@@ -404,19 +389,12 @@ class Controller(object):
             timestamps = my_time.timestamp_millis_split(start_timestamp, end_timestamp)
 
             service_names = zipkin.get_services()
-            # service_names = ['api_com', 'nova_api_cascading']
 
-            timestamps = list(zip(timestamps[0::2], timestamps[1::2]))
+            timestamps = my_list.tuple_list(timestamps)
 
             print(len(timestamps))
 
-            pool = mp.Pool(processes=cpus)
-
-            [pool.apply_async(cl.process_all_metrics_in_time,
-                              args=(service_names, timestamp_tuple[0], timestamp_tuple[1],))
-             for timestamp_tuple in timestamps]
-
-            pool.close()
-            pool.join()
+            for timestamp_tuple in timestamps:
+                cl.process_all_metrics_in_time(service_names, timestamp_tuple[0], timestamp_tuple[1])
 
             self.view.display_message('Time processing', 'finish in {} seconds'.format(time.time() - start_time))

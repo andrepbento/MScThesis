@@ -4,7 +4,6 @@ This repository contains some contents related to the project of my Master Thesi
 
 ## Contents
 
-* [Architecture](architecture) - The solution architecture.
 * [Graphy](Graphy) - Developed tool for the whole project.
-* [Report](report) - Project report in `LaTeX` and `pdf` formats.
-* [Requirements](requirements) - The solution requirements.
+* [Report](MScThesisReport) - Project report in `LaTeX` and `pdf` formats.
+* [Notebooks](notebooks) - Notebooks with the metrics analysis algorithms.

@@ -2,12 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac17d9c-0640-4218-92c8-7fa55c430a98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/graphy/controller/controller_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Graphy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Graphy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Run.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/28_06_simplified_100_spans.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/28_06_simplified_100_spans.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphy/controller/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/controller/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphy/utils/zipkin.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/zipkin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/controller/controller_logic.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/controller/controller_logic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/db/arangodb.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/db/arangodb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/graph/graph_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/graph/graph_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/models/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/models/trace.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/files.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/list.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphy/utils/plots.py" beforeDir="false" afterPath="$PROJECT_DIR$/graphy/utils/plots.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opentsdb.conf" beforeDir="false" afterPath="$PROJECT_DIR$/opentsdb.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/utils/test_dict.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/utils/test_dict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../architecture/Graphy_Architecture.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../architecture/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../notebooks/.idea/notebooks.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../notebooks/.idea/notebooks.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/MScThesisReport.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/MScThesisReport.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/foreseen_work_plan_semester_2.gan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/foreseen_work_plan_semester_2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/foreseen_work_plan_semester_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/proposed_work_plan_semester_1.gan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/proposed_work_plan_semester_1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/proposed_work_plan_semester_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/proposed_work_plan_semester_2.gan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/proposed_work_plan_semester_2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/proposed_work_plan_semester_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/real_work_plan_semester_1.gan" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/real_work_plan_semester_1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/real_work_plan_semester_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/gantt_charts/tasks_2_semester" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/arangodb_vs_neo4j_scalability.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/component_diagram.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/container_diagram.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/context_diagram.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/fctuc-logo.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/graph_manipulation_tools_diagram_comparison.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/graph_visual_representation.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/influxdb_vs_opentsdb_storage_requirements.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/influxdb_vs_opentsdb_write_throughput.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/monolithic_and_microservices.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/popularity_of_time_series_databases.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/proposed_work_plan_semester_1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/proposed_work_plan_semester_2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/real_work_plan_semester_1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/span_tree.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/span_tree_example.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/traces-and-spans.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../report/images/utility_tree.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../requirements/README.md" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,39 +67,39 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_get_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_get_metrics Coverage Results" MODIFIED="1551719990303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_timestamp_millis_split.coverage" NAME="Unittests for test_time.TestTime.test_timestamp_millis_split Coverage Results" MODIFIED="1551880173713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_list_TestList.coverage" NAME="Unittests for test_list.TestList Coverage Results" MODIFIED="1551393363911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$spark__1_.coverage" NAME="spark (1) Coverage Results" MODIFIED="1553601420998" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Graphy$zipkin.coverage" NAME="zipkin Coverage Results" MODIFIED="1551368350521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$arangodb.coverage" NAME="arangodb Coverage Results" MODIFIED="1551884845919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/db" />
-    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1553621280062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Graphy$Test.coverage" NAME="Test Coverage Results" MODIFIED="1551451331930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_calc_percentage.coverage" NAME="Unittests for test_dict.TestDict.test_calc_percentage Coverage Results" MODIFIED="1551449455511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime.coverage" NAME="Unittests for test_time.TestTime Coverage Results" MODIFIED="1551880322352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$app.coverage" NAME="app Coverage Results" MODIFIED="1551196347236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles.coverage" NAME="Unittests for test_files.TestFiles Coverage Results" MODIFIED="1551197681872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_update.coverage" NAME="Unittests for test_dict.TestDict.test_update Coverage Results" MODIFIED="1551451062492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_format_metric_name.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_format_metric_name Coverage Results" MODIFIED="1551973353618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig.coverage" NAME="Unittests for test_config.TestConfig Coverage Results" MODIFIED="1551196158663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_get_absolute_path.coverage" NAME="Unittests for test_files.TestFiles.test_get_absolute_path Coverage Results" MODIFIED="1551197199658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_logger_TestLogger_test_setup_logging.coverage" NAME="Unittests for test_logger.TestLogger.test_setup_logging Coverage Results" MODIFIED="1551274901188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$spark.coverage" NAME="spark Coverage Results" MODIFIED="1553599140895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_read_file.coverage" NAME="Unittests for test_files.TestFiles.test_read_file Coverage Results" MODIFIED="1551197502842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_send_numeric_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_send_numeric_metrics Coverage Results" MODIFIED="1551718395572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_in_test_config_py.coverage" NAME="Unittests in test_config.py Coverage Results" MODIFIED="1551196420009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$trace.coverage" NAME="trace Coverage Results" MODIFIED="1552404922460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/models" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin.coverage" NAME="Unittests for test_zipkin.TestZipkin Coverage Results" MODIFIED="1551881327813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig_test_get.coverage" NAME="Unittests for test_config.TestConfig.test_get Coverage Results" MODIFIED="1551196015592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit.coverage" NAME="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit Coverage Results" MODIFIED="1551881167115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_erase_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_erase_metrics Coverage Results" MODIFIED="1551718066011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_timestamp_millis_split.coverage" NAME="Unittests for test_time.TestTime.test_timestamp_millis_split Coverage Results" MODIFIED="1551880173713" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$zipkin.coverage" NAME="zipkin Coverage Results" MODIFIED="1551368350521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin.coverage" NAME="Unittests for test_zipkin.TestZipkin Coverage Results" MODIFIED="1551881327813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_get_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_get_metrics Coverage Results" MODIFIED="1551719990303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_in_test_opentsdb_py.coverage" NAME="Unittests in test_opentsdb.py Coverage Results" MODIFIED="1551451876916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_filter.coverage" NAME="Unittests for test_dict.TestDict.test_filter Coverage Results" MODIFIED="1551450645679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict.coverage" NAME="Unittests for test_dict.TestDict Coverage Results" MODIFIED="1551451299309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_from_str_to_datetime.coverage" NAME="Unittests for test_time.TestTime.test_from_str_to_datetime Coverage Results" MODIFIED="1551880306964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
-    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_from_timestamp_to_datetime.coverage" NAME="Unittests for test_time.TestTime.test_from_timestamp_to_datetime Coverage Results" MODIFIED="1551879987156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB Coverage Results" MODIFIED="1551720134206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime.coverage" NAME="Unittests for test_time.TestTime Coverage Results" MODIFIED="1551880322352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_format_metric_name.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_format_metric_name Coverage Results" MODIFIED="1551973353618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_update.coverage" NAME="Unittests for test_dict.TestDict.test_update Coverage Results" MODIFIED="1551451062492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_from_str_to_datetime.coverage" NAME="Unittests for test_time.TestTime.test_from_str_to_datetime Coverage Results" MODIFIED="1551880306964" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_config_TestConfig.coverage" NAME="Unittests for test_config.TestConfig Coverage Results" MODIFIED="1551196158663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_from_timestamp_to_datetime.coverage" NAME="Unittests for test_time.TestTime.test_from_timestamp_to_datetime Coverage Results" MODIFIED="1551879987156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_erase_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_erase_metrics Coverage Results" MODIFIED="1551718066011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$app.coverage" NAME="app Coverage Results" MODIFIED="1551196347236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit.coverage" NAME="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit Coverage Results" MODIFIED="1551881167115" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_read_file.coverage" NAME="Unittests for test_files.TestFiles.test_read_file Coverage Results" MODIFIED="1551197502842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_calc_percentage.coverage" NAME="Unittests for test_dict.TestDict.test_calc_percentage Coverage Results" MODIFIED="1551449455511" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_list_TestList_test_diff.coverage" NAME="Unittests for test_list.TestList.test_diff Coverage Results" MODIFIED="1551393143836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$trace.coverage" NAME="trace Coverage Results" MODIFIED="1552404922460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/models" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_list_TestList.coverage" NAME="Unittests for test_list.TestList Coverage Results" MODIFIED="1551393363911" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1553621280062" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles_test_get_absolute_path.coverage" NAME="Unittests for test_files.TestFiles.test_get_absolute_path Coverage Results" MODIFIED="1551197199658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_in_test_config_py.coverage" NAME="Unittests in test_config.py Coverage Results" MODIFIED="1551196420009" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_filter.coverage" NAME="Unittests for test_dict.TestDict.test_filter Coverage Results" MODIFIED="1551450645679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_opentsdb_TestOpenTSDB_test_send_numeric_metrics.coverage" NAME="Unittests for test_opentsdb.TestOpenTSDB.test_send_numeric_metrics Coverage Results" MODIFIED="1551718395572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict.coverage" NAME="Unittests for test_dict.TestDict Coverage Results" MODIFIED="1551451299309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_files_TestFiles.coverage" NAME="Unittests for test_files.TestFiles Coverage Results" MODIFIED="1551197681872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Test.coverage" NAME="Test Coverage Results" MODIFIED="1551451331930" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Graphy$arangodb.coverage" NAME="arangodb Coverage Results" MODIFIED="1551884845919" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/db" />
+    <SUITE FILE_PATH="coverage/Graphy$spark.coverage" NAME="spark Coverage Results" MODIFIED="1553599140895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_logger_TestLogger_test_setup_logging.coverage" NAME="Unittests for test_logger.TestLogger.test_setup_logging Coverage Results" MODIFIED="1551274901188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
     <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_time_TestTime_test_to_unix_time.coverage" NAME="Unittests for test_time.TestTime.test_to_unix_time Coverage Results" MODIFIED="1551879193761" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
   </component>
   <component name="CoverageViewManager">
@@ -73,43 +124,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="248" selection-start-line="248" selection-end-line="248" />
-              <folding>
-                <element signature="e#67#95#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
-              <folding>
-                <element signature="e#968#1008#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/controller/controller_logic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+            <state relative-caret-position="1343">
+              <caret line="87" column="17" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
               <folding>
-                <element signature="e#66#96#0" expanded="true" />
+                <element signature="e#65#74#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5066">
+              <caret line="309" selection-start-line="309" selection-end-line="309" />
             </state>
           </provider>
         </entry>
@@ -117,57 +148,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="30" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="30" />
+            <state relative-caret-position="765">
+              <caret line="45" column="24" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docker-compose.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="59" column="19" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
+        <entry file="file://$PROJECT_DIR$/graphy/models/trace.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="2992">
+              <caret line="239" column="13" selection-start-line="239" selection-start-column="13" selection-end-line="239" selection-end-column="13" />
               <folding>
-                <element signature="e#67#106#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/utils/plots.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
-              <folding>
-                <element signature="e#67#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/utils/logger.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/graphy/app.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="30" selection-start-line="30" selection-end-line="30" />
-              <folding>
-                <element signature="e#67#89#0" expanded="true" />
+                <element signature="e#337#1987#0" />
+                <element signature="e#358#471#0" />
               </folding>
             </state>
           </provider>
@@ -185,10 +188,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>G</find>
-      <find>H</find>
-      <find>first_graph</find>
-      <find>second_graph</find>
       <find>'api_com', 'neutron-server-cascading'</find>
       <find>profile</find>
       <find>logger</find>
@@ -212,9 +211,13 @@
       <find>call_count</find>
       <find>TRACE_FILE</find>
       <find>graph_variance</find>
-      <find>f9e26b7bd3e471f7a60621bfef974c9d</find>
       <find>http.url</find>
       <find>TIMESTAMP_RESOLUTION</find>
+      <find>call_count_out</find>
+      <find>gain</find>
+      <find>f9e26b7bd3e471f7a60621bfef974c9d</find>
+      <find>6cd10f0531954ddebca0ce7b43cf939b</find>
+      <find>plot_service_trace_cov</find>
     </findStrings>
     <replaceStrings>
       <replace>:</replace>
@@ -237,9 +240,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tests/utils/list.py" />
-        <option value="$PROJECT_DIR$/tests/utils/__init__.py" />
-        <option value="$PROJECT_DIR$/tests/__init__.py" />
         <option value="$PROJECT_DIR$/tests/test.py" />
         <option value="$PROJECT_DIR$/tests/test_app.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_config.py" />
@@ -249,10 +249,7 @@
         <option value="$PROJECT_DIR$/graphy/view/console_view.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_logger.py" />
         <option value="$PROJECT_DIR$/data/TRASH.json" />
-        <option value="$PROJECT_DIR$/graphy/utils/list.py" />
         <option value="$PROJECT_DIR$/tests/utils/test_list.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/dict.py" />
-        <option value="$PROJECT_DIR$/tests/utils/test_dict.py" />
         <option value="$PROJECT_DIR$/tests/db/__init__.py" />
         <option value="$PROJECT_DIR$/tests/db/test_arango.py" />
         <option value="$PROJECT_DIR$/tests/db/test_arangodb.py" />
@@ -265,36 +262,42 @@
         <option value="$PROJECT_DIR$/tests/utils/test_zipkin.py" />
         <option value="$PROJECT_DIR$/docker-compose-elasticsearch.yml" />
         <option value="$PROJECT_DIR$/test/docker-compose.yml" />
-        <option value="$PROJECT_DIR$/docker-compose.yml" />
-        <option value="$PROJECT_DIR$/graphy/db/opentsdb.py" />
         <option value="$PROJECT_DIR$/tests/db/test_opentsdb.py" />
-        <option value="$PROJECT_DIR$/graphy/db/arangodb.py" />
         <option value="$PROJECT_DIR$/graphy/cli.py" />
         <option value="$PROJECT_DIR$/graphy/logging.yaml" />
-        <option value="$PROJECT_DIR$/graphy/utils/files.py" />
         <option value="$PROJECT_DIR$/graphy/utils/time.py" />
         <option value="$PROJECT_DIR$/graphy/models/span.py" />
         <option value="$PROJECT_DIR$/graphy/models/span_tree.py" />
         <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/graphy/utils/spark.py" />
         <option value="$PROJECT_DIR$/spark.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
-        <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
-        <option value="$PROJECT_DIR$/graphy/utils/plots.py" />
-        <option value="$PROJECT_DIR$/graphy/models/trace.py" />
-        <option value="$PROJECT_DIR$/data/28_06_simplified_100_spans.json" />
         <option value="$PROJECT_DIR$/graphy/utils/zipkin.py" />
-        <option value="$PROJECT_DIR$/graphy/config.yaml" />
-        <option value="$PROJECT_DIR$/graphy/controller/controller_logic.py" />
         <option value="$PROJECT_DIR$/graphy/app.py" />
+        <option value="$PROJECT_DIR$/opentsdb.conf" />
+        <option value="$PROJECT_DIR$/graphy/utils/dict.py" />
+        <option value="$PROJECT_DIR$/tests/utils/test_dict.py" />
+        <option value="$PROJECT_DIR$/graphy/utils/list.py" />
+        <option value="$PROJECT_DIR$/graphy/db/opentsdb.py" />
+        <option value="$PROJECT_DIR$/graphy/models/trace.py" />
+        <option value="$PROJECT_DIR$/graphy/db/arangodb.py" />
+        <option value="$PROJECT_DIR$/graphy/graph/graph_processor.py" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/graphy/utils/plots.py" />
+        <option value="$PROJECT_DIR$/graphy/test.py" />
         <option value="$PROJECT_DIR$/graphy/controller/controller.py" />
+        <option value="$PROJECT_DIR$/data/28_06_simplified_100_spans.json" />
+        <option value="$PROJECT_DIR$/graphy/config.yaml" />
+        <option value="$PROJECT_DIR$/graphy/utils/files.py" />
+        <option value="$PROJECT_DIR$/graphy/controller/controller_logic.py" />
+        <option value="$PROJECT_DIR$/data/trace_cov_analysis/api_com.csv" />
+        <option value="$PROJECT_DIR$/docker-compose.yml" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="y" value="25" />
-    <option name="width" value="1635" />
-    <option name="height" value="1055" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="13" />
+    <option name="width" value="960" />
+    <option name="height" value="527" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -315,11 +318,10 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -335,14 +337,23 @@
             <path>
               <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
               <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="scripts" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Graphy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
-              <item name="Graphy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="graphy" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="Graphy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="scripts" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -354,7 +365,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="Node&#9;FILE&#9;file:///media/apbento/B6C8BAECC8BAAA4F/André/UC/Tese/MScThesis/Graphy/venv/lib/python3.6/site-packages/treelib/node.py" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/setup.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -373,18 +384,18 @@
     <option name="myUseBundledCoveragePy" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tests/utils" />
-      <recent name="$PROJECT_DIR$/data" />
-      <recent name="$PROJECT_DIR$/graphy/utils" />
-      <recent name="$PROJECT_DIR$/graphy" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\André\UC\Tese\MScThesis\Graphy" />
       <recent name="$PROJECT_DIR$/test" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/graphy/models" />
       <recent name="$PROJECT_DIR$/data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/tests/utils" />
+      <recent name="$PROJECT_DIR$/graphy/utils" />
+      <recent name="$PROJECT_DIR$/graphy" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -422,48 +433,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="spark (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Unittests for test_dict.TestDict.test_sort" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Graphy" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/utils" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spark.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="spark" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Graphy" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/graphy/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\André\UC\Tese\MScThesis\Graphy\spark.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_dict.TestDict.test_sort&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
@@ -477,13 +459,11 @@
       <item itemvalue="Python.Install" />
       <item itemvalue="Python.Run" />
       <item itemvalue="Python.Test" />
-      <item itemvalue="Python.spark (1)" />
-      <item itemvalue="Python.spark" />
+      <item itemvalue="Python tests.Unittests for test_dict.TestDict.test_sort" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.spark (1)" />
-        <item itemvalue="Python.spark" />
+        <item itemvalue="Python tests.Unittests for test_dict.TestDict.test_sort" />
       </list>
     </recent_temporary>
   </component>
@@ -530,14 +510,54 @@
       <workItem from="1553793356934" duration="11685000" />
       <workItem from="1553859314812" duration="4535000" />
       <workItem from="1553870906725" duration="11630000" />
-      <workItem from="1553883415304" duration="41000" />
+      <workItem from="1553883415304" duration="66000" />
+      <workItem from="1553890270226" duration="2625000" />
+      <workItem from="1553918378639" duration="902000" />
+      <workItem from="1553921434891" duration="614000" />
+      <workItem from="1553923592466" duration="636000" />
+      <workItem from="1553967832279" duration="2217000" />
+      <workItem from="1554121463967" duration="1284000" />
+      <workItem from="1554123125836" duration="11343000" />
+      <workItem from="1554216052609" duration="6614000" />
+      <workItem from="1554382019053" duration="6781000" />
+      <workItem from="1554460288492" duration="8252000" />
+      <workItem from="1554725163444" duration="24177000" />
+      <workItem from="1554912668695" duration="1376000" />
+      <workItem from="1554917450475" duration="11145000" />
+      <workItem from="1555332928573" duration="2263000" />
+      <workItem from="1555335703822" duration="545000" />
+      <workItem from="1555336333751" duration="7599000" />
+      <workItem from="1555412305902" duration="2800000" />
+      <workItem from="1555428365940" duration="2416000" />
+      <workItem from="1555497352413" duration="4201000" />
+      <workItem from="1555516335575" duration="2074000" />
+      <workItem from="1555602249667" duration="15000" />
+      <workItem from="1555614817854" duration="2248000" />
+      <workItem from="1556023813085" duration="6730000" />
+      <workItem from="1556110403320" duration="1851000" />
+      <workItem from="1556273583960" duration="1798000" />
+      <workItem from="1556815017944" duration="241000" />
+      <workItem from="1557241782727" duration="9961000" />
+      <workItem from="1557485867632" duration="627000" />
+      <workItem from="1557753491747" duration="4296000" />
+      <workItem from="1558024575664" duration="4464000" />
+      <workItem from="1558959284492" duration="2458000" />
+      <workItem from="1559051225309" duration="23000" />
+      <workItem from="1559053595722" duration="2115000" />
+      <workItem from="1559146235306" duration="1567000" />
+      <workItem from="1559239070932" duration="254000" />
+      <workItem from="1559292801048" duration="965000" />
+      <workItem from="1559834103740" duration="8704000" />
+      <workItem from="1559869375220" duration="783000" />
+      <workItem from="1559961848863" duration="23000" />
+      <workItem from="1560330419738" duration="1253000" />
+      <workItem from="1560451038031" duration="639000" />
+      <workItem from="1560868646986" duration="24000" />
+      <workItem from="1561052905969" duration="459000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit - 2019.03.06 at 14h 06m 01s.xml">
-      <configuration name="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_for_test_zipkin_TestZipkin_test_ZipkinTraceLimit - 2019.03.06 at 14h 06m 07s.xml">
       <configuration name="Unittests for test_zipkin.TestZipkin.test_ZipkinTraceLimit" configurationId="tests" />
     </history-entry>
@@ -565,9 +585,12 @@
     <history-entry file="Unittests_for_test_opentsdb_TestOpenTSDB_test_format_metric_name - 2019.03.07 at 15h 42m 58s.xml">
       <configuration name="Unittests for test_opentsdb.TestOpenTSDB.test_format_metric_name" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_for_test_dict_TestDict_test_sort - 2019.04.04 at 14h 59m 09s.xml">
+      <configuration name="Unittests for test_dict.TestDict.test_sort" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="258990000" />
+    <option name="totallyTimeSpent" value="410377000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -579,24 +602,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-37" width="1920" height="1117" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47682118" visible="true" weight="0.17662753" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47682118" visible="true" weight="0.2854856" />
       <window_info id="Structure" order="1" sideWeight="0.5231788" side_tool="true" weight="0.17129135" />
       <window_info id="Favorites" order="2" sideWeight="0.50672644" side_tool="true" weight="0.14391144" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3294271" />
-      <window_info anchor="bottom" id="Run" internal_type="SLIDING" order="2" sideWeight="0.4994664" weight="0.36734694" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49530202" visible="true" weight="0.53775513" />
+      <window_info anchor="bottom" id="Run" internal_type="SLIDING" order="2" sideWeight="0.49573106" weight="0.36434978" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49466383" weight="0.38004485" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.3294271" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32857144" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3294271" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49932885" visible="true" weight="0.30510205" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.504698" side_tool="true" weight="0.53776044" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49839914" weight="0.5026042" />
-      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.49786553" weight="0.2887755" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49893278" weight="0.29753914" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5058698" side_tool="true" weight="0.28411406" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49839914" weight="0.50224215" />
+      <window_info anchor="bottom" id="Docker" order="11" sideWeight="0.4941302" weight="0.3105381" />
       <window_info active="true" anchor="bottom" id="Dependency Graph" order="12" visible="true" weight="0.030612245" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32959184" />
       <window_info anchor="bottom" id="Database Changes" order="14" show_stripe_button="false" />
@@ -693,7 +715,7 @@
           <line>86</line>
           <option name="timeStamp" value="100" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pyArango/graph.py</url>
           <line>76</line>
           <option name="timeStamp" value="152" />
@@ -704,30 +726,23 @@
           <option name="timeStamp" value="484" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/models/span_tree.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="489" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/client.py</url>
           <line>155</line>
           <option name="timeStamp" value="498" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/graphy/db/opentsdb.py</url>
-          <line>130</line>
-          <option name="timeStamp" value="499" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/graphy/controller/controller.py</url>
-          <line>247</line>
-          <option name="timeStamp" value="508" />
+          <line>114</line>
+          <option name="timeStamp" value="504" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1553882559344" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphy$Unittests_for_test_dict_TestDict_test_sort.coverage" NAME="Unittests for test_dict.TestDict.test_sort Coverage Results" MODIFIED="1554386348510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests/utils" />
+    <SUITE FILE_PATH="coverage/Graphy$opentsdb.coverage" NAME="opentsdb Coverage Results" MODIFIED="1554218999990" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy/db" />
+    <SUITE FILE_PATH="coverage/Graphy$Run.coverage" NAME="Run Coverage Results" MODIFIED="1561052912813" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Graphy$test.coverage" NAME="test Coverage Results" MODIFIED="1555340952130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/graphy" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
@@ -753,59 +768,118 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/684237410/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_logger.py">
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_neutron-server-cascading.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_vpc-service.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_nova-conductor-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_nova-scheduler-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_nova-compute-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_nova-api-cascading.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_nova-api-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_cinder-scheduler-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_cinder-volume-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_service_neutron-server-cascaded.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/test.py" />
+    <entry file="file://$PROJECT_DIR$/data/traces-2018-06-28.jsonl">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="8296">
+          <caret line="488" column="23" selection-start-line="488" selection-start-column="23" selection-end-line="488" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/uc-01/traces/ecs/traces-2018-06-28.jsonl">
+      <provider selected="true" editor-type-id="LargeFileEditor">
+        <state relative-caret-position="255">
+          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+        <state relative-caret-position="512">
+          <caret line="72" column="4" selection-start-line="72" selection-start-column="4" selection-end-line="72" selection-end-column="4" />
           <folding>
-            <element signature="e#67#76#0" expanded="true" />
+            <element signature="e#67#77#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utils/test_dict.py">
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+        <state relative-caret-position="238">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/models/span_tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
           <folding>
-            <element signature="e#68#97#0" expanded="true" />
+            <element signature="e#68#92#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/errors.log" />
-    <entry file="file://$PROJECT_DIR$/tests/db/test_opentsdb.py">
+    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+        <state relative-caret-position="36">
+          <caret line="460" column="7" selection-start-line="460" selection-start-column="7" selection-end-line="460" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.jsonl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/modified_spans_28_06__8PM_9PM.jsonl">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/uc-01/traces/ecs/traces-2018-06-29.jsonl">
+      <provider selected="true" editor-type-id="LargeFileEditor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
           <folding>
-            <element signature="e#67#78#0" expanded="true" />
+            <element signature="e#67#106#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/TRASH.json" />
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/treelib/node.py" />
-    <entry file="file:///usr/lib/python3.6/codecs.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/cli.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/logging.yaml">
+    <entry file="file://$PROJECT_DIR$/graphy/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="255">
+          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding>
+            <element signature="e#67#89#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/matplotlib/pyplot.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/models/annotation.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/models/attributes.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/models/binary_annotation.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/models/endpoint.py" />
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/treelib/tree.py" />
-    <entry file="file://$PROJECT_DIR$/graphy/utils/json.py">
+    <entry file="file://$PROJECT_DIR$/graphy/utils/plots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        <state relative-caret-position="174">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="33" selection-end-column="86" />
           <folding>
             <element signature="e#67#76#0" expanded="true" />
           </folding>
@@ -814,125 +888,131 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/utils/dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/numpy/core/overrides.py" />
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd_file_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pyspark/java_gateway.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/pyspark/rdd.py" />
-    <entry file="file://$PROJECT_DIR$/spark.py" />
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/info.log" />
-    <entry file="file://$PROJECT_DIR$/scripts/docker-stop-rm-all.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/models/span_tree.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="61" column="32" selection-start-line="61" selection-start-column="32" selection-end-line="61" selection-end-column="32" />
+        <state relative-caret-position="175">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
           <folding>
-            <element signature="e#68#92#0" expanded="true" />
+            <element signature="e#67#85#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/db/arangodb.py">
+    <entry file="file://$PROJECT_DIR$/data/uc-01/README.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4471">
-          <caret line="263" column="24" selection-start-line="263" selection-start-column="24" selection-end-line="267" selection-end-column="10" />
-          <folding>
-            <element signature="e#67#98#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="452">
+          <caret line="129" column="3" selection-start-line="129" selection-start-column="3" selection-end-line="130" selection-end-column="67" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/typing.pyi">
+    <entry file="file:///usr/lib/python3.7/posixpath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="348" column="8" selection-start-line="348" selection-start-column="8" selection-end-line="348" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/graph/graph_processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6681">
-          <caret line="400" column="8" selection-start-line="400" selection-start-column="8" selection-end-line="400" selection-end-column="8" />
-          <folding>
-            <element signature="e#67#102#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/potsdb/client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="158" selection-start-line="158" selection-end-line="158" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/multiprocessing/__init__.pyi">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/db/opentsdb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="114" column="14" selection-start-line="114" selection-start-column="14" selection-end-line="114" selection-end-column="14" />
-          <folding>
-            <element signature="e#67#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
-          <folding>
-            <element signature="e#67#84#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="175">
+          <caret line="79" selection-start-line="79" selection-end-line="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/utils/files.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="365">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#67#76#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.jsonl">
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/nova-api-cascaded.csv">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/neutron-server-cascading.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/neutron-server-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/hss.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/evs.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/cinder-volume-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/cinder-scheduler-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/cinder-api-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/batch_console.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/apig_console.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/cluster-manager.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/mysql.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/nova-compute-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/nova-conductor-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/nova-scheduler-cascaded.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/vpc-service.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/nova-api-cascading.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="10" lean-forward="true" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/trace_cov_analysis/api_com.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opentsdb.conf">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/controller/controller_logic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1343">
+          <caret line="87" column="17" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
+          <folding>
+            <element signature="e#65#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5066">
+          <caret line="309" selection-start-line="309" selection-end-line="309" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="45" column="24" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/graphy/models/trace.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="193" column="35" selection-start-line="193" selection-start-column="35" selection-end-line="193" selection-end-column="35" />
+        <state relative-caret-position="2992">
+          <caret line="239" column="13" selection-start-line="239" selection-start-column="13" selection-end-line="239" selection-end-column="13" />
           <folding>
             <element signature="e#337#1987#0" />
             <element signature="e#358#471#0" />
@@ -940,107 +1020,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/uc-01/README.txt">
+    <entry file="file://$PROJECT_DIR$/docker-compose.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/zipkin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
-          <folding>
-            <element signature="e#67#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.6/multiprocessing/pool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="118" selection-start-line="118" selection-end-line="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/controller/controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="248" selection-start-line="248" selection-end-line="248" />
-          <folding>
-            <element signature="e#67#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/statistics/timestamp.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/models/span.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
-          <folding>
-            <element signature="e#968#1008#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/controller/controller_logic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
-          <folding>
-            <element signature="e#66#96#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/config.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="30" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/28_06_simplified_100_spans.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="61" selection-start-line="61" selection-end-line="61" />
-          <folding>
-            <element signature="e#67#106#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/plots.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
-          <folding>
-            <element signature="e#67#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/utils/logger.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graphy/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="e#67#89#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="415">
+          <caret line="59" column="19" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
         </state>
       </provider>
     </entry>

@@ -37,10 +37,10 @@ class TestDict(TestCase):
     def test_sort(self):
         """ Tests sort function. """
         test_dict = {'0': 1, '1': 1, '2': 2}
-        right_sorted_list = [('2', 2), ('0', 1), ('1', 1)]
-        wrong_sorted_list = [('1', 1), ('2', 2), ('1', 1)]
+        right_sorted_list = {'2': 2, '0': 1, '1': 1}
+        wrong_sorted_list = {'1': 1, '2': 2, '3': 1}
 
-        self.assertIsInstance(my_dict.sort(test_dict), list)
+        self.assertIsInstance(my_dict.sort(test_dict), dict)
 
         self.assertEqual(my_dict.sort(test_dict), right_sorted_list)
 

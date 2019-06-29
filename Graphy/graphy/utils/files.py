@@ -8,6 +8,8 @@ from os.path import dirname
 ROOT_PROJECT_DIRECTORY = os.path.join(dirname(dirname(dirname(__file__))))
 DATA_PROJECT_DIRECTORY = os.path.join(ROOT_PROJECT_DIRECTORY, 'data')
 
+TRACE_COV_PROJECT_DIRECTORY = os.path.join(DATA_PROJECT_DIRECTORY, 'trace_cov_analysis')
+
 
 def get_absolute_path(relative_path, from_project=False):
     if from_project:
@@ -24,3 +26,9 @@ def read_file(path):
     with open(path) as fp:
         file_data = fp.read()
     return file_data
+
+
+def save_dict(file_path: str, my_dict: dict):
+    with open(file_path, 'w') as f:
+        for key in my_dict.keys():
+            f.write("%s,%s\n" % (key, my_dict[key]))
