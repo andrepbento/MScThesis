@@ -5,5 +5,5 @@ This repository contains some contents related to the project of my Master Thesi
 ## Contents
 
 * [Graphy](Graphy) - Developed tool for the whole project.
-* [Report](MScThesisReport) - Project report in `LaTeX` and `pdf` formats.
+* [Report](https://github.com/andrepbento/MScThesisReport) - Project report in `LaTeX` and `pdf` formats.
 * [Notebooks](notebooks) - Notebooks with the metrics analysis algorithms.
