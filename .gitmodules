@@ -3,7 +3,7 @@
 	url = git@github.com:andrepbento/MScThesisReport.git
 [submodule "OpenTracingProcessor"]
 	path = OpenTracingProcessor
-	url = git@github.com:jaimelive/OpenTracingProcessor.git
+	url = git@github.com:andrepbento/OpenTracingProcessor.git
 [submodule "papers/IEEE_NCA_19_Tracing_Analysis_Paper"]
 	path = papers/IEEE_NCA_19_Tracing_Analysis_Paper
 	url = git@github.com:andrepbento/IEEE_NCA_19_Tracing_Analysis_Paper.git
